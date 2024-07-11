@@ -1,0 +1,75 @@
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  background: #242424;
+  margin: 0;
+}
+
+body::-webkit-scrollbar{
+  width:10px;
+  background-color:rgba(36,36,36,0.1);
+}
+
+body::-webkit-scrollbar-thumb{
+  background-color:#9238A8;
+}
+
+body.active{
+  overflow: hidden;
+}
+
+.container{
+  max-width: 1630px;
+  margin: 0 auto;
+  padding:0px 15px;
+}
+
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat/Montserrat-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat/Montserrat-Medium.ttf);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat/Montserrat-SemiBold.ttf);
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat/Montserrat-Bold.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat/Montserrat-ExtraBold.ttf);
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+*{
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+}
+
