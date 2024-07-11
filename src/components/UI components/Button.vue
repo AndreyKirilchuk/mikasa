@@ -13,6 +13,7 @@
 
 <style scoped>
   button{
+
     display: flex;
     gap:15px;
     border-radius: 5px;
@@ -26,6 +27,7 @@
     cursor: pointer;
     transition: 0.3s;
     align-items: center;
+
   }
 
   button img{

@@ -11,6 +11,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.66.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },

@@ -1,5 +1,6 @@
 <script setup>
-  import { ref, inject, provide } from 'vue'
+  import axios from 'axios'
+  import { ref, inject, provide, reactive } from 'vue'
 
   import Button from '@/components/UI components/Button.vue'
   import CalculateNav from '@/components/UI components/CalculateNav.vue'
@@ -9,11 +10,16 @@
   const progress = ref(1);
   const answers = ref([]);
   const selectedOption = ref(null);
+  const name = ref();
+  const number = ref();
+  const gochat = ref(false);
+  const gocall = ref(false);
+  const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
   const nextProgress = () => {
     progress.value++;
     answers.value.push(selectedOption.value);
-    console.log(answers.value);
   }
 
   const backProgress = () => {
@@ -21,8 +27,34 @@
     answers.value.pop();
   }
 
-  const sendCalculation = () => {
-    console.log("asd");
+  const sendCalculation = async () => {
+    let txt = `<b> У вас новая заявка! </b> %0A %0A`;
+
+    const message = [{
+      'Имя': name.value,
+      'Номер': number.value,
+      'Участок': answers.value[0],
+      'Площадь дома': answers.value[1],
+      'Количество этажей': answers.value[2],
+      'Заселение в дом': answers.value[3],
+      'Свяжитесь со мной в WhatsApp': gochat.value,
+      'Бесплатная консультация по телефону': gocall.value,
+    }];
+
+    for (const item of message) {
+      for (const key in item) {
+        txt += `<b>${key}</b>: ${item[key]}%0A%0A`;
+      }
+    }
+
+    console.log(txt);
+
+    try {
+      const response = await axios.get(`https://api.telegram.org/bot${botId}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${txt}`)
+      console.log('Message sent',  response.data);
+    } catch (error) {
+      console.error('Error sending message', error);
+    }
   }
 
   provide("backProgress", backProgress)
@@ -45,8 +77,8 @@
     </div>
 
 <!--    progress 1-->
-    <div class="calculate_form" v-if="progress === 1">
-      <form @submit.prevent="nextProgress">
+
+      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress === 1">
         <h2>Есть ли у вас участок?</h2>
         <div class="options_img">
           <div class="option_img">
@@ -73,15 +105,14 @@
 
         <CalculateNav :click="closeCalculate"/>
       </form>
-    </div>
 
-    <div class="calculate_form" v-if="progress === 2">
-      <form @submit.prevent="nextProgress">
+
+      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress === 2">
         <h2>Какую площадь дома планируете?</h2>
         <div class="options_text">
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="ss1" name="answer" required v-model="selectedOption" value="От 50 до 100 м<sup>2</sup>"/>
+              <input type="radio" id="ss1" name="answer" required v-model="selectedOption" value="От 50 до 100 м2"/>
               <label for="s1"></label>
             </div>
             От 50 до 100 м<sup>2</sup>
@@ -89,7 +120,7 @@
 
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s2" name="answer" required v-model="selectedOption" value="От 100 до 150 м<sup>2</sup>"/>
+              <input type="radio" id="s2" name="answer" required v-model="selectedOption" value="От 100 до 150 м2"/>
               <label for="s2"></label>
             </div>
             От 100 до 150 м<sup>2</sup>
@@ -97,7 +128,7 @@
 
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s3" name="answer" required v-model="selectedOption" value="От 150 до 200 м<sup>2</sup>"/>
+              <input type="radio" id="s3" name="answer" required v-model="selectedOption" value="От 150 до 200 м2"/>
               <label for="s3"></label>
             </div>
             От 150 до 200 м<sup>2</sup>
@@ -105,7 +136,7 @@
 
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s4" name="answer" required v-model="selectedOption" value="От 200 м<sup>2</sup> и более" />
+              <input type="radio" id="s4" name="answer" required v-model="selectedOption" value="От 200 м2 и более" />
               <label for="s4"></label>
             </div>
             От 200 м<sup>2</sup> и более
@@ -123,10 +154,8 @@
 
         <CalculateNav :click="backProgress" />
       </form>
-    </div>
 
-    <div class="calculate_form" v-if="progress === 3">
-      <form @submit.prevent="nextProgress">
+      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress === 3">
         <h2>Сколько этажей планируете?</h2>
         <div class="options_img">
           <div class="option_img">
@@ -174,16 +203,16 @@
 
         <CalculateNav :click="backProgress"/>
       </form>
-    </div>
 
-    <div class="calculate_form" v-if="progress === 4">
-      <form @submit.prevent="nextProgress">
+
+
+      <form @submit.prevent="nextProgress"  class="calculate_form" v-if="progress === 4">
 
         <h2>Какую площадь дома планируете?</h2>
         <div class="options_text">
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s1" name="answer" required v-model="selectedOption" value="От 50 до 100 м<sup>2</sup>"/>
+              <input type="radio" id="s1" name="answer" required v-model="selectedOption" value="В течение полугода"/>
               <label for="s1"></label>
             </div>
             В течение полугода
@@ -191,7 +220,7 @@
 
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s2" name="answer" required v-model="selectedOption" value="От 100 до 150 м<sup>2</sup>"/>
+              <input type="radio" id="s2" name="answer" required v-model="selectedOption" value="В течение года"/>
               <label for="s2"></label>
             </div>
             В течение года
@@ -199,7 +228,7 @@
 
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s3" name="answer" required v-model="selectedOption" value="От 150 до 200 м<sup>2</sup>"/>
+              <input type="radio" id="s3" name="answer" required v-model="selectedOption" value="В течении двух лет"/>
               <label for="s3"></label>
             </div>
             В течении двух лет
@@ -207,7 +236,7 @@
 
           <div class="option_text">
             <div class="option_container">
-              <input type="radio" id="s4" name="answer" required v-model="selectedOption" value="От 200 м<sup>2</sup> и более" />
+              <input type="radio" id="s4" name="answer" required v-model="selectedOption" value="Пока не планировали" />
               <label for="s4"></label>
             </div>
             Пока не планировали
@@ -216,7 +245,7 @@
 
         <CalculateNav :click="backProgress"/>
       </form>
-    </div>
+
 
       <form @submit.prevent="sendCalculation"  class="calculate_form" v-if="progress === 5">
         <h2>Введите номер телефона, на который <br>
@@ -225,20 +254,20 @@
         <div class="sendForm">
           <div class="sendForm_input">
             <label for="name">Ваше имя</label>
-            <input type="text" placeholder="Иванов Иван">
+            <input type="text" v-model="name" placeholder="Иванов Иван">
           </div>
 
           <div class="sendForm_input">
             <label for="name">Ваш номер</label>
-            <input type="number" placeholder="+7(987) 654-32-10">
+            <input type="number" v-model="number" placeholder="+7(987) 654-32-10">
           </div>
 
           <div class="checkbox_container">
             <div class="custom_checbox">
+              <input type="checkbox" id="checbox1" name="checbox" v-model="gochat">
               <label for="checbox1">
                 <img src="/check_mark.svg" alt="check_mark" width="13px">
               </label>
-              <input type="checkbox" id="checbox1" name="checbox" required>
             </div>
             <div>
               Свяжитесь со мной в <span class="violet">WhatsApp</span>
@@ -248,10 +277,10 @@
 
           <div class="checkbox_container">
             <div class="custom_checbox">
+              <input type="checkbox" id="checbox2" name="checbox" v-model="gocall">
               <label for="checbox2">
                 <img src="/check_mark.svg" alt="check_mark" width="13px">
               </label>
-              <input type="checkbox" id="checbox2" name="checbox" required>
             </div>
             <div>
               <span class="violet">Бесплатная консультация</span> по телефону
@@ -260,10 +289,10 @@
 
           <div class="checkbox_container">
             <div class="custom_checbox">
+              <input type="checkbox" id="checbox3" name="checbox" required>
               <label for="checbox3">
                 <img src="/check_mark.svg"  alt="check_mark" width="13px">
               </label>
-              <input type="checkbox" id="checbox3" name="checbox" required>
             </div>
             <div>
               Я согласен с <span class="violet">политикой конфиденциальных данных</span>
@@ -333,9 +362,10 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    padding: 75px 0px;
-    height: 400px;
+    padding: 300px 0px;
+    height: 700px;
     flex-direction: column;
+    margin: 0 auto;
   }
 
   .calculate_form h2{
@@ -350,6 +380,7 @@
     color: white;
     font-size: 24px;
     font-weight: 500;
+    margin: 0 auto;
   }
 
   .options_text{
@@ -470,7 +501,9 @@
     align-items: center;
   }
 
-
+  .custom_checbox label img{
+    display: none;
+  }
 
   .custom_checbox input:checked + label img{
     display: block;

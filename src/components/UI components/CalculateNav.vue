@@ -30,6 +30,10 @@ const backProgress  = inject("backProgress");
     display: flex;
     justify-content: center;
     gap: 25px;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .back{
