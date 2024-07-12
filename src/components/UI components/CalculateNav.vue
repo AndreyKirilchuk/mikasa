@@ -5,6 +5,10 @@ import { inject } from 'vue'
 
 const backProgress  = inject("backProgress");
 
+defineProps({
+  text:String
+})
+
 </script>
 
 <template>
@@ -15,7 +19,7 @@ const backProgress  = inject("backProgress");
       </svg>
     </button>
 
-    <Button text="Далее"/>
+    <Button :text="text"/>
   </div>
 </template>
 
@@ -26,7 +30,7 @@ const backProgress  = inject("backProgress");
     justify-content: center;
     gap: 25px;
     position: absolute;
-    bottom: 2%;
+    bottom: 4%;
     left: 50%;
     transform: translate(-50%, -50%);
   }

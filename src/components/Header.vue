@@ -1,9 +1,30 @@
 <script setup>
+  import { ref, onMounted, onUnmounted } from 'vue'
+
   import Button from '@/components/UI components/Button.vue'
+
+  const headerClass = ref('header_container');
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      headerClass.value = 'header_container scrolled';
+    } else {
+      headerClass.value = 'header_container';
+    }
+  };
+
+  onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+  });
+
 </script>
 
 <template>
-  <div class="header_container">
+  <div class="header_container" :class="headerClass" >
     <div class="container">
       <header>
         <div class="logo">
@@ -36,9 +57,13 @@
   .header_container {
     position: fixed;
     width: 100%;
+    z-index: 500;
+    transition: 0.3s;
+  }
+
+  .header_container.scrolled {
     background: rgba(36, 36, 36, 0.8);
     backdrop-filter: blur(50px);
-    z-index: 500;
   }
 
   header{

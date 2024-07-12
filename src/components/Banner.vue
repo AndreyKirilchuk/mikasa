@@ -9,15 +9,15 @@
 <template>
   <main>
     <section class="banner">
-      <div class="banner_content">
+      <div class="banner_content" >
         <div class="container">
-          <div class="banner_info">
+          <div class="banner_info" v-motion-slide-visible-once-left>
             <h2>Строим дома <p>для комфортной жизни</p></h2>
             <span>Строительство загородной недвижимости в Уфе</span>
-            <Button text="Рассчитать стоимость" :arrow="true" @click="openCalculate" />
+            <Button text="Рассчитать стоимость" :arrow="true" @click="openCalculate"/>
           </div>
-          <div class="info-boxes">
-            <div class="info-box">
+          <div class="info-boxes" v-motion-slide-bottom>
+            <div class="info-box" >
               <p>От индивидуального проекта до дома «под ключ» за 120 дней</p>
             </div>
             <div class="info-box">
@@ -31,7 +31,7 @@
       </div>
 
       <div class="banner_fon"> </div>
-      <div class="banner-img">
+      <div class="banner-img" v-motion-fade-visible-once>
         <img src="/house.png" alt="House">
       </div>
     </section>
@@ -46,12 +46,14 @@
   justify-content: space-between;
   position: relative;
   border-bottom: 1px solid #444444;
+  max-height: 1001px;
 }
 
 .banner_content  {
   top: 20%;
   width: 100%;
   position: absolute;
+  z-index: 100;
 }
 
 .banner_info{
@@ -109,5 +111,6 @@ button{
 .banner-img img {
   max-width: 100%;
   height: auto;
+  z-index: -100;
 }
 </style>

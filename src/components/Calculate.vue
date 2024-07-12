@@ -7,16 +7,19 @@
 
   const { closeCalculate } = inject("Calculate");
 
-  const progress = ref(1);
-  const answers = ref([]);
-  const selectedOption = ref(null);
-  const name = ref();
-  const number = ref();
-  const gochat = ref(false);
-  const gocall = ref(false);
-  const agreed = ref(false);
-  const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+  const progress = ref(1)
+  const answers = ref([])
+  const selectedOption = ref(null)
+  const name = ref('')
+  const number = ref('')
+  const gochat = ref(false)
+  const gocall = ref(false)
+  const agreed = ref(true)
+  const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
+  const error_name = ref(false)
+  const error_number = ref(false)
+  const error_agreed = ref(false)
 
   const questions = reactive([
     {
@@ -57,15 +60,14 @@
   ]);
 
   const checkboxes = reactive([
-    { id: 'checbox1', name: 'checbox', model: 'gochat', text: 'Свяжитесь со мной в <span class="violet">WhatsApp</span>' },
-    { id: 'checbox2', name: 'checbox', model: 'gocall', text: '<span class="violet">Бесплатная консультация</span> по телефону'},
-    { id: 'checbox3', name: 'checbox', model: 'agreed', text: 'Я согласен с <span class="violet">политикой конфиденциальных данных</span>' }
+    { id: 'checbox1', name: 'checbox', model: 'gochat', text: 'Свяжитесь со мной в <span style="color: #9238A8">WhatsApp</span>',},
+    { id: 'checbox2', name: 'checbox', model: 'gocall', text: '<span style="color: #9238A8">Бесплатная консультация</span> по телефону',},
+    { id: 'checbox3', name: 'checbox', model: 'agreed', text: 'Я согласен с <span style="color: #9238A8">политикой конфиденциальных данных</span>',}
   ]);
 
   const nextProgress = () => {
     progress.value++;
     answers.value.push(selectedOption.value);
-    console.log(answers.value);
     selectedOption.value = '';
   }
 
@@ -75,6 +77,53 @@
       closeCalculate();
     }
     answers.value.pop();
+  }
+
+  const applyMask = () => {
+    let rawValue = number.value.replace(/[^0-9]/g, '');
+
+    if (rawValue.startsWith('7')) {
+      rawValue = rawValue.slice(1);
+    }
+
+    let maskedValue = '+7 (' + rawValue.substring(0, 3);
+
+    if(rawValue.length === 0){
+      maskedValue = '';
+    }
+
+    if (rawValue.length > 3) {
+      maskedValue += ') ';
+      maskedValue += rawValue.substring(3, 6);
+    }
+
+    if (rawValue.length > 6) {
+      maskedValue += '-' + rawValue.substring(6, 8);
+    }
+
+    if (rawValue.length > 8) {
+      maskedValue += '-' + rawValue.substring(8, 10);
+    }
+
+    number.value = maskedValue;
+  }
+
+  const validateForm = () => {
+    if(name.value.length < 2){
+      error_name.value = true;
+    }
+
+    if(name.value.length < 5){
+      error_number.value = true;
+    }
+
+    if(agreed.value === false){
+      error_agreed.value = true;
+    }
+
+    if(error_name.value === false && error_name.value === false && agreed === true){
+      console.log('asd');
+    }
   }
 
   const sendCalculation = async () => {
@@ -97,11 +146,10 @@
       }
     }
 
-    console.log(txt);
-
     try {
       const response = await axios.get(`https://api.telegram.org/bot${botId}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${txt}`)
       console.log('Message sent',  response.data);
+      progress.value++;
     } catch (error) {
       console.error('Error sending message', error);
     }
@@ -112,7 +160,7 @@
 </script>
 
 <template>
-  <div class="calculate">
+  <div class="calculate" v-motion-fade-visible>
     <!--    header -->
     <div class="calculate_header">
       <div></div>
@@ -130,9 +178,9 @@
     <!--    progress 1 - 4-->
 
       <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress <= 4">
-        <h2>{{ questions[progress - 1].title }}</h2>
+        <h2 v-motion-fade-visible>{{ questions[progress - 1].title }}</h2>
 
-        <div class="options_img" v-if="progress === 1 || progress === 3" v-auto-animate>
+        <div class="options_img" v-if="progress === 1 || progress === 3"  v-motion-fade-visible>
           <div v-for="(option, index) in questions[progress - 1].options" :key="index" class="option_img">
             <div class="radio_container">
               <input type="radio" :id="option.id" name="answer" required v-model="selectedOption" :value="option.value" />
@@ -144,7 +192,7 @@
           </div>
         </div>
 
-        <div class="options_text" v-if="progress === 2 ||  progress === 4" v-auto-animate>
+        <div class="options_text" v-if="progress === 2 ||  progress === 4" v-motion-fade-visible>
           <div class="option_text"  v-for="(option, index) in questions[progress - 1].options" :key="index">
             <div class="option_container">
                 <input type="radio" :id="option.id" name="answer" required v-model="selectedOption" :value="option.value" />
@@ -156,27 +204,29 @@
           </div>
         </div>
 
-        <CalculateNav/>
+        <CalculateNav text="Далее"/>
       </form>
 
     <!--    progress 5-->
-      <form @submit.prevent="sendCalculation"  class="calculate_form" v-if="progress === 5">
-        <h2>Введите номер телефона, на который <br>Вам отправить расчет</h2>
-        <div class="sendForm">
+      <form @submit.prevent="validateForm"  class="calculate_form" v-if="progress === 5">
+        <h2 v-motion-fade-visible>Введите номер телефона, на который <br>Вам отправить расчет</h2>
+        <div class="sendForm" v-motion-fade-visible>
 
           <div class="sendForm_input">
             <label for="name">Ваше имя</label>
-            <input type="text" v-model="name" placeholder="Иванов Иван">
+            <input type="text" v-model="name" placeholder="Иванов Иван" :class="'error', error_name">
+            <span class="error_text" v-if="error_name">*Обязательное поле для заполнения</span>
           </div>
 
           <div class="sendForm_input">
-            <label for="name">Ваш номер</label>
-            <input type="number" v-model="number" placeholder="+7(987) 654-32-10">
+            <label for="number">Ваш номер</label>
+            <input id="number" v-model="number" placeholder="+7 (___) ___ __ __" @input="applyMask" :class="'error', error_number">
+            <span class="error_text" v-if="error_number">*Обязательное поле для заполнения</span>
           </div>
 
           <div class="checkbox_container" v-for="(checkbox, index) in checkboxes" :key="index">
             <div class="custom_checbox">
-              <input type="checkbox" :id="checkbox.id" :name="checkbox.name" v-model="checkbox.model" required>
+              <input type="checkbox" :id="checkbox.id" :name="checkbox.name" v-model="checkbox.model" >
               <label :for="checkbox.id">
                 <img src="/check_mark.svg" alt="check_mark" width="13px">
               </label>
@@ -187,9 +237,19 @@
           </div>
 
         </div>
-        <CalculateNav/>
+        <CalculateNav text="Готово"/>
       </form>
     </div>
+
+  <!--    after send -->
+  <div class="calculate_form" v-if="progress === 5">
+    <img src="/successful.svg" alt="successful" width="100px">
+    
+    <h2 v-motion-fade-visible> Спасибо, данные успешно отправлены!
+      Наш специалист скоро свяжется с вами!</h2>
+
+    <Button text="На главную" />
+  </div>
 
 
 </template>
@@ -249,8 +309,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    padding: 300px 0px;
-    height: 700px;
+    height: 650px;
     flex-direction: column;
     margin: 0 auto;
   }
@@ -394,6 +453,16 @@
 
   .custom_checbox input:checked + label img{
     display: block;
+  }
+
+  .error_text{
+    font-size: 14px;
+    font-weight: 400;
+    color: #CC1616;
+  }
+
+  .error{
+    border: 1px solid #CC1616;
   }
 
 </style>

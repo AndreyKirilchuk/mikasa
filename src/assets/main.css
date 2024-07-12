@@ -5,15 +5,17 @@ html{
 body{
   background: #242424;
   margin: 0;
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar{
-  width:10px;
+  width:12px;
   background-color:rgba(36,36,36,0.1);
 }
 
 body::-webkit-scrollbar-thumb{
   background-color:#9238A8;
+  border-radius:5px;
 }
 
 body.active{
