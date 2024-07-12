@@ -14,16 +14,66 @@
   const number = ref();
   const gochat = ref(false);
   const gocall = ref(false);
+  const agreed = ref(false);
   const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
   const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
+  const questions = reactive([
+    {
+      title: 'Есть ли у вас участок?',
+      options: [
+        { id: 'with', value: 'Есть участок', text: 'Есть участок', img: '/with_a_plot.png' },
+        { id: 'without', value: 'Нет участка', text: 'Нет участка', img: '/without_plot.png' }
+      ]
+    },
+    {
+      title: 'Какую площадь дома планируете?',
+      options: [
+        { id: 'ss1', value: 'От 50 до 100 м2', text: 'От 50 до 100 м²' },
+        { id: 's2', value: 'От 100 до 150 м2', text: 'От 100 до 150 м²' },
+        { id: 's3', value: 'От 150 до 200 м2', text: 'От 150 до 200 м²' },
+        { id: 's4', value: 'От 200 м2 и более', text: 'От 200 м² и более' },
+        { id: 's5', value: 'Еще думаю', text: 'Еще думаю' }
+      ]
+    },
+    {
+      title: 'Сколько этажей планируете?',
+      options: [
+        { id: '1flor', value: '1 этаж', text: '1 этаж', img: '/1flor.png' },
+        { id: '1.5flor', value: '1.5 этажа', text: '1.5 этажа', img: '/without_plot.png' },
+        { id: '2flor', value: '2 этажа', text: '2 этажа', img: '/2flor.png' },
+        { id: 'dontknowflor', value: 'Не знаю', text: 'Не знаю', img: '/dontknowflor.png' }
+      ]
+    },
+    {
+      title: 'В какие сроки планируете начать строительство?',
+      options: [
+        { id: 's1', value: 'В течение полугода', text: 'В течение полугода' },
+        { id: 's2', value: 'В течение года', text: 'В течение года' },
+        { id: 's3', value: 'В течение двух лет', text: 'В течение двух лет' },
+        { id: 's4', value: 'Пока не планировали', text: 'Пока не планировали' }
+      ]
+    }
+  ]);
+
+  const checkboxes = reactive([
+    { id: 'checbox1', name: 'checbox', model: 'gochat', text: 'Свяжитесь со мной в <span class="violet">WhatsApp</span>' },
+    { id: 'checbox2', name: 'checbox', model: 'gocall', text: '<span class="violet">Бесплатная консультация</span> по телефону'},
+    { id: 'checbox3', name: 'checbox', model: 'agreed', text: 'Я согласен с <span class="violet">политикой конфиденциальных данных</span>' }
+  ]);
 
   const nextProgress = () => {
     progress.value++;
     answers.value.push(selectedOption.value);
+    console.log(answers.value);
+    selectedOption.value = '';
   }
 
   const backProgress = () => {
     progress.value--;
+    if(progress.value === 0){
+      closeCalculate();
+    }
     answers.value.pop();
   }
 
@@ -63,6 +113,7 @@
 
 <template>
   <div class="calculate">
+    <!--    header -->
     <div class="calculate_header">
       <div></div>
       <div class="progress_bar">
@@ -76,182 +127,43 @@
 
     </div>
 
-<!--    progress 1-->
+    <!--    progress 1 - 4-->
 
-      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress === 1">
-        <h2>Есть ли у вас участок?</h2>
-        <div class="options_img">
-          <div class="option_img">
+      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress <= 4">
+        <h2>{{ questions[progress - 1].title }}</h2>
+
+        <div class="options_img" v-if="progress === 1 || progress === 3" v-auto-animate>
+          <div v-for="(option, index) in questions[progress - 1].options" :key="index" class="option_img">
             <div class="radio_container">
-              <input type="radio" id="with" name="answer" required v-model="selectedOption" value="Есть участок" />
-              <label class="сustom_radio" for="with">
-                <img src="/with_a_plot.png" alt="">
+              <input type="radio" :id="option.id" name="answer" required v-model="selectedOption" :value="option.value" />
+              <label :for="option.id" class="сustom_radio">
+                <img v-if="option.img" :src="option.img" alt="">
               </label>
             </div>
-            <p>Есть участок</p>
-          </div>
-
-          <div class="option_img">
-            <div class="radio_container">
-              <input type="radio" id="without" name="answer" required v-model="selectedOption" value="Нет участка" />
-              <label class="сustom_radio" for="without">
-                <img src="/without_plot.png" alt="">
-              </label>
-            </div>
-            <p>Нет участка</p>
-          </div>
-
-        </div>
-
-        <CalculateNav :click="closeCalculate"/>
-      </form>
-
-
-      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress === 2">
-        <h2>Какую площадь дома планируете?</h2>
-        <div class="options_text">
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="ss1" name="answer" required v-model="selectedOption" value="От 50 до 100 м2"/>
-              <label for="s1"></label>
-            </div>
-            От 50 до 100 м<sup>2</sup>
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s2" name="answer" required v-model="selectedOption" value="От 100 до 150 м2"/>
-              <label for="s2"></label>
-            </div>
-            От 100 до 150 м<sup>2</sup>
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s3" name="answer" required v-model="selectedOption" value="От 150 до 200 м2"/>
-              <label for="s3"></label>
-            </div>
-            От 150 до 200 м<sup>2</sup>
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s4" name="answer" required v-model="selectedOption" value="От 200 м2 и более" />
-              <label for="s4"></label>
-            </div>
-            От 200 м<sup>2</sup> и более
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s5" name="answer" required v-model="selectedOption" value="Еще думаю">
-              <label for="s5"></label>
-            </div>
-            Еще думаю
+            <p>{{ option.text }}</p>
           </div>
         </div>
 
-
-        <CalculateNav :click="backProgress" />
-      </form>
-
-      <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress === 3">
-        <h2>Сколько этажей планируете?</h2>
-        <div class="options_img">
-          <div class="option_img">
-            <div class="radio_container">
-              <input type="radio" id="1flor" name="answer" required v-model="selectedOption" value="1 этаж" />
-              <label class="сustom_radio" for="1flor">
-                <img src="/1flor.png" alt="">
-              </label>
-            </div>
-            <p>1 этаж</p>
-          </div>
-
-          <div class="option_img">
-            <div class="radio_container">
-              <input type="radio" id="1.5flor" name="answer" required v-model="selectedOption" value="1.5 этажа" />
-              <label class="сustom_radio" for="1.5flor">
-                <img src="/without_plot.png" alt="">
-              </label>
-            </div>
-            <p>1.5 этажа</p>
-          </div>
-
-          <div class="option_img">
-            <div class="radio_container">
-              <input type="radio" id="2flor" name="answer" required v-model="selectedOption" value="2 этажа" />
-              <label class="сustom_radio" for="2flor">
-                <img src="/2flor.png" alt="">
-              </label>
-            </div>
-            <p>2 этажа</p>
-          </div>
-
-          <div class="option_img">
-            <div class="radio_container">
-              <input type="radio" id="dontknowflor" name="answer" required v-model="selectedOption" value="Не знаю" />
-              <label class="сustom_radio" for="dontknowflor">
-                <img src="/dontknowflor.png" alt="">
-              </label>
-            </div>
-            <p>Не знаю</p>
-          </div>
-
-        </div>
-
-
-        <CalculateNav :click="backProgress"/>
-      </form>
-
-
-
-      <form @submit.prevent="nextProgress"  class="calculate_form" v-if="progress === 4">
-
-        <h2>Какую площадь дома планируете?</h2>
-        <div class="options_text">
-          <div class="option_text">
+        <div class="options_text" v-if="progress === 2 ||  progress === 4" v-auto-animate>
+          <div class="option_text"  v-for="(option, index) in questions[progress - 1].options" :key="index">
             <div class="option_container">
-              <input type="radio" id="s1" name="answer" required v-model="selectedOption" value="В течение полугода"/>
-              <label for="s1"></label>
+                <input type="radio" :id="option.id" name="answer" required v-model="selectedOption" :value="option.value" />
+                <label :for="option.id" class="сustom_radio">
+                  <img v-if="option.img" :src="option.img" alt="">
+                </label>
             </div>
-            В течение полугода
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s2" name="answer" required v-model="selectedOption" value="В течение года"/>
-              <label for="s2"></label>
-            </div>
-            В течение года
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s3" name="answer" required v-model="selectedOption" value="В течении двух лет"/>
-              <label for="s3"></label>
-            </div>
-            В течении двух лет
-          </div>
-
-          <div class="option_text">
-            <div class="option_container">
-              <input type="radio" id="s4" name="answer" required v-model="selectedOption" value="Пока не планировали" />
-              <label for="s4"></label>
-            </div>
-            Пока не планировали
+            {{ option.text }}
           </div>
         </div>
 
-        <CalculateNav :click="backProgress"/>
+        <CalculateNav/>
       </form>
 
-
+    <!--    progress 5-->
       <form @submit.prevent="sendCalculation"  class="calculate_form" v-if="progress === 5">
-        <h2>Введите номер телефона, на который <br>
-          Вам отправить расчет</h2>
-
+        <h2>Введите номер телефона, на который <br>Вам отправить расчет</h2>
         <div class="sendForm">
+
           <div class="sendForm_input">
             <label for="name">Ваше имя</label>
             <input type="text" v-model="name" placeholder="Иванов Иван">
@@ -262,45 +174,20 @@
             <input type="number" v-model="number" placeholder="+7(987) 654-32-10">
           </div>
 
-          <div class="checkbox_container">
+          <div class="checkbox_container" v-for="(checkbox, index) in checkboxes" :key="index">
             <div class="custom_checbox">
-              <input type="checkbox" id="checbox1" name="checbox" v-model="gochat">
-              <label for="checbox1">
+              <input type="checkbox" :id="checkbox.id" :name="checkbox.name" v-model="checkbox.model" required>
+              <label :for="checkbox.id">
                 <img src="/check_mark.svg" alt="check_mark" width="13px">
               </label>
             </div>
-            <div>
-              Свяжитесь со мной в <span class="violet">WhatsApp</span>
+            <div v-html="checkbox.text">
+
             </div>
           </div>
 
-
-          <div class="checkbox_container">
-            <div class="custom_checbox">
-              <input type="checkbox" id="checbox2" name="checbox" v-model="gocall">
-              <label for="checbox2">
-                <img src="/check_mark.svg" alt="check_mark" width="13px">
-              </label>
-            </div>
-            <div>
-              <span class="violet">Бесплатная консультация</span> по телефону
-            </div>
-          </div>
-
-          <div class="checkbox_container">
-            <div class="custom_checbox">
-              <input type="checkbox" id="checbox3" name="checbox" required>
-              <label for="checbox3">
-                <img src="/check_mark.svg"  alt="check_mark" width="13px">
-              </label>
-            </div>
-            <div>
-              Я согласен с <span class="violet">политикой конфиденциальных данных</span>
-            </div>
-          </div>
-        </div>  
-
-        <CalculateNav :click="backProgress"/>
+        </div>
+        <CalculateNav/>
       </form>
     </div>
 

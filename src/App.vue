@@ -24,7 +24,11 @@
     closeCalculate,
   });
 
+  const items = ref(['asd', 'asd', 'y2e', 'xv'])
 
+  const addItem = () => {
+    items.value.push('ads');
+  }
 </script>
 
 <template>
@@ -33,6 +37,13 @@
 
   <Banner/>
   <Projects/>
+
+  <button @click="addItem"></button>
+  <div v-auto-animate style="display:flex; gap:15px; font-size:20px; color:white;">
+    <div v-for="(item, index) in items" :key="index" >
+      {{ item }}
+    </div>
+  </div>
 </template>
 
 <style scoped>
