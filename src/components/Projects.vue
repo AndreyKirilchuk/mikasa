@@ -114,7 +114,7 @@ import { reactive, ref } from 'vue'
   .project_list{
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    flex-grow: 50px;
   }
 
   button{
