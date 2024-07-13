@@ -12,9 +12,6 @@
   const selectedOption = ref(null)
   const name = ref('')
   const number = ref('')
-  const gochat = ref(false)
-  const gocall = ref(false)
-  const agreed = ref(true)
   const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
   const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
   const error_name = ref(false)
@@ -60,9 +57,9 @@
   ]);
 
   const checkboxes = reactive([
-    { id: 'checbox1', name: 'checbox', model: 'gochat', text: 'Свяжитесь со мной в <span style="color: #9238A8">WhatsApp</span>',},
-    { id: 'checbox2', name: 'checbox', model: 'gocall', text: '<span style="color: #9238A8">Бесплатная консультация</span> по телефону',},
-    { id: 'checbox3', name: 'checbox', model: 'agreed', text: 'Я согласен с <span style="color: #9238A8">политикой конфиденциальных данных</span>',}
+    { id: 'checkbox1', name: 'checbox', text: 'Свяжитесь со мной в <span style="color: #9238A8">WhatsApp</span>', checked: false },
+    { id: 'checkbox2', name: 'checbox', text: '<span style="color: #9238A8">Бесплатная консультация</span> по телефону', checked: false },
+    { id: 'checkbox3', name: 'checbox', text: 'Я согласен с <span style="color: #9238A8">политикой конфиденциальных данных</span>', checked: true }
   ]);
 
   const nextProgress = () => {
@@ -79,7 +76,26 @@
     answers.value.pop();
   }
 
+  const applyCheckbox = () => {
+    if (checkboxes[2].checked === false) {
+      error_agreed.value = true;
+    } else {
+      error_agreed.value = false;
+    }
+
+    console.log('asd');
+  }
+
+  const applyName = () => {
+    if(name.value.length === 0){
+      error_name.value = true;
+    }else{
+      error_name.value = false;
+    }
+  }
+
   const applyMask = () => {
+
     let rawValue = number.value.replace(/[^0-9]/g, '');
 
     if (rawValue.startsWith('7')) {
@@ -106,24 +122,38 @@
     }
 
     number.value = maskedValue;
+
+    if(number.value.length === 0){
+      error_number.value = true;
+    }else{
+      error_number.value = false;
+    }
   }
 
   const validateForm = () => {
-    if(name.value.length < 2){
-      error_name.value = true;
-    }
+    error_name.value = false;
+    error_number.value = false;
+    error_agreed.value = false;
 
-    if(name.value.length < 5){
-      error_number.value = true;
-    }
+    setTimeout( () => {
 
-    if(agreed.value === false){
-      error_agreed.value = true;
-    }
 
-    if(error_name.value === false && error_name.value === false && agreed === true){
-      console.log('asd');
-    }
+      if(name.value.length < 1){
+        error_name.value = true;
+      }
+
+      if(number.value.length < 1){
+        error_number.value = true;
+      }
+
+      if(checkboxes[2].checked === false){
+        error_agreed.value = true;
+      }
+
+      if(error_name.value === false && error_name.value === false && checkboxes[2].checked === true){
+        sendCalculation()
+      }
+    },0.01)
   }
 
   const sendCalculation = async () => {
@@ -136,8 +166,8 @@
       'Площадь дома': answers.value[1],
       'Количество этажей': answers.value[2],
       'Заселение в дом': answers.value[3],
-      'Свяжитесь со мной в WhatsApp': gochat.value,
-      'Бесплатная консультация по телефону': gocall.value,
+      'Свяжитесь со мной в WhatsApp': checkboxes[0].checked,
+      'Бесплатная консультация по телефону': checkboxes[1].checked,
     }];
 
     for (const item of message) {
@@ -164,7 +194,7 @@
     <!--    header -->
     <div class="calculate_header">
       <div></div>
-      <div class="progress_bar">
+      <div class="progress_bar" v-if="progress < 6">
         <div v-for="step in 5" :key="step" :class="{'step': true, 'completed': step <= progress}"></div>
       </div>
       <button class="cross" @click="closeCalculate">
@@ -214,42 +244,70 @@
 
           <div class="sendForm_input">
             <label for="name">Ваше имя</label>
-            <input type="text" v-model="name" placeholder="Иванов Иван" :class="'error', error_name">
-            <span class="error_text" v-if="error_name">*Обязательное поле для заполнения</span>
+            <input
+              type="text"
+              v-model="name"
+              placeholder="Иванов Иван"
+              @input="applyName"
+              :class="{ 'error': error_name }"
+            >
+            <div class="error_text"><span  v-if="error_name">*Обязательное поле для заполнения</span></div>
           </div>
 
           <div class="sendForm_input">
             <label for="number">Ваш номер</label>
-            <input id="number" v-model="number" placeholder="+7 (___) ___ __ __" @input="applyMask" :class="'error', error_number">
-            <span class="error_text" v-if="error_number">*Обязательное поле для заполнения</span>
+            <input
+              id="number"
+              v-model="number"
+              placeholder="+7 (___) ___ __ __"
+              @input="applyMask"
+              :class="{ 'error': error_number }"
+            >
+            <div class="error_text"><span  v-if="error_number">*Обязательное поле для заполнения</span></div>
           </div>
 
-          <div class="checkbox_container" v-for="(checkbox, index) in checkboxes" :key="index">
-            <div class="custom_checbox">
-              <input type="checkbox" :id="checkbox.id" :name="checkbox.name" v-model="checkbox.model" >
-              <label :for="checkbox.id">
-                <img src="/check_mark.svg" alt="check_mark" width="13px">
-              </label>
-            </div>
-            <div v-html="checkbox.text">
 
+            <div class="checkbox_inner" v-for="(checkbox, index) in checkboxes" :key="index">
+              <div class="custom_checbox">
+                <input
+                  type="checkbox"
+                  :id="checkbox.id"
+                  :name="checkbox.name"
+                  v-model="checkbox.checked"
+                  @change="applyCheckbox(checkbox.id)"
+                >
+                <label :for="checkbox.id" :class="{ 'error': error_agreed && checkbox.id === 'checkbox3' }">
+                  <img src="/check_mark.svg" alt="check_mark" width="13px">
+                </label>
+              </div>
+              <div v-html="checkbox.text">
+
+              </div>
             </div>
-          </div>
+
+
 
         </div>
         <CalculateNav text="Готово"/>
       </form>
+
+      <!--    after send -->
+      <div class="calculate_form" v-if="progress === 6">
+        <div class="accept_container">
+          <img src="/successful.svg" alt="successful" width="100px" v-motion-fade-visible>
+
+          <h2 v-motion-fade-visible> Спасибо, данные успешно отправлены!
+            Наш специалист скоро свяжется с вами!</h2>
+
+          <Button text="На главную" @click="closeCalculate"/>
+        </div>
+
+      </div>
+
+
     </div>
 
-  <!--    after send -->
-  <div class="calculate_form" v-if="progress === 5">
-    <img src="/successful.svg" alt="successful" width="100px">
-    
-    <h2 v-motion-fade-visible> Спасибо, данные успешно отправлены!
-      Наш специалист скоро свяжется с вами!</h2>
 
-    <Button text="На главную" />
-  </div>
 
 
 </template>
@@ -395,7 +453,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     max-width: 600px;
   }
 
@@ -415,11 +473,17 @@
     background: white;
     width: 100%;
     border-radius: 10px;
-    border: none;
+    border: 1px solid white;
     outline: none;
   }
 
   .checkbox_container{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .checkbox_inner{
     display: flex;
     gap: 20px;
     text-align:left;
@@ -459,10 +523,34 @@
     font-size: 14px;
     font-weight: 400;
     color: #CC1616;
+    height:15px;
   }
 
   .error{
-    border: 1px solid #CC1616;
+    border:1px solid #CC1616 !important;
+    animation: shake 0.5s;
   }
 
+  @keyframes shake {
+    0% { transform: translateY(2px); }
+    25% { transform: translateY(-4px); }
+    50% { transform: translateY(3px); }
+    75% { transform: translateY(-2px); }
+    100% { transform: translateY(0); }
+  }
+
+
+  .accept_container{
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 40px;
+    font-weight: 600;
+  }
+
+  .accept_container button{
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 </style>
