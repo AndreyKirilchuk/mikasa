@@ -25,15 +25,14 @@ import { reactive, ref } from 'vue'
       mainProjectAnimate.value = false;
     },500)
 
-
     console.log(mainProject.value);
   }
 </script>
 
 <template>
-  <div class="projects_container">
-    <div class="container" >
-      <h2>Готовые проекты</h2>
+  <div class="projects_container" id="projects">
+    <div class="container">
+      <h2 class="block_title">Готовые проекты</h2>
       <div class="project">
         <div class="main_project" v-motion-slide-visible-once-left :class="{ 'fade-in': mainProjectAnimate }">
           <img :src="mainProject.img" alt="" width="100%" height="500px">
@@ -41,11 +40,13 @@ import { reactive, ref } from 'vue'
           <span class="text">
             {{ mainProject.text }}
           </span>
-          <Button text="Хочу такой дом" :arrow="true"/>
+          <a href="#form">
+            <Button text="Хочу такой дом" :arrow="true"/>
+          </a>
         </div>
 
         <div class="project_list" v-motion-slide-visible-once-bottom>
-          <div class="project_item" v-for="project in projects" v-auto-animate>
+          <div class="project_item" v-for="(project,index) in projects" :key="index" v-auto-animate  v-show="project.view">
             <span v-if="project.view">
               <div class="image-container" @click="showProject(project.id)">
                 <img :src="project.img" alt="" height="300px">
@@ -62,14 +63,7 @@ import { reactive, ref } from 'vue'
 
 <style scoped>
   .projects_container {
-    padding: 150px 0px;
-    border-bottom: 1px solid #444444;
-  }
-
-  h2{
-    font-size: 54px;
-    color: white;
-    font-weight: 700;
+    margin-bottom:200px;
   }
 
   .project{
@@ -77,6 +71,7 @@ import { reactive, ref } from 'vue'
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 100px;
+    max-height: 1550px;
   }
 
   .main_project{
@@ -85,6 +80,10 @@ import { reactive, ref } from 'vue'
     position: sticky;
     top: 150px;
     border-radius: 20px;
+  }
+
+  h2{
+    margin: 50px 0px;
   }
 
   .main_project img{
@@ -114,7 +113,7 @@ import { reactive, ref } from 'vue'
   .project_list{
     display: flex;
     flex-direction: column;
-    flex-grow: 50px;
+    gap: 50px;
   }
 
   button{

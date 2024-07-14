@@ -12,8 +12,6 @@
   const selectedOption = ref(null)
   const name = ref('')
   const number = ref('')
-  const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
-  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
   const error_name = ref(false)
   const error_number = ref(false)
   const error_agreed = ref(false)
@@ -170,6 +168,9 @@
       'Бесплатная консультация по телефону': checkboxes[1].checked,
     }];
 
+    const botId = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
+
     for (const item of message) {
       for (const key in item) {
         txt += `<b>${key}</b>: ${item[key]}%0A%0A`;
@@ -230,7 +231,7 @@
                   <img v-if="option.img" :src="option.img" alt="">
                 </label>
             </div>
-            {{ option.text }}
+            <label class="hover_text" :for="option.id">{{ option.text }}</label>
           </div>
         </div>
 
@@ -259,7 +260,7 @@
             <input
               id="number"
               v-model="number"
-              placeholder="+7 (___) ___ __ __"
+              placeholder="+7 (987) 654 32 10"
               @input="applyMask"
               :class="{ 'error': error_number }"
             >
@@ -313,6 +314,11 @@
 </template>
 
 <style scoped>
+
+  .hover_text:hover > .option_container  {
+    outline: 2px solid #9238A8;
+  }
+
   .calculate{
     position: fixed;
     z-index: 800;
@@ -553,4 +559,5 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
 </style>

@@ -86,7 +86,7 @@
   }
 
   nav a:hover{
-    color: #9238A8;
+    color: #7b308d;
   }
 
 

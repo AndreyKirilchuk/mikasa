@@ -55,8 +55,12 @@ defineProps({
     transition: 0.3s;
   }
 
+  .back:hover{
+    background-color: rgba(22, 22, 23, 0.6);
+  }
+
   .back:hover svg path{
-    stroke: #9238A8;
+    stroke: #cecece;
   }
 
 </style>
