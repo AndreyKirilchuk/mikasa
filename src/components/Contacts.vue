@@ -84,7 +84,7 @@
     flex-direction: column;
     gap: 50px;
     margin-left: 160px;
-    padding:75px 0px;
+    padding:75px 0px 120px;
   }
 
   .white{

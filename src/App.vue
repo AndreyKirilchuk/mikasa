@@ -12,6 +12,9 @@
   import Reviews from '@/components/Reviews.vue'
   import Modal from '@/components/Modal.vue'
   import MoreReviews from '@/components/MoreReviews.vue'
+  import Footer from '@/components/Footer.vue'
+  import Edge from '@/components/Edge.vue'
+
 
   const body = ref(document.body)
   const CalculateActive = ref(false);
@@ -73,12 +76,13 @@
     <Banner/>
     <Projects />
     <Banner_form title="Индивидуальный <br> подход" img="house2.png"/>
-    <!--  SLIDER-->
+    <Edge/>
     <Services/>
     <Banner_form title="Ответим на все ваши <br> вопросы" img="house3.png"/>
     <Reviews/>
     <f-a-q/>
     <Contacts/>
+    <Footer />
   </div>
 
 </template>

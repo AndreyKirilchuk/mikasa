@@ -94,7 +94,7 @@ const { closeReviews } = inject("Reviews")
 
   .info-box:hover{
     background-color: rgba(22, 22, 23, 0.6);
-    color:  #cecece;;
+    color:  #cecece;  ;
   }
 
   button{
