@@ -11,10 +11,13 @@
   import Contacts from '@/components/Contacts.vue'
   import Reviews from '@/components/Reviews.vue'
   import Modal from '@/components/Modal.vue'
+  import MoreReviews from '@/components/MoreReviews.vue'
 
   const body = ref(document.body)
   const CalculateActive = ref(false);
   const ModalActive = ref(false);
+  const ModalVideo = ref('');
+  const moreReviewsActive = ref(false);
 
   const openCalculate = () => {
     body.value.classList.add('active')
@@ -26,14 +29,25 @@
     CalculateActive.value = false;
   }
 
-  const openModal = () => {
-    body.value.classList.remove('active')
+  const openModal = (video) => {
+    body.value.classList.add('active')
     ModalActive.value = true;
+    ModalVideo.value = video
   }
 
   const closeModal = () => {
-    body.value.classList.add('active')
+    body.value.classList.remove('active')
     ModalActive.value = false;
+  }
+
+  const moreReviews = () => {
+    body.value.classList.add('active')
+    moreReviewsActive.value = true;
+  }
+
+  const closeReviews = () => {
+    body.value.classList.remove('active')
+    moreReviewsActive.value = false;
   }
 
   provide("Calculate", {
@@ -41,12 +55,20 @@
     closeCalculate,
   });
 
+  provide("Reviews", {
+    openModal,
+    closeModal,
+    moreReviews,
+    closeReviews
+  })
+
 </script>
 
 <template>
   <Header/>
-  <Calculate v-if="CalculateActive" />
-  <Modal v-if="ModalActive"/>
+  <Calculate v-if="CalculateActive"/>
+  <MoreReviews v-if="moreReviewsActive" />
+  <Modal v-if="ModalActive" :ModalVideo="ModalVideo"/>
   <div class="block_container">
     <Banner/>
     <Projects />
@@ -59,8 +81,6 @@
     <Contacts/>
   </div>
 
-<!--  FORM-->
-<!--  FOOTER-->
 </template>
 
 <style>

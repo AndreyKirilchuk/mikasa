@@ -1,12 +1,13 @@
 <script setup>
-  import { reactive } from 'vue'
+import { inject, reactive } from 'vue'
+import Button from '@/components/UI components/Button.vue'
 
   const reviews = reactive([
     {
       name: 'Тимур Ибрагимов',
       text: 'MeCasa построила для меня дом мечты! Профессионализм, внимание к деталям и качество работы — вот что отличает эту компанию. Рекомендую MeCasa всем, кто хочет создать свой идеальный дом!',
       img: '/avatar.png',
-      video: 'path/to/timur_video.mp4'
+      video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
     },
     {
       name: 'Эльвира Галяутдинова',
@@ -27,6 +28,8 @@
       video: 'path/to/ruslan_video.mp4'
     }
   ])
+
+  const { moreReviews, openModal } = inject("Reviews")
 </script>
 
 <template>
@@ -41,13 +44,16 @@
 
           <div>
             <h4>{{review.name}}</h4>
-            <img class="img-btn" src="/video_button.svg" alt="">
+            <img class="img-btn" src="/video_button.svg" alt="" @click="openModal(review.video)">
           </div>
         </div>
         <div class="review_text">
           {{review.text}}
         </div>
       </div>
+    </div>
+    <div class="btn_container" v-motion-slide-visible-once-bottom>
+      <Button text="Больше отзывов" @click="moreReviews"/>
     </div>
   </div>
 </template>
@@ -88,6 +94,12 @@
 
   .img-btn{
     cursor: pointer;
+  }
+
+  button{
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 25px 30px;
   }
 
 </style>

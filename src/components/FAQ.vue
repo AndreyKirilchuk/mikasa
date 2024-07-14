@@ -49,7 +49,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     transition: 0.3s ease-in-out;
   }
 
