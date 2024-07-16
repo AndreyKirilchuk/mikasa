@@ -30,8 +30,8 @@ import { reactive, ref } from 'vue'
 </script>
 
 <template>
-  <div class="projects_container" id="projects">
-    <div class="container">
+  <div class="projects_container">
+    <div class="container" id="projects">
       <h2 class="block_title">Готовые проекты</h2>
       <div class="project">
         <div class="main_project" v-motion-slide-visible-once-left :class="{ 'fade-in': mainProjectAnimate }">

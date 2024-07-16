@@ -19,6 +19,10 @@
 <template>
 
   <div class="container">
+    <div class="link_block">
+      <div id="faq"></div>
+    </div>
+
     <h2 class="block_title" v-motion-slide-visible-once-left>Частые вопросы</h2>
 
     <div class="faq_container">

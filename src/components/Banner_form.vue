@@ -9,15 +9,61 @@ import { ref } from 'vue'
 import Button from '@/components/UI components/Button.vue'
 import axios from 'axios'
 
-const tel = ref();
+const number = ref('');
+const error_number = ref(false)
+
+const applyMask = () => {
+
+  let rawValue = number.value.replace(/[^0-9]/g, '');
+
+  if (rawValue.startsWith('7')) {
+    rawValue = rawValue.slice(1);
+  }
+
+  let maskedValue = '+7 (' + rawValue.substring(0, 3);
+
+  if(rawValue.length === 0){
+    maskedValue = '';
+  }
+
+  if (rawValue.length > 3) {
+    maskedValue += ') ';
+    maskedValue += rawValue.substring(3, 6);
+  }
+
+  if (rawValue.length > 6) {
+    maskedValue += '-' + rawValue.substring(6, 8);
+  }
+
+  if (rawValue.length > 8) {
+    maskedValue += '-' + rawValue.substring(8, 10);
+  }
+
+  number.value = maskedValue;
+
+  if(number.value.length === 0){
+    error_number.value = true;
+  }else{
+    error_number.value = false;
+  }
+}
 
 const sendForm = async () => {
-  tel.value = '';
+  error_number.value = false
+
+  if(number.value.length === 0){
+    setTimeout(() => {
+      error_number.value = true;
+    },10)
+    return
+  }
+
+  error_number.value = false
 
   let txt = `<b> У вас новая заявка! </b> %0A %0A`;
 
   const message = [{
-    'Номер телефона': tel.value,
+    'Номер телефона': number.value,
   }];
 
   for (const item of message) {
@@ -32,6 +78,7 @@ const sendForm = async () => {
   try {
     const response = await axios.get(`https://api.telegram.org/bot${botId}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${txt}`)
     console.log('Message sent',  response.data);
+    number.value = ''
   } catch (error) {
     console.error('Error sending message', error);
   }
@@ -49,11 +96,11 @@ const sendForm = async () => {
             <hr>
             <span>Оставьте заявку и мы составим для вас <br> индивидуальный проект</span>
           </div>
-          <form @submit.prevent="sendForm" class="form" v-motion-slide-bottom>
-            <input type="text" placeholder="Номер телефона" v-model="tel" >
+          <form @submit.prevent="sendForm" class="form" v-motion-slide-visible-once-bottom>
+            <input type="text" placeholder="Номер телефона" v-model="number" @input="applyMask" :class="{'error': error_number}">
             <Button text="Оставить заявку" />
           </form>
-          <div class="agreed">*Нажимая на кнопку вы соглашаетесь с <span>политикой конфиденциальных данных</span></div>
+          <div class="agreed" v-motion-slide-visible-once-bottom>*Нажимая на кнопку вы соглашаетесь с <span>политикой конфиденциальных данных</span></div>
         </div>
       </div>
 
@@ -155,4 +202,18 @@ input::placeholder{
   font-size: 18px;
   font-weight: 500;
 }
+
+.error{
+  border:1px solid #CC1616 !important;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translateY(2px); }
+  25% { transform: translateY(-4px); }
+  50% { transform: translateY(3px); }
+  75% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
 </style>

@@ -13,7 +13,8 @@
   import Modal from '@/components/Modal.vue'
   import MoreReviews from '@/components/MoreReviews.vue'
   import Footer from '@/components/Footer.vue'
-  import Edge from '@/components/Edge.vue'
+  import Edge from '@/components/About.vue'
+  import Form from '@/components/Form.vue'
 
 
   const body = ref(document.body)
@@ -76,12 +77,13 @@
     <Banner/>
     <Projects />
     <Banner_form title="Индивидуальный <br> подход" img="house2.png"/>
-    <Edge/>
+
     <Services/>
     <Banner_form title="Ответим на все ваши <br> вопросы" img="house3.png"/>
     <Reviews/>
     <f-a-q/>
     <Contacts/>
+    <Form/>
     <Footer />
   </div>
 
@@ -100,5 +102,14 @@
     display: flex;
     flex-direction: column;
     gap: 150px;
+  }
+
+  .link_block{
+    position: relative;
+  }
+
+  .link_block div{
+    position: absolute;
+    top: -140px;
   }
 </style>

@@ -34,6 +34,10 @@ import Button from '@/components/UI components/Button.vue'
 
 <template>
   <div class="container">
+    <div class="link_block">
+      <div id="reviews"></div>
+    </div>
+
     <h2 class="block_title" v-motion-slide-visible-once-left>Что говорят наши клиенты</h2>
     <div class="reviews_container">
       <div class="review" v-for="review in reviews" v-motion-slide-visible-once-bottom>

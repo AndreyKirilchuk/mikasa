@@ -37,7 +37,6 @@
           <a href="#projects">Проекты</a>
           <a href="#about">О нас</a>
           <a href="#services">Услуги</a>
-          <a href="#team">Команда</a>
           <a href="#reviews">Отзывы</a>
           <a href="#faq">Частые вопросы</a>
           <a href="#contacts">Контакты</a>

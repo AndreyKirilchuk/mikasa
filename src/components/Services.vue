@@ -10,10 +10,18 @@
     { name: 'Водоснабжение', img: '/water_supply.png' }
   ]);
 
+  import Edge from '@/components/About.vue'
+
 </script>
 
 <template>
   <div class="container">
+    <Edge/>
+
+    <div class="link_block">
+      <div id="services"></div>
+    </div>
+
     <h2 class="block_title" v-motion-slide-visible-once-left>Комплекс услуг</h2>
     <div class="services_container">
       <a :style="{    background: `url(${service.img})`,  }" class="service" v-for="service in services"  href="#form" v-motion-slide-visible-once-bottom>
