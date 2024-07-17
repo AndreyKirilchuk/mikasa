@@ -53,35 +53,21 @@ import { inject, reactive, ref, watch } from 'vue'
     setImg();
   };
 
-  let intervalId;
 
-  const startInterval = () => {
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-    intervalId = setInterval(() => {
-      if (About.value === 'video') {
-        nextVideo();
-      } else {
-        nextImg();
-      }
-    }, 5000);
-  };
 
   const toggleVideo = (id) => {
     videoIndex = videos.findIndex(item => item.id === id);
     setVideo()
-    startInterval()
+
   }
 
   const toggleImg = (id) => {
     imgIndex = images.findIndex(item => item.id === id);
     setImg()
-    startInterval()
+
   }
 
-  watch(About, startInterval);
-  startInterval();
+
 
   const { openModal } = inject("Reviews")
 </script>
