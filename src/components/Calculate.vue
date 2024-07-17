@@ -198,14 +198,13 @@
       <div class="progress_bar" v-if="progress < 6">
         <div v-for="step in 5" :key="step" :class="{'step': true, 'completed': step <= progress}"></div>
       </div>
-      <button class="cross" @click="closeCalculate">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M2.56066 0.43934C1.97487 -0.146447 1.02513 -0.146447 0.43934 0.43934C-0.146447 1.02513 -0.146447 1.97487 0.43934 2.56066L12.8787 15L0.439341 27.4393C-0.146446 28.0251 -0.146446 28.9749 0.439341 29.5607C1.02513 30.1464 1.97487 30.1464 2.56066 29.5607L15 17.1213L27.4393 29.5607C28.0251 30.1464 28.9749 30.1464 29.5607 29.5607C30.1464 28.9749 30.1464 28.0251 29.5607 27.4393L17.1213 15L29.5607 2.56066C30.1464 1.97487 30.1464 1.02513 29.5607 0.43934C28.9749 -0.146447 28.0251 -0.146447 27.4393 0.43934L15 12.8787L2.56066 0.43934Z" fill="white"/>
-        </svg>
-      </button>
-
     </div>
 
+    <button class="cross" @click="closeCalculate">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.56066 0.43934C1.97487 -0.146447 1.02513 -0.146447 0.43934 0.43934C-0.146447 1.02513 -0.146447 1.97487 0.43934 2.56066L12.8787 15L0.439341 27.4393C-0.146446 28.0251 -0.146446 28.9749 0.439341 29.5607C1.02513 30.1464 1.97487 30.1464 2.56066 29.5607L15 17.1213L27.4393 29.5607C28.0251 30.1464 28.9749 30.1464 29.5607 29.5607C30.1464 28.9749 30.1464 28.0251 29.5607 27.4393L17.1213 15L29.5607 2.56066C30.1464 1.97487 30.1464 1.02513 29.5607 0.43934C28.9749 -0.146447 28.0251 -0.146447 27.4393 0.43934L15 12.8787L2.56066 0.43934Z" fill="white"/>
+      </svg>
+    </button>
     <!--    progress 1 - 4-->
 
       <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress <= 4">
@@ -328,13 +327,16 @@
     height:100%;
     background: rgba(20,22,26,0.8);
     backdrop-filter: blur(100px);
-    padding: 70px;
   }
 
   .calculate_header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top: 88px;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .progress_bar{
@@ -358,6 +360,9 @@
     background: 0;
     border:0;
     cursor: pointer;
+    position: absolute;
+    right: 75px;
+    top: 65px;
   }
 
   .cross svg path{
@@ -373,7 +378,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    height: 650px;
+    height:90vh;
     flex-direction: column;
     margin: 0 auto;
   }

@@ -30,7 +30,7 @@ defineProps({
     justify-content: center;
     gap: 25px;
     position: absolute;
-    bottom: 4%;
+    bottom: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
   }

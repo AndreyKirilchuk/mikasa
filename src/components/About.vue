@@ -93,13 +93,13 @@ import { inject, reactive, ref, watch } from 'vue'
     </div>
 
     <div class="about_container">
-      <div :class="{ 'fade-in': aboutAnimate }">
+      <div class="about_info" :class="{ 'fade-in': aboutAnimate }">
         <h4 class="block_title">{{ thisContent.name}}</h4>
         <span v-html="thisContent.text">
 
         </span>
 
-        <a href="#form">
+        <a href="#form" class="info-btn">
           <Button text="Быстрая заявка" :arrow="true"/>
         </a>
       </div>
@@ -136,6 +136,10 @@ import { inject, reactive, ref, watch } from 'vue'
 </template>
 
 <style scoped>
+  .about_info{
+    height: 450px;
+    position: relative;
+  }
 
   .fade-in{
     animation: fadeIn 1s;
@@ -196,20 +200,25 @@ import { inject, reactive, ref, watch } from 'vue'
   }
 
   .about_container button{
-    margin-top: 180px;
     padding: 25px 30px;
     font-size: 24px;
     border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .info-btn{
+
   }
 
   .about_navigate{
     border-radius: 100px;
-    border:1px solid white;
+    outline:2px solid white;
     display: flex;
     height:fit-content;
     width: 120px;
     position: relative;
-    height: fit-content;
+
     cursor: pointer;
   }
 
@@ -220,6 +229,7 @@ import { inject, reactive, ref, watch } from 'vue'
     border:0;
     cursor: pointer;
     transition: 0.3s;
+    transform: translateX(-1px);
   }
 
   .about_navigate button .left path{
@@ -259,7 +269,7 @@ import { inject, reactive, ref, watch } from 'vue'
   }
 
   .about_navigate button.active{
-    transform: translateX(60px);
+    transform: translateX(61px);
   }
 
   .content_navigate{

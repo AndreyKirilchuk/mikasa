@@ -105,6 +105,14 @@
     background: #9238a8;
   }
 
+  .toggle svg path{
+    transition: 0.3s;
+  }
+
+  .toggle:hover svg path{
+    fill: white;
+  }
+
   .toggle svg{
     transform: rotate(45deg);
     transition: 0.3s ease-in-out;

@@ -15,17 +15,17 @@
       <div class="contacts_info">
         <div class="contacts_text"  v-motion-slide-visible-once-bottom>
           <div>
-            В ПН-ПТ с 9:00 до 18:00
+            В ПН-ПТ с 9:00 до 18:00<br>
             В СБ-ВС по договоренности
           </div>
 
           <div class="white">
-            +7 (927) 336-08-88
+            +7 (927) 336-08-88<br>
             ivanov-inan@gmail.com
           </div>
 
           <div>
-            div. Бари Галеева
+            Бари Галеева
             г. Уфа
           </div>
         </div>

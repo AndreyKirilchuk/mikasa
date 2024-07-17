@@ -54,8 +54,8 @@
           </div>
 
           <div>
-            Политика обработки персональных данных<br>
-            Разработка сайта <a href="" class="violet">W agency</a>
+            <a href="">Политика обработки персональных данных</a><br>
+            <a href="https://t.me/nilahimp" target="_blank">Разработка сайта <span class="violet">W agency</span></a>
           </div>
         </div>
       </footer>
@@ -76,6 +76,10 @@
 
   .footer_logo{
     cursor: pointer;
+  }
+
+  a{
+    color: rgba(255,255,255,0.5);
   }
 
   path{

@@ -11,7 +11,7 @@ const { closeReviews } = inject("Reviews")
     <div>
       <h3 v-motion-fade>Убедитесь в нашем профессионализме</h3>
       <span v-motion-fade>Отзывы наших клиентов на разных площадках</span>
-      <div class="info-boxes" v-motion-slide-visible-once-bottom>
+      <div class="info-boxes" >
         <a class="info-box" href="">
           <p>
             <img src="/2gis.svg" alt="">

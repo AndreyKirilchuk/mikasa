@@ -4,21 +4,31 @@ import { reactive, ref } from 'vue'
   import Button from '@/components/UI components/Button.vue'
 
   const projects = reactive([
-    {id: 1 , name:'Проект 1', img:'/project1.svg', text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям', 'view': false},
-    {id: 2 , name:'Проект 2', img:'/project2.svg', text: 'asd', 'view': true},
-    {id: 3 , name:'Проект 3', img:'/project3.svg', text: 'asd', 'view': true},
-    {id: 4 , name:'Проект 4', img:'/project4.svg', text: 'asd', 'view': true},
-    {id: 5 , name:'Проект 5', img:'/project5.svg', text: 'asd','view': true},
+    {id: 1 , name:'Проект 1', preview:'/project1.svg', images: ['/project1.svg', '/project2.svg', '/project3.svg'], text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям', 'view': false},
+    {id: 2 , name:'Проект 2', preview:'/project2.svg', images: ['/project2.svg', '/project1-2.svg', '/project1-3.svg'],  text: 'asd', 'view': true},
+    {id: 3 , name:'Проект 3', preview:'/project3.svg', images: ['/project3.svg', '/project1-2.svg', '/project1-3.svg'],  text: 'asd', 'view': true},
+    {id: 4 , name:'Проект 4', preview:'/project4.svg', images: ['/project4.svg', '/project1-2.svg', '/project1-3.svg'],  text: 'asd', 'view': true},
+    {id: 5 , name:'Проект 5', preview:'/project5.svg', images: ['/project5.svg', '/project1-2.svg', '/project1-3.svg'],  text: 'asd','view': true},
   ])
 
+  const slideAnimate = ref(false)
   const mainProjectAnimate = ref(false);
+  const currentImageIndex = ref(0);
 
-  const mainProject = ref(    {id: 1 , name:'Проект 1', img:'/project1.svg', text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям', 'view': false},);
+  const mainProject = ref(    {
+    id: 1 ,
+    name:'Проект 1',
+    preview:'/project1.svg',
+    images: ['/project1.svg', '/project2.svg', '/project3.svg'],
+    text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
+    'view': false
+  },);
 
   const showProject = (id) => {
     projects.find(item => item.id === mainProject.value.id).view = true;
     mainProject.value = projects.find((item) => item.id === id);
     projects.find((item) => item.id === id).view = false;
+    currentImageIndex.value = 0;
 
     mainProjectAnimate.value = true;
     setTimeout(() => {
@@ -27,6 +37,24 @@ import { reactive, ref } from 'vue'
 
     console.log(mainProject.value);
   }
+
+  const slideAnimteFade = () => {
+    slideAnimate.value = true;
+
+    setTimeout(()=>{
+      slideAnimate.value = false
+    },200)
+  }
+
+  const nextImage = () => {
+    slideAnimteFade()
+    currentImageIndex.value = (currentImageIndex.value + 1) % mainProject.value.images.length;
+  };
+
+  const prevImage = () => {
+    slideAnimteFade()
+    currentImageIndex.value = (currentImageIndex.value - 1 + mainProject.value.images.length) % mainProject.value.images.length;
+  };
 </script>
 
 <template>
@@ -35,7 +63,7 @@ import { reactive, ref } from 'vue'
       <h2 class="block_title">Готовые проекты</h2>
       <div class="project">
         <div class="main_project" v-motion-slide-visible-once-left :class="{ 'fade-in': mainProjectAnimate }">
-          <img :src="mainProject.img" alt="" width="100%" height="500px">
+          <img :class="{ 'fade-in': slideAnimate }" :src="mainProject.images[currentImageIndex]" alt="" width="100%" height="500px">
           <h3>{{ mainProject.name }} <span></span></h3>
           <span class="text">
             {{ mainProject.text }}
@@ -43,13 +71,27 @@ import { reactive, ref } from 'vue'
           <a href="#form">
             <Button text="Хочу такой дом" :arrow="true"/>
           </a>
+
+<!--          slider nav-->
+          <div class="prev" @click="nextImage">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="30" transform="matrix(-1 0 0 1 60 0)" fill="white"/>
+              <path d="M33 20L23.6837 29.5272C23.3036 29.9159 23.3036 30.5369 23.6837 30.9255L33 40.4528" stroke="#14161A" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="next" @click="prevImage">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="30" fill="white"/>
+              <path d="M27 20L36.3163 29.5272C36.6964 29.9159 36.6964 30.5369 36.3163 30.9255L27 40.4528" stroke="#14161A" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
 
         <div class="project_list" v-motion-slide-visible-once-bottom>
           <div class="project_item" v-for="(project,index) in projects" :key="index" v-auto-animate  v-show="project.view">
             <span v-if="project.view">
               <div class="image-container" @click="showProject(project.id)">
-                <img :src="project.img" alt="" height="300px">
+                <img :src="project.preview" alt="" height="300px">
               </div>
               <h3>{{project.name}}</h3>
             </span>
@@ -89,6 +131,34 @@ import { reactive, ref } from 'vue'
   .main_project img{
     object-fit: cover;
     border-radius: 20px;
+  }
+
+  .prev, .next{
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  }
+
+  svg circle, svg path{
+    transition: 0.3s;
+  }
+
+  .prev:hover svg circle, .next:hover svg circle{
+    fill: #9238a8;
+  }
+
+  .prev:hover svg path, .next:hover svg path{
+    stroke: white;
+  }
+
+  .prev{
+    left: 25px;
+  }
+
+  .next{
+    right: 25px;
   }
 
   .fade-in{
@@ -133,7 +203,7 @@ import { reactive, ref } from 'vue'
 
   .image-container img {
     width: 100%;
-    height: auto;
+    height: 300px;
     transition: transform 0.3s ease;
   }
 

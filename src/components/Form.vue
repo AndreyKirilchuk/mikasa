@@ -103,10 +103,6 @@ const sendCalculation = async () => {
   const message = [{
     'Имя': name.value,
     'Номер': number.value,
-    'Участок': answers.value[0],
-    'Площадь дома': answers.value[1],
-    'Количество этажей': answers.value[2],
-    'Заселение в дом': answers.value[3],
     'Свяжитесь со мной в WhatsApp': checkboxes[0].checked,
     'Бесплатная консультация по телефону': checkboxes[1].checked,
   }];
