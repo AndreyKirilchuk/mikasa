@@ -1,35 +1,34 @@
-html{
+html {
   scroll-behavior: smooth;
 }
 
-body{
+body {
   background: #242424;
   margin: 0;
   overflow-x: hidden;
 }
 
-body::-webkit-scrollbar{
-  width:12px;
-  background-color:rgba(36,36,36,0.1);
+body::-webkit-scrollbar {
+  width: 12px;
+  background-color: rgba(36, 36, 36, 0.1);
 }
 
-body::-webkit-scrollbar-thumb{
-  background-color:#9238A8;
-  border-radius:5px;
+body::-webkit-scrollbar-thumb {
+  background-color: #9238a8;
+  border-radius: 5px;
 }
 
-body.active{
+body.active {
   overflow: hidden;
 }
 
-.container{
+.container {
   max-width: 1630px;
   margin: 0 auto;
-  padding:0px 15px;
+  padding: 0px 15px;
 }
 
-
-a{
+a {
   text-decoration: none;
   color: white;
 }
@@ -69,18 +68,17 @@ a{
   font-style: normal;
 }
 
-
-*{
+* {
   box-sizing: border-box;
   font-family: 'Montserrat';
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }

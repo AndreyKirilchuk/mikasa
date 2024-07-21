@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   title: String,
-  img: String,
+  img: String
 })
 
 import { ref } from 'vue'
@@ -9,66 +9,67 @@ import { ref } from 'vue'
 import Button from '@/components/UI components/Button.vue'
 import axios from 'axios'
 
-const number = ref('');
+const number = ref('')
 const error_number = ref(false)
 
 const applyMask = () => {
-
-  let rawValue = number.value.replace(/[^0-9]/g, '');
+  let rawValue = number.value.replace(/[^0-9]/g, '')
 
   if (rawValue.startsWith('7')) {
-    rawValue = rawValue.slice(1);
+    rawValue = rawValue.slice(1)
   }
 
-  let maskedValue = '+7 (' + rawValue.substring(0, 3);
+  let maskedValue = '+7 (' + rawValue.substring(0, 3)
 
-  if(rawValue.length === 0){
-    maskedValue = '';
+  if (rawValue.length === 0) {
+    maskedValue = ''
   }
 
   if (rawValue.length > 3) {
-    maskedValue += ') ';
-    maskedValue += rawValue.substring(3, 6);
+    maskedValue += ') '
+    maskedValue += rawValue.substring(3, 6)
   }
 
   if (rawValue.length > 6) {
-    maskedValue += '-' + rawValue.substring(6, 8);
+    maskedValue += '-' + rawValue.substring(6, 8)
   }
 
   if (rawValue.length > 8) {
-    maskedValue += '-' + rawValue.substring(8, 10);
+    maskedValue += '-' + rawValue.substring(8, 10)
   }
 
-  number.value = maskedValue;
+  number.value = maskedValue
 
-  if(number.value.length === 0){
-    error_number.value = true;
-  }else{
-    error_number.value = false;
+  if (number.value.length === 0) {
+    error_number.value = true
+  } else {
+    error_number.value = false
   }
 }
 
 const sendForm = async () => {
   error_number.value = false
 
-  if(number.value.length === 0){
+  if (number.value.length === 0) {
     setTimeout(() => {
-      error_number.value = true;
-    },10)
+      error_number.value = true
+    }, 10)
     return
   }
 
   error_number.value = false
 
-  let txt = `<b> У вас новая заявка! </b> %0A %0A`;
+  let txt = `<b> У вас новая заявка! </b> %0A %0A`
 
-  const message = [{
-    'Номер телефона': number.value,
-  }];
+  const message = [
+    {
+      'Номер телефона': number.value
+    }
+  ]
 
   for (const item of message) {
     for (const key in item) {
-      txt += `<b>${key}</b>: ${item[key]}%0A%0A`;
+      txt += `<b>${key}</b>: ${item[key]}%0A%0A`
     }
   }
 
@@ -76,41 +77,50 @@ const sendForm = async () => {
   const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
 
   try {
-    const response = await axios.get(`https://api.telegram.org/bot${botId}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${txt}`)
-    console.log('Message sent',  response.data);
+    const response = await axios.get(
+      `https://api.telegram.org/bot${botId}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${txt}`
+    )
+    console.log('Message sent', response.data)
     number.value = ''
   } catch (error) {
-    console.error('Error sending message', error);
+    console.error('Error sending message', error)
   }
 }
-
 </script>
 
 <template>
-
-    <section class="banner">
-      <div class="banner_content" >
-        <div class="container">
-          <div class="banner_info" v-motion-slide-visible-once-left>
-            <h3 v-html="title" class="block_title"></h3>
-            <hr>
-            <span>Оставьте заявку и мы составим для вас <br> индивидуальный проект</span>
-          </div>
-          <form @submit.prevent="sendForm" class="form" v-motion-slide-visible-once-bottom>
-            <input type="text" placeholder="Номер телефона" v-model="number" @input="applyMask" :class="{'error': error_number}">
-            <Button text="Оставить заявку" />
-          </form>
-          <div class="agreed" v-motion-slide-visible-once-bottom>*Нажимая на кнопку вы соглашаетесь с <span>политикой конфиденциальных данных</span></div>
+  <section class="banner">
+    <div class="banner_content">
+      <div class="container">
+        <div class="banner_info" v-motion-slide-visible-once-left>
+          <h3 v-html="title" class="block_title"></h3>
+          <hr />
+          <span
+            >Оставьте заявку и мы составим для вас <br />
+            индивидуальный проект</span
+          >
+        </div>
+        <form @submit.prevent="sendForm" class="form" v-motion-slide-visible-once-bottom>
+          <input
+            type="text"
+            placeholder="Номер телефона"
+            v-model="number"
+            @input="applyMask"
+            :class="{ error: error_number }"
+          />
+          <Button text="Оставить заявку" />
+        </form>
+        <div class="agreed" v-motion-slide-visible-once-bottom>
+          *Нажимая на кнопку вы соглашаетесь с <span>политикой конфиденциальных данных</span>
         </div>
       </div>
+    </div>
 
-      <div class="banner_fon"> </div>
-      <div class="banner-img" v-motion-fade-visible-once>
-        <img :src="img" alt="House">
-      </div>
-    </section>
-
-
+    <div class="banner_fon"></div>
+    <div class="banner-img" v-motion-fade-visible-once>
+      <img :src="img" alt="House" />
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -124,7 +134,7 @@ const sendForm = async () => {
   background: #202122;
 }
 
-.banner_content  {
+.banner_content {
   top: 12%;
   width: 100%;
   position: absolute;
@@ -132,7 +142,7 @@ const sendForm = async () => {
 }
 
 .banner_info {
-  max-width:  751px;
+  max-width: 751px;
 }
 
 .banner_info span {
@@ -143,9 +153,9 @@ const sendForm = async () => {
   line-height: 30px;
 }
 
-hr{
+hr {
   margin: 25px 0px;
-  border:1px solid #444444;
+  border: 1px solid #444444;
 }
 
 .banner-img img {
@@ -154,66 +164,75 @@ hr{
   z-index: -100;
 }
 
-.form{
+.form {
   margin-top: 120px;
   margin-bottom: 12px;
   display: flex;
   gap: 25px;
 }
 
-.agreed{
+.agreed {
   color: white;
   font-size: 16px;
   font-weight: 500;
 }
 
-.agreed span{
+.agreed span {
   color: #9238a8;
 }
 
-button{
+button {
   padding: 20px 30px;
   border-radius: 5px;
   font-size: 20px;
 }
 
-input{
+input {
   padding: 25px 15px;
   border-radius: 5px;
-  border:1px solid rgba(255,255,255,0.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   background: 0;
   outline: none;
-  color:white;
+  color: white;
   font-size: 18px;
   font-weight: 500;
   transition: 0.3s;
 }
 
-input:hover{
-  border:1px solid white;
-}
-
-input:focus{
+input:hover {
   border: 1px solid white;
 }
 
-input::placeholder{
-  color: rgba(255,255,255,0.7);
+input:focus {
+  border: 1px solid white;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
   font-size: 18px;
   font-weight: 500;
 }
 
-.error{
-  border:1px solid #CC1616 !important;
+.error {
+  border: 1px solid #cc1616 !important;
   animation: shake 0.5s;
 }
 
 @keyframes shake {
-  0% { transform: translateY(2px); }
-  25% { transform: translateY(-4px); }
-  50% { transform: translateY(3px); }
-  75% { transform: translateY(-2px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(2px);
+  }
+  25% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  75% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
-
 </style>
