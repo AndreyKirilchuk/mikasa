@@ -28,7 +28,7 @@ defineProps({
       </svg>
     </button>
 
-    <Button :text="text" />
+    <Button :text="text" class="next" />
   </div>
 </template>
 
@@ -71,4 +71,11 @@ defineProps({
 .back:hover svg path {
   stroke: #cecece;
 }
+
+@media(max-width: 1500px){
+  .next{
+    padding:15px 25px;
+  }
+}
+
 </style>

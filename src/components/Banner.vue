@@ -14,7 +14,7 @@ const { openCalculate } = inject('Calculate')
           <div class="banner_info" v-motion-slide-visible-once-left>
             <h2>
               Строим дома
-              <p>для комфортной жизни</p>
+              <p>для комфортной<br> жизни</p>
             </h2>
             <span>Строительство загородной недвижимости в Уфе</span>
             <Button text="Рассчитать стоимость" :arrow="true" @click="openCalculate" />
@@ -114,4 +114,29 @@ button {
   height: auto;
   z-index: -100;
 }
+
+
+@media(max-width: 1500px){
+  .banner_info h2{
+    font-size: 56px;
+    line-height: 60px;
+  }
+  .banner_info span {
+    font-size: 24px;
+  }
+  button{
+    font-size: 24px;
+  }
+  .info-box{
+    font-size: 16px;
+    padding:10px;
+  }
+  .info-boxes{
+    gap: 50px;
+  }
+  .banner-img{
+    width: 850px;
+  }
+}
+
 </style>

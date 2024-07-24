@@ -23,9 +23,9 @@ body.active {
 }
 
 .container {
-  max-width: 1630px;
+  max-width: 1720px;
   margin: 0 auto;
-  padding: 0px 15px;
+  padding: 0px 60px;
 }
 
 a {

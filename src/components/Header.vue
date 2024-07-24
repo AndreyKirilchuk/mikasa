@@ -86,4 +86,19 @@ nav a {
 nav a:hover {
   color: #7b308d;
 }
+
+@media(max-width: 1500px){
+  nav{
+    font-size: 16px;
+  }
+  button{
+    font-size: 16px;
+  }
+  img{
+    width: 222px;
+  }
+  header{
+    padding:20px 0px;
+  }
+}
 </style>

@@ -37,4 +37,10 @@ button:hover {
 button:hover img {
   transform: translateX(50%);
 }
+
+@media(max-width: 1500px){
+  button{
+    font-size: 18px;
+  }
+}
 </style>

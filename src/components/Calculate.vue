@@ -162,7 +162,7 @@ const validateForm = () => {
 
     if (
       error_name.value === false &&
-      error_name.value === false &&
+      error_number.value === false &&
       checkboxes[2].checked === true
     ) {
       sendCalculation()
@@ -431,7 +431,7 @@ provide('backProgress', backProgress)
   margin: 0 auto;
 }
 
-.calculate_form h2 {
+h2 {
   color: white;
   font-size: 40px;
   font-weight: 600;
@@ -518,7 +518,6 @@ input[type='radio']:checked + label img {
 
 .sendForm_input {
   text-align: left;
-  gap: 15px;
   display: flex;
   flex-direction: column;
   font-size: 24px;
@@ -527,6 +526,8 @@ input[type='radio']:checked + label img {
 }
 
 .sendForm_input input {
+  margin-top: 15px;
+  margin-bottom: 5px;
   font-size: 20px;
   padding: 20px;
   background: white;
@@ -620,5 +621,43 @@ input[type='radio']:checked + label img {
   bottom: 4%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1600px) {
+  img{
+    max-width: 250px;
+    max-height: 150px;
+  }
+  h2{
+    font-size: 32px;
+  }
+  .option_img{
+    font-size: 20px;
+  }
+  .option_text{
+    font-size: 24px;
+  }
+  .step{
+    height: 3px;
+  }
+  .calculate_header{
+    top: 60px;
+  }
+  .cross{
+    top: 40px;
+    width: 24px;
+  }
+  .sendForm{
+    gap: 20px;
+  }
+  .sendForm_input{
+    font-size: 20px;
+  }
+  .sendForm_input input{
+    font-size: 18px;
+  }
+  .checkbox_inner{
+    font-size: 18px;
+  }
 }
 </style>

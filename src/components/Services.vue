@@ -58,6 +58,22 @@ import Edge from '@/components/About.vue'
   position: relative;
 }
 
+@media(max-width: 1600px){
+  .services_container{
+    padding:35px 0px;
+    gap: 30px;
+  }
+  .service{
+    width: 100%;
+  }
+}
+
+@media(max-width: 1400px){
+  .services_container{
+    gap: 20px;
+  }
+}
+
 .service:hover {
   background: url('/violet_block.png') !important;
 }
