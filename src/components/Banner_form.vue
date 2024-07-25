@@ -96,7 +96,7 @@ const sendForm = async () => {
           <h3 v-html="title" class="block_title"></h3>
           <hr />
           <span
-            >Оставьте заявку и мы составим для вас <br />
+            >Оставьте заявку и мы составим для вас <br/>
             индивидуальный проект</span
           >
         </div>
@@ -111,7 +111,7 @@ const sendForm = async () => {
           <Button text="Оставить заявку" />
         </form>
         <div class="agreed" v-motion-slide-visible-once-bottom>
-          *Нажимая на кнопку вы соглашаетесь с <span>политикой конфиденциальных данных</span>
+          *Нажимая на кнопку вы соглашаетесь с <span>политикой <br class="mobile_br"> конфиденциальных данных</span>
         </div>
       </div>
     </div>
@@ -188,7 +188,7 @@ button {
 }
 
 input {
-  padding: 25px 15px;
+  padding: 25px 30px;
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   background: 0;
@@ -197,6 +197,8 @@ input {
   font-size: 18px;
   font-weight: 500;
   transition: 0.3s;
+  box-sizing:border-box;
+  max-width: 260px;
 }
 
 input:hover {
@@ -233,6 +235,39 @@ input::placeholder {
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@media(max-width: 1700px){
+  .banner-img img{
+    max-height: 530px;
+  }
+  .banner_info{
+    width: 690px;
+  }
+  .form{
+    margin-top: 100px;
+  }
+}
+
+@media(max-width: 1600px){
+  .banner_info{
+    width: 580px;
+  }
+  button{
+    padding:10px 30px !important;
+  }
+  .form{
+    margin-top: 80px;
+  }
+}
+
+@media(max-width: 1500px){
+  .banner_info span{
+    font-size: 20px;
+  }
+  .banner_info{
+    width: 591px;
   }
 }
 </style>

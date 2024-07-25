@@ -65,7 +65,7 @@ onUnmounted(() => {
 }
 
 header {
-  padding: 32px 0px 22px 0px;
+  padding:39px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;

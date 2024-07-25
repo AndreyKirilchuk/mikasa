@@ -77,7 +77,7 @@ provide('Reviews', {
     <Banner_form title="Индивидуальный <br> подход" img="house2.png" />
 
     <Services />
-    <Banner_form title="Ответим на все ваши <br> вопросы" img="house3.png" />
+    <Banner_form title="Ответим на все <br class='mobile_br'> ваши <br class='dekstop_br'> вопросы" img="house3.png" />
     <Reviews />
     <f-a-q />
     <Contacts />
@@ -88,7 +88,7 @@ provide('Reviews', {
 
 <style>
 .block_title {
-  color: #ffffff;
+  color: white;
   font-size: 52px;
   margin: 0;
   font-weight: 700;
@@ -98,7 +98,7 @@ provide('Reviews', {
 .block_container {
   display: flex;
   flex-direction: column;
-  gap: 150px;
+  row-gap: 150px;
 }
 
 .link_block {
@@ -109,4 +109,28 @@ provide('Reviews', {
   position: absolute;
   top: -140px;
 }
+
+@media(max-width: 1500px){
+  .block_title{
+    font-size: 44px;
+  }
+  .block_container {
+    row-gap: 120px;
+  }
+}
+
+.mobile_br{
+  display: none;
+}
+
+
+@media(max-width: 1600px){
+  .mobile_br{
+    display: block;
+  }
+  .dekstop_br{
+    display: none;
+  }
+}
+
 </style>

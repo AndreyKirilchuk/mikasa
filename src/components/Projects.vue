@@ -104,13 +104,51 @@ const prevImage = () => {
           v-motion-slide-visible-once-left
           :class="{ 'fade-in': mainProjectAnimate }"
         >
-          <img
-            :class="{ 'fade-in': slideAnimate }"
-            :src="mainProject.images[currentImageIndex]"
-            alt=""
-            width="100%"
-            height="500px"
-          />
+          <div class="main_preview">
+            <img
+              :class="{ 'fade-in': slideAnimate }"
+              :src="mainProject.images[currentImageIndex]"
+              :alt="mainProject.images[currentImageIndex]"
+              width="100%"
+              height="500px"
+            />
+            <!--          slider nav-->
+            <div class="prev" @click="nextImage">
+              <svg
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="30" cy="30" r="30" transform="matrix(-1 0 0 1 60 0)" fill="white" />
+                <path
+                  d="M33 20L23.6837 29.5272C23.3036 29.9159 23.3036 30.5369 23.6837 30.9255L33 40.4528"
+                  stroke="#14161A"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <div class="next" @click="prevImage">
+              <svg
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="30" cy="30" r="30" fill="white" />
+                <path
+                  d="M27 20L36.3163 29.5272C36.6964 29.9159 36.6964 30.5369 36.3163 30.9255L27 40.4528"
+                  stroke="#14161A"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+          </div>
+
           <h3>{{ mainProject.name }} <span></span></h3>
           <span class="text">
             {{ mainProject.text }}
@@ -118,42 +156,6 @@ const prevImage = () => {
           <a href="#form">
             <Button text="Хочу такой дом" :arrow="true" />
           </a>
-
-          <!--          slider nav-->
-          <div class="prev" @click="nextImage">
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="30" cy="30" r="30" transform="matrix(-1 0 0 1 60 0)" fill="white" />
-              <path
-                d="M33 20L23.6837 29.5272C23.3036 29.9159 23.3036 30.5369 23.6837 30.9255L33 40.4528"
-                stroke="#14161A"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
-          <div class="next" @click="prevImage">
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="30" cy="30" r="30" fill="white" />
-              <path
-                d="M27 20L36.3163 29.5272C36.6964 29.9159 36.6964 30.5369 36.3163 30.9255L27 40.4528"
-                stroke="#14161A"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
         </div>
 
         <div class="project_list" v-motion-slide-visible-once-bottom>
@@ -166,7 +168,7 @@ const prevImage = () => {
           >
             <span v-if="project.view">
               <div class="image-container" @click="showProject(project.id)">
-                <img :src="project.preview" alt="" height="300px" />
+                <img :src="project.preview" :alt="project.preview" height="300px" />
               </div>
               <h3>{{ project.name }}</h3>
             </span>
@@ -184,8 +186,7 @@ const prevImage = () => {
 
 .project {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 100px;
   max-height: 1550px;
 }
@@ -202,7 +203,11 @@ h2 {
   margin: 50px 0px;
 }
 
-.main_project img {
+.main_preview{
+  position: relative;
+}
+
+.main_preview img {
   object-fit: cover;
   border-radius: 20px;
 }
@@ -211,8 +216,8 @@ h2 {
 .next {
   position: absolute;
   top: 50%;
-  width: 60px;
-  height: 60px;
+  width: fit-content;
+  height: fit-content;
   cursor: pointer;
 }
 
@@ -293,5 +298,41 @@ button {
   font-weight: 500;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.7);
+}
+
+@media(max-width: 1500px){
+  h3{
+    font-size: 28px;
+  }
+  .text{
+    font-size: 16px;
+  }
+  button{
+    font-size: 20px;
+    padding:25px;
+  }
+  .main_preview img{
+    height: 400px;
+    background-size: 20%;
+  }
+  .main_preview .prev svg, .next svg{
+    width: 50px;
+    height: 50px;
+  }
+  .project{
+    gap: 30px;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .image-container{
+    width:400px;
+  }
+  .image-container img{
+    width: 400px;
+    height: 240px;
+  }
+  .project_item{
+    width: 400px;
+  }
 }
 </style>

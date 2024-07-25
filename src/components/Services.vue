@@ -10,12 +10,12 @@ const services = reactive([
   { name: 'Водоснабжение', img: '/water_supply.png' }
 ])
 
-import Edge from '@/components/About.vue'
+import About from '@/components/About.vue'
 </script>
 
 <template>
   <div class="container">
-    <Edge />
+    <About />
 
     <div class="link_block">
       <div id="services"></div>
