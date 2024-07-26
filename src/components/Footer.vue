@@ -190,4 +190,31 @@ footer > * div:last-child {
 .messenger:hover svg path {
   fill: #ffffffb3;
 }
+
+@media(max-width: 1600px){
+  .footer_logo svg{
+    width: 316px;
+  }
+
+  .footer_links svg{
+    width: 35px;
+    height: 35px;
+  }
+
+  .number{
+    font-size: 28px;
+  }
+
+  .email{
+    font-size: 20px;
+  }
+
+  .footer_down{
+    font-size: 16px;
+  }
+
+  .footer_container{
+    padding: 35px 0px;
+  }
+}
 </style>

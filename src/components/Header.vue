@@ -87,7 +87,7 @@ nav a:hover {
   color: #7b308d;
 }
 
-@media(max-width: 1500px){
+@media(max-width: 1600px){
   nav{
     font-size: 16px;
   }

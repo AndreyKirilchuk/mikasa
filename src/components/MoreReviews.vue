@@ -100,5 +100,16 @@ button {
   padding: 25px 50px;
   border-radius: 10px;
   margin: 0 auto;
+  font-size: 20px !important;
+}
+
+@media(max-width: 1400px){
+  h3{
+    font-size: 40px;
+  }
+
+  span{
+    font-size: 20px;
+  }
 }
 </style>

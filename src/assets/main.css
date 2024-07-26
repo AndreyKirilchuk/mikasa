@@ -1,3 +1,4 @@
+
 html {
   scroll-behavior: smooth;
 }
@@ -72,6 +73,7 @@ a {
 * {
   box-sizing: border-box;
   font-family: 'Montserrat';
+  text-wrap: wrap;
 }
 
 input[type='number']::-webkit-inner-spin-button,

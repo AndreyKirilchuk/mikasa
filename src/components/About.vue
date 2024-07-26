@@ -195,6 +195,7 @@ const { openModal } = inject('Reviews')
   display: none;
   cursor: pointer;
   width: fit-content;
+  height: fit-content;
 }
 
 .play.active {
@@ -222,7 +223,6 @@ h4 {
 
 .about_preview {
   width: 100%;
-  height: 100%;
   border-radius: 20px;
   background: #d9d9d9 !important;
   display: flex;
@@ -244,9 +244,6 @@ span {
   bottom: 0;
 }
 
-.info-btn {
-}
-
 .about_navigate {
   border-radius: 100px;
   outline: 2px solid white;
@@ -254,7 +251,6 @@ span {
   height: fit-content;
   width: 120px;
   position: relative;
-
   cursor: pointer;
 }
 
@@ -329,5 +325,34 @@ span {
 
 .content_navigate div.active {
   background: white;
+}
+
+@media(max-width: 1600px){
+  .about_info, .about_preview{
+    max-height: 400px;
+  }
+  h4{
+    font-size: 44px;
+  }
+  span, button{
+    font-size: 20px !important;
+  }
+}
+
+@media(max-width: 1500px){
+  .about_container{
+    display: flex !important;
+    gap: 100px;
+    justify-content:space-between;
+  }
+  .about_info{
+    min-width: 560px;
+  }
+}
+
+@media(max-width: 1400px){
+  .about_info{
+    min-width: 450px;
+  }
 }
 </style>

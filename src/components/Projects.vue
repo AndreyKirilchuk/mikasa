@@ -300,7 +300,7 @@ button {
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media(max-width: 1500px){
+@media(max-width: 1600px){
   h3{
     font-size: 28px;
   }
@@ -323,6 +323,7 @@ button {
     gap: 30px;
     justify-content: space-between;
     width: 100%;
+    max-height: 1320px;
   }
   .image-container{
     width:400px;

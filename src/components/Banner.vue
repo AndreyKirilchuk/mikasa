@@ -116,7 +116,7 @@ button {
 }
 
 
-@media(max-width: 1500px){
+@media(max-width: 1600px){
   .banner_info h2{
     font-size: 56px;
     line-height: 60px;

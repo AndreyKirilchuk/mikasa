@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 
 const services = reactive([
   { name: `Строительство <br>дома`, img: '/home_build.png' },
-  { name: 'Механизированная штукатурка', img: '/mechanized_plastering.png' },
+  { name: `Механизированная<br> штукатурка`, img: '/mechanized_plastering.png' },
   { name: `Полусухая<br> стяжка`, img: '/semi_dry_screed.png' },
   { name: 'Электромонтаж', img: '/electrical_installation.png' },
   { name: 'Системы отопления', img: '/heating_systems.png' },
@@ -56,22 +56,9 @@ import About from '@/components/About.vue'
   height: 260px;
   transition: 0.3s;
   position: relative;
-}
-
-@media(max-width: 1600px){
-  .services_container{
-    padding:35px 0px;
-    gap: 30px;
-  }
-  .service{
-    width: 100%;
-  }
-}
-
-@media(max-width: 1400px){
-  .services_container{
-    gap: 20px;
-  }
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 .service:hover {
@@ -98,5 +85,42 @@ img {
   font-weight: 600;
   align-items: center;
   line-height: 26px;
+}
+
+@media(max-width: 1700px){
+  .services_container{
+    padding:50px;
+  }
+}
+
+@media(max-width: 1600px){
+  .services_container{
+    padding:35px 0px;
+    gap: 30px;
+  }
+  .service{
+    width: 100%;
+  }
+}
+
+@media(max-width: 1530px){
+  .services_container{
+    gap: 20px;
+  }
+  .service{
+    height: 220px;
+  }
+  .service_inner{
+    font-size: 20px;
+    bottom:20px;
+  }
+}
+
+
+
+@media(max-width: 768px){
+  .services_container{
+    grid-template-columns: repeat(2,1fr);
+  }
 }
 </style>

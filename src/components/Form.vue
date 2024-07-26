@@ -104,7 +104,7 @@ const validateForm = () => {
 
     if (
       error_name.value === false &&
-      error_name.value === false &&
+      error_number.value === false &&
       checkboxes[2].checked === true
     ) {
       sendCalculation()
@@ -138,7 +138,10 @@ const sendCalculation = async () => {
       `https://api.telegram.org/bot${botId}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${txt}`
     )
     console.log('Message sent', response.data)
-    progress.value++
+
+    name.value =''
+    number.value = ''
+
   } catch (error) {
     console.error('Error sending message', error)
   }
@@ -241,14 +244,12 @@ const sendCalculation = async () => {
   outline: none;
 }
 
-.sendForm_input input:focus {
-  border: 1px solid #9238a8;
+.sendForm_input input::placeholder{
+  color: black;
 }
 
-.checkbox_container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+.sendForm_input input:focus {
+  border: 1px solid #9238a8;
 }
 
 .checkbox_inner {
@@ -333,5 +334,41 @@ button {
   margin-top: 10px;
   font-size: 20px;
   font-weight: 600;
+}
+
+@media(max-width: 1600px){
+  h4{
+    font-size: 20px;
+  }
+  .sendForm{
+    gap: 20px;
+  }
+  .sendForm_input{
+    font-size: 20px;
+  }
+  .sendForm_input input{
+    font-size: 18px;
+  }
+  .checkbox_inner{
+    font-size: 16px;
+  }
+
+  button{
+    font-size: 16px;
+  }
+
+
+}
+
+@media(max-width: 1440px){
+  .container{
+    width: 1200px;
+  }
+}
+
+@media(max-width: 1300px){
+  .container{
+    width: 1100px;
+  }
 }
 </style>

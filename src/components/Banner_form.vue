@@ -194,7 +194,7 @@ input {
   background: 0;
   outline: none;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   transition: 0.3s;
   box-sizing:border-box;
@@ -211,7 +211,7 @@ input:focus {
 
 input::placeholder {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -265,9 +265,34 @@ input::placeholder {
 @media(max-width: 1500px){
   .banner_info span{
     font-size: 20px;
+    line-height: 25px;
   }
   .banner_info{
-    width: 591px;
+    width: 630px;
+  }
+  .banner-img img{
+    max-height: 540px;
+    max-width: 750px;
+  }
+  input{
+    font-size: 18px;
+    padding:15px 25px;
+  }
+  input::placeholder {
+    font-size: 18px;
+  }
+  button{
+    font-size: 18px;
+    padding:15px 25px;
   }
 }
+
+@media(max-width: 1440px){
+  .banner_info{
+    width: 530px;
+  }
+
+}
+
+
 </style>

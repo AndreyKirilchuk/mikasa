@@ -1,4 +1,5 @@
-<script setup></script>
+<script setup>
+</script>
 
 <template>
   <div class="contacts_container">
@@ -9,20 +10,28 @@
       <h2 class="block_title" v-motion-slide-visible-once-left>Контакты</h2>
     </div>
     <div class="contacts_inner">
-      <div class="contacts_info">
-        <div class="contacts_text" v-motion-slide-visible-once-bottom>
-          <div>
-            В ПН-ПТ с 9:00 до 18:00<br />
-            В СБ-ВС по договоренности
-          </div>
 
-          <div class="white">
-            +7 (927) 336-08-88<br />
-            ivanov-inan@gmail.com
-          </div>
 
-          <div>Бари Галеева г. Уфа</div>
+      <div class="contacts_text_absolute">
+        <div class="container" v-motion-slide-visible-once-bottom>
+          <div class="contacts_text">
+            <div>
+              В ПН-ПТ с 9:00 до 18:00<br />
+              В СБ-ВС по договоренности
+            </div>
+
+            <div class="white">
+              +7 (927) 336-08-88<br />
+              ivanov-inan@gmail.com
+            </div>
+
+            <div>Бари Галеева г. Уфа</div>
+          </div>
         </div>
+      </div>
+
+
+      <div class="contacts_info">
         <div class="contacts_messengers" v-motion-slide-visible-once-left>
           <a href="" class="messenger">
             <svg
@@ -107,25 +116,33 @@
   border-bottom: 1px solid #444444;
   border-top: 1px solid #444444;
   margin-top: 50px;
-}
-
-.contacts_info {
+  position: relative;
   color: rgba(255, 255, 255, 0.7);
   font-size: 30px;
   font-weight: 300;
+}
+
+.contacts_info {
   min-width: 800px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .contacts_map {
   width: 100%;
+  height: 650px;
 }
 
 .contacts_text {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  margin-left: 160px;
-  padding: 75px 0px 120px;
+  padding: 70px 0px;
+}
+
+.contacts_text_absolute{
+  position: absolute;
+  width: 100%;
 }
 
 .white {
@@ -137,6 +154,7 @@
   display: flex;
   justify-content: space-around;
   padding: 35px 0px;
+  width: 100%;
 }
 
 path {
@@ -147,4 +165,38 @@ path {
 a:hover svg path {
   fill: white;
 }
+
+@media(max-width: 1600px){
+  .contacts_inner{
+    font-size: 24px;
+  }
+
+  .contacts_map{
+    height: 520px;
+  }
+
+  svg{
+    width: 40px;
+    height: 40px;
+  }
+
+  .contacts_text{
+    padding: 60px 0px;
+  }
+
+  .contacts_messengers{
+    padding: 30px 0px;
+  }
+
+  .contacts_info{
+    min-width: 700px;
+  }
+}
+
+@media(max-width: 1500px){
+  .contacts_info{
+    min-width: 600px;
+  }
+}
+
 </style>

@@ -43,7 +43,7 @@ const { moreReviews, openModal } = inject('Reviews')
       <div class="review" v-for="review in reviews" v-motion-slide-visible-once-bottom>
         <div class="review_name">
           <div>
-            <img :src="review.img" alt="" />
+            <img :src="review.img" :alt="review.img" class="avatar" />
           </div>
 
           <div>
@@ -104,5 +104,38 @@ button {
   margin: 0 auto;
   border-radius: 10px;
   padding: 25px 30px;
+}
+
+@media(max-width: 1600px){
+
+
+  h4{
+    font-size: 24px;
+  }
+
+  .review{
+    padding: 35px;
+  }
+
+  .avatar{
+    width: 100px;
+  }
+
+  button{
+    font-size:20px;
+  }
+
+}
+
+@media(max-width: 1440px){
+  .reviews_container {
+    padding: 35px 0px;
+  }
+}
+
+@media(max-width: 1400px){
+  .review_text{
+    font-size:16px;
+  }
 }
 </style>

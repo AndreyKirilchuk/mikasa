@@ -57,7 +57,7 @@ const { closeModal } = inject('Reviews')
   left: 50%;
   transform: translate(-50%, -50%);
   width: 85%;
-  height: 900px;
+  height: 90%;
   z-index: 810;
   background: black;
 }

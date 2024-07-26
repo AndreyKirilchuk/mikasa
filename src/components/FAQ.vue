@@ -1,5 +1,7 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive} from 'vue'
+
+
 
 const questions = reactive([
   { name: 'Вопрос 1', content: 'Ответ на вопрос 1', open: false },
@@ -15,9 +17,6 @@ const questions = reactive([
   { name: 'Вопрос 6', content: 'Ответ на вопрос 6', open: false }
 ])
 
-const toggleAccordion = (index) => {
-  questions[index].open = !questions[index].open
-}
 </script>
 
 <template>
@@ -28,18 +27,18 @@ const toggleAccordion = (index) => {
 
     <h2 class="block_title" v-motion-slide-visible-once-left>Частые вопросы</h2>
 
-    <div class="faq_container">
-      <div
+    <CAccordion class="faq_container">
+      <CAccordionItem
         v-for="(question, index) in questions"
-        :key="index"
+        :item-key="index"
         class="faq"
         v-motion-slide-visible-once-bottom
       >
         <div class="accordion">
-          <div class="name">
+          <CAccordionHeader class="name">
             {{ question.name }}
-          </div>
-          <button class="toggle" @click="toggleAccordion(index)" :class="{ active: question.open }">
+          </CAccordionHeader>
+          <button class="toggle" :class="{ active: question.open }">
             <svg
               width="17"
               height="30"
@@ -56,17 +55,17 @@ const toggleAccordion = (index) => {
             </svg>
           </button>
         </div>
-        <div class="content" :class="{ active: question.open }">
+        <CAccordionBody class="content" :class="{ active: question.open }">
           {{ question.content }}
-        </div>
-      </div>
-    </div>
+        </CAccordionBody>
+      </CAccordionItem>
+    </CAccordion>
   </div>
 </template>
 
 <style scoped>
 .faq_container {
-  padding: 50px 150px;
+  padding: 50px 60px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -149,5 +148,11 @@ const toggleAccordion = (index) => {
 
 .toggle.active svg path {
   fill: white;
+}
+
+@media(max-width: 1440px){
+  .faq_container{
+    padding: 35px 0px;
+  }
 }
 </style>

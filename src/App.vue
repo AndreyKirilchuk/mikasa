@@ -68,7 +68,7 @@ provide('Reviews', {
 
 <template>
   <Header />
-  <Calculate v-if="CalculateActive" />
+  <Calculate :class="{'thisCalculate':1 === 1  ,'calculate_active': CalculateActive}"/>
   <MoreReviews v-if="moreReviewsActive" />
   <Modal v-if="ModalActive" :ModalVideo="ModalVideo" />
   <div class="block_container">
@@ -110,9 +110,10 @@ provide('Reviews', {
   top: -140px;
 }
 
-@media(max-width: 1500px){
+@media(max-width: 1600px){
   .block_title{
     font-size: 44px;
+    line-height: 53px;
   }
   .block_container {
     row-gap: 120px;
@@ -131,6 +132,14 @@ provide('Reviews', {
   .dekstop_br{
     display: none;
   }
+}
+
+.thisCalculate{
+  display: none;
+}
+
+.calculate_active {
+  display: block;
 }
 
 </style>

@@ -11,10 +11,12 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@coreui/coreui": "^5.1.0",
     "@formkit/auto-animate": "^0.8.2",
     "@vueuse/motion": "^2.2.3",
     "axios": "^1.7.2",
-    "vue": "^3.4.29"
+    "vue": "^3.4.29",
+    "vuetify": "^3.6.13"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
