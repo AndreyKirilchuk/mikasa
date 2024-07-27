@@ -188,7 +188,7 @@ button {
 }
 
 input {
-  padding: 25px 30px;
+  padding: 20px 30px;
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   background: 0;
@@ -285,13 +285,66 @@ input::placeholder {
     font-size: 18px;
     padding:15px 25px;
   }
+  .agreed{
+    font-size: 14px;
+  }
+  .banner_content{
+    top: 40px;
+  }
 }
 
-@media(max-width: 1440px){
-  .banner_info{
-    width: 530px;
+@media(max-width: 1440px) {
+  .banner_info {
+    width: 520px;
   }
 
+}
+
+@media(max-width: 1350px){
+  .banner_content{
+    top: 30px;
+  }
+  .banner-img img {
+    max-width: 700px;
+    max-height: 480px;
+  }
+  .banner_info {
+    width: 550px;
+  }
+  hr{
+    margin:20px 0px
+  }
+  .banner_info span{
+    font-size: 18px;
+    line-height: 20px;
+  }
+  input{
+    font-size: 16px;
+    padding: 20px 25px;
+  }
+}
+
+@media(max-width: 1300px){
+  .banner_content{
+    top: 20px;
+  }
+  .banner_info{
+    width: 505px;
+  }
+  .banner-img img {
+    max-width: 650px;
+    max-height: 480px;
+  }
+}
+
+@media(max-width:1200px){
+  .banner_info span{
+    font-size:16px;
+  }
+  .banner-img img {
+    max-width: 600px;
+    max-height: 480px;
+  }
 }
 
 

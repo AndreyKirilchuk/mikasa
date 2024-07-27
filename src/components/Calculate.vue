@@ -85,6 +85,7 @@ const backProgress = () => {
   progress.value--
   if (progress.value === 0) {
     closeCalculate()
+    progress.value++
   }
   answers.value.pop()
 }
@@ -95,8 +96,6 @@ const applyCheckbox = () => {
   } else {
     error_agreed.value = false
   }
-
-  console.log('asd')
 }
 
 const applyName = () => {
@@ -241,7 +240,7 @@ provide('backProgress', backProgress)
     </button>
     <!--    progress 1 - 4-->
 
-    <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress <= 4">
+    <form @submit.prevent="nextProgress" class="calculate_form" v-if="progress <= 4 ">
       <h2 v-motion-fade-visible>{{ questions[progress - 1].title }}</h2>
 
       <div class="options_img" v-if="progress === 1 || progress === 3" v-motion-fade-visible>

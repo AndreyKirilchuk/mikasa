@@ -16,7 +16,7 @@ const { openCalculate } = inject('Calculate')
               Строим дома
               <p>для комфортной<br> жизни</p>
             </h2>
-            <span>Строительство загородной недвижимости в Уфе</span>
+            <div>Строительство загородной недвижимости в Уфе</div>
             <Button text="Рассчитать стоимость" :arrow="true" @click="openCalculate" />
           </div>
           <div class="info-boxes" v-motion-slide-bottom>
@@ -75,11 +75,12 @@ const { openCalculate } = inject('Calculate')
   font-weight: 800;
 }
 
-.banner_info span {
+.banner_info div {
   font-size: 28px;
   color: white;
   font-weight: 500;
-  margin: 0;
+  margin: 30px 0px;
+  line-height: 30px;
 }
 
 button {
@@ -113,6 +114,9 @@ button {
   max-width: 100%;
   height: auto;
   z-index: -100;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 
@@ -121,21 +125,66 @@ button {
     font-size: 56px;
     line-height: 60px;
   }
-  .banner_info span {
+  .banner_info div {
     font-size: 24px;
+    max-width: 450px;
   }
   button{
     font-size: 24px;
+    padding: 25px 30px;
   }
   .info-box{
     font-size: 16px;
-    padding:10px;
+    padding:1px 15px;
+    max-width: 270px;
   }
   .info-boxes{
     gap: 50px;
   }
   .banner-img{
     width: 850px;
+  }
+}
+
+@media(max-width: 1440px){
+  .banner-img{
+    width: 800px;
+  }
+}
+
+@media(max-width: 1300px){
+  .info-boxes{
+    gap: 25px;
+  }
+
+}
+
+@media(max-width: 1200px){
+  .banner_info h2{
+    font-size: 40px;
+    line-height: 46px;
+  }
+  .banner_info div {
+    font-size: 24px;
+    margin:20px 0px;
+  }
+  button{
+    font-size: 18px;
+    padding: 23px 27px;
+  }
+  .info-box{
+    font-size: 14px;
+    padding:1px 10px;
+    max-width: 230px;
+  }
+  .info-boxes{
+    gap: 20px;
+  }
+  .banner-img{
+    width: 656px;
+  }
+  .banner_content{
+    top: 15%;
   }
 }
 

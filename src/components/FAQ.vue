@@ -1,7 +1,7 @@
 <script setup>
-import { reactive} from 'vue'
+import { reactive, ref } from 'vue'
 
-
+const thisActive = ref(null);
 
 const questions = reactive([
   { name: 'Вопрос 1', content: 'Ответ на вопрос 1', open: false },
@@ -17,6 +17,17 @@ const questions = reactive([
   { name: 'Вопрос 6', content: 'Ответ на вопрос 6', open: false }
 ])
 
+const toggleAccordion = (index) => {
+  if(thisActive.value !== null){
+    if(thisActive.value === index){
+
+    }else{
+      questions[thisActive.value].open = false;
+    }
+  }
+  thisActive.value = index
+  questions[index].open = !questions[index].open
+}
 </script>
 
 <template>
@@ -27,18 +38,18 @@ const questions = reactive([
 
     <h2 class="block_title" v-motion-slide-visible-once-left>Частые вопросы</h2>
 
-    <CAccordion class="faq_container">
-      <CAccordionItem
+    <div class="faq_container">
+      <div
         v-for="(question, index) in questions"
-        :item-key="index"
+        :key="index"
         class="faq"
         v-motion-slide-visible-once-bottom
       >
         <div class="accordion">
-          <CAccordionHeader class="name">
+          <div class="name">
             {{ question.name }}
-          </CAccordionHeader>
-          <button class="toggle" :class="{ active: question.open }">
+          </div>
+          <button class="toggle" @click="toggleAccordion(index)" :class="{ active: question.open}">
             <svg
               width="17"
               height="30"
@@ -55,11 +66,11 @@ const questions = reactive([
             </svg>
           </button>
         </div>
-        <CAccordionBody class="content" :class="{ active: question.open }">
+        <div class="content" :class="{ active: question.open }">
           {{ question.content }}
-        </CAccordionBody>
-      </CAccordionItem>
-    </CAccordion>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -75,7 +86,7 @@ const questions = reactive([
 
 .faq {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 0px 17px;
+  padding: 0px 17px 20px 17px;
   transition: 0.3s ease-in-out;
 }
 
@@ -87,20 +98,20 @@ const questions = reactive([
   font-size: 32px;
   font-weight: 600;
   transition: 0.3s ease-in-out;
-  margin-bottom: 20px;
 }
 
 .content {
-  overflow: hidden;
   max-height: 0;
-  transition: 0.3s ease-in-out;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
   font-size: 20px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .content.active {
-  max-height: 100%;
+  margin-top: 20px;
+  max-height: 100px;
 }
 
 .toggle {
@@ -131,7 +142,7 @@ const questions = reactive([
 
 .toggle svg {
   transform: rotate(45deg);
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .toggle div:last-child {

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, inject } from 'vue'
 
 import Button from '@/components/UI components/Button.vue'
 
@@ -20,6 +20,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
+
+const toggleBurger = inject('toggleBurger')
 </script>
 
 <template>
@@ -41,10 +43,16 @@ onUnmounted(() => {
           <a href="#contacts">Контакты</a>
         </nav>
 
-        <div>
+        <div class="header-btn">
           <a href="#form">
             <Button text="Оставить заявку" />
           </a>
+
+          <div class="burger" @click="toggleBurger">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </header>
     </div>
@@ -65,7 +73,7 @@ onUnmounted(() => {
 }
 
 header {
-  padding:39px 0px;
+  padding:25px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,6 +95,32 @@ nav a:hover {
   color: #7b308d;
 }
 
+.header-btn{
+  display:flex;
+  gap: 15px;
+}
+
+.burger{
+  padding: 11px 7px;
+  border:1px solid #444444;
+  border-radius: 5px;
+  background:rgba(32, 33, 34, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width:36px;
+  height: 36px;
+  display: none;
+}
+
+.burger div{
+  background: white;
+  width: 100%;
+  height: 2px;
+  margin-bottom: 3px;
+  border-radius: 25%;
+}
+
 @media(max-width: 1600px){
   nav{
     font-size: 16px;
@@ -101,4 +135,34 @@ nav a:hover {
     padding:20px 0px;
   }
 }
+
+@media(max-width: 1200px){
+  nav{
+    font-size: 14px;
+  }
+  img{
+    width: 200px;
+  }
+
+  button{
+    padding: 9px 16px;
+    font-size: 14px;
+  }
+}
+
+@media(max-width: 1100px){
+  nav{
+    display:none;
+  }
+  .burger {
+    display:block
+  }
+}
+
+@media(max-width: 768px){
+  .burger{
+    width: 34px;
+  }
+}
+
 </style>

@@ -170,7 +170,7 @@ const prevImage = () => {
               <div class="image-container" @click="showProject(project.id)">
                 <img :src="project.preview" :alt="project.preview" height="300px" />
               </div>
-              <h3>{{ project.name }}</h3>
+              <h4>{{ project.name }}</h4>
             </span>
           </div>
         </div>
@@ -180,6 +180,10 @@ const prevImage = () => {
 </template>
 
 <style scoped>
+h2{
+  margin-bottom:50px;
+}
+
 .projects_container {
   margin-bottom: 200px;
 }
@@ -199,8 +203,8 @@ const prevImage = () => {
   border-radius: 20px;
 }
 
-h2 {
-  margin: 50px 0px;
+h3 {
+  margin: 25px 0px;
 }
 
 .main_preview{
@@ -257,10 +261,15 @@ svg path {
   }
 }
 
-h3 {
+h3, h4 {
   font-size: 36px;
   color: white;
   font-weight: 600;
+}
+
+h4{
+  margin-bottom: 0;
+  margin-top: 20px;
 }
 
 .project_list {
@@ -301,7 +310,13 @@ button {
 }
 
 @media(max-width: 1600px){
-  h3{
+  .main_project{
+    top: 120px;
+  }
+  h2{
+    margin-bottom:40px;
+  }
+  h3, h4{
     font-size: 28px;
   }
   .text{
@@ -323,7 +338,7 @@ button {
     gap: 30px;
     justify-content: space-between;
     width: 100%;
-    max-height: 1320px;
+    max-height: 1250px;
   }
   .image-container{
     width:400px;
@@ -334,6 +349,74 @@ button {
   }
   .project_item{
     width: 400px;
+  }
+  .project_list{
+    gap: 30px;
+  }
+}
+
+@media(max-width: 1300px){
+  .main_project{
+    top: 150px;
+  }
+  .main_preview img{
+    height: 350px;
+  }
+}
+
+@media(max-width: 1200px){
+  h2{
+    margin-bottom:35px;
+  }
+  .main_preview .prev svg, .next svg{
+    width: 45px;
+    height: 45px;
+  }
+  .image-container{
+    width:310px;
+  }
+  .image-container img{
+    width: 310px;
+    height: 186px;
+  }
+  .project_item{
+    width: 310px;
+  }
+}
+
+@media(max-width: 1024px){
+  h2{
+    margin-bottom:20px;
+  }
+  h3{
+    margin:10px 0px;
+    font-size:24px;
+  }
+  h4{
+    margin-top: 10px;
+    font-size: 22px;
+  }
+  .text{
+    font-size: 14px;
+  }
+  button{
+    font-size: 14px;
+    padding:20px;
+  }
+  .main_preview img{
+    height: 300px;
+  }
+  .project_list{
+    gap: 20px;
+  }
+  .project{
+    gap: 20px;
+  }
+}
+
+@media(max-width: 768px){
+  .main_preview img{
+    height: 400px;
   }
 }
 </style>

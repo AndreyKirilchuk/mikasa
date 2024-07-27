@@ -159,7 +159,6 @@ const { openModal } = inject('Reviews')
           :class="{ active: thisContent.id === circle.id }"
           v-if="About === 'video'"
           @click="toggleVideo(circle.id)"
-          v-motion-right
         ></div>
         <div
           v-for="circle in images"
@@ -211,14 +210,15 @@ nav {
 }
 
 h4 {
-  margin: 40px 0px;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  line-height: 40px;
 }
 
 .about_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
-  gap: 135px;
 }
 
 .about_preview {
@@ -228,6 +228,7 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 500px;
 }
 
 span {
@@ -329,13 +330,18 @@ span {
 
 @media(max-width: 1600px){
   .about_info, .about_preview{
-    max-height: 400px;
+    height: 400px;
   }
   h4{
-    font-size: 44px;
+    margin-top: 35px;
+    margin-bottom: 15px;
   }
   span, button{
     font-size: 20px !important;
+  }
+  .play img{
+    width:100px;
+    height:100px;
   }
 }
 
@@ -353,6 +359,42 @@ span {
 @media(max-width: 1400px){
   .about_info{
     min-width: 450px;
+  }
+}
+
+@media(max-width: 1300px){
+  .about_container{
+    gap: 55px;
+  }
+  .about_info, .about_preview{
+    height: 375px;
+  }
+}
+
+@media(max-width: 1200px){
+  .about_container{
+    gap: 0px;
+  }
+}
+
+@media(max-width: 1024px){
+  button{
+    padding: 20px;
+    font-size: 16px;
+  }
+  .play img{
+    width: 90px;
+    height:90px;
+  }
+  span, button{
+    font-size: 16px !important;
+  }
+}
+
+@media(max-width: 768px){
+  .play img{
+    width:80px;
+    height:80px;
   }
 }
 </style>

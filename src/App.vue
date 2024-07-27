@@ -13,14 +13,15 @@ import Reviews from '@/components/Reviews.vue'
 import Modal from '@/components/Modal.vue'
 import MoreReviews from '@/components/MoreReviews.vue'
 import Footer from '@/components/Footer.vue'
-import Edge from '@/components/About.vue'
 import Form from '@/components/Form.vue'
+import Burger from '@/components/Burger.vue'
 
 const body = ref(document.body)
 const CalculateActive = ref(false)
 const ModalActive = ref(false)
 const ModalVideo = ref('')
 const moreReviewsActive = ref(false)
+const burgerActive = ref(false)
 
 const openCalculate = () => {
   body.value.classList.add('active')
@@ -53,6 +54,16 @@ const closeReviews = () => {
   moreReviewsActive.value = false
 }
 
+const toggleBurger = () => {
+  burgerActive.value = !burgerActive.value;
+
+  if(burgerActive.value){
+    body.value.classList.add('active')
+  }else{
+    body.value.classList.remove('active')
+  }
+}
+
 provide('Calculate', {
   openCalculate,
   closeCalculate
@@ -64,11 +75,15 @@ provide('Reviews', {
   moreReviews,
   closeReviews
 })
+
+provide('toggleBurger', toggleBurger)
 </script>
 
 <template>
   <Header />
   <Calculate :class="{'thisCalculate':1 === 1  ,'calculate_active': CalculateActive}"/>
+  <Burger :burgerActive="burgerActive" />
+
   <MoreReviews v-if="moreReviewsActive" />
   <Modal v-if="ModalActive" :ModalVideo="ModalVideo" />
   <div class="block_container">
@@ -84,6 +99,7 @@ provide('Reviews', {
     <Form />
     <Footer />
   </div>
+
 </template>
 
 <style>
@@ -110,28 +126,8 @@ provide('Reviews', {
   top: -140px;
 }
 
-@media(max-width: 1600px){
-  .block_title{
-    font-size: 44px;
-    line-height: 53px;
-  }
-  .block_container {
-    row-gap: 120px;
-  }
-}
-
 .mobile_br{
   display: none;
-}
-
-
-@media(max-width: 1600px){
-  .mobile_br{
-    display: block;
-  }
-  .dekstop_br{
-    display: none;
-  }
 }
 
 .thisCalculate{
@@ -142,4 +138,34 @@ provide('Reviews', {
   display: block;
 }
 
+@media(max-width: 1600px){
+  .block_title{
+    font-size: 44px;
+    line-height: 53px;
+  }
+  .block_container {
+    row-gap: 120px;
+  }
+  .mobile_br{
+    display: block;
+  }
+  .dekstop_br{
+    display: none;
+  }
+}
+
+@media(max-width: 1200px){
+  .block_title{
+    font-size: 40px;
+  }
+}
+
+@media(max-width: 1024px){
+  .block_container{
+    row-gap: 80px;
+  }
+  .block_title{
+    font-size: 32px;
+  }
+}
 </style>

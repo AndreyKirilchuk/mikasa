@@ -43,4 +43,10 @@ button:hover img {
     font-size: 18px;
   }
 }
+
+@media(max-width: 1200px){
+  button img{
+    width: 10px;
+  }
+}
 </style>
