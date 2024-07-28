@@ -138,4 +138,106 @@ button {
     font-size:16px;
   }
 }
+
+@media(max-width: 1200px){
+  h4{
+    font-size: 20px;
+  }
+  .review{
+    padding: 30px;
+  }
+  .avatar{
+    width: 90px;
+  }
+
+  button{
+    padding: 20px 25px;
+  }
+  .img-btn{
+    width: 35px;
+  }
+  .review_text{
+    font-size:14px;
+    margin-top: 10px;
+  }
+
+  .reviews_container{
+    gap: 20px;
+  }
+}
+
+@media(max-width: 1024px){
+  h4{
+    font-size: 18px;
+  }
+  .review{
+    padding: 25px;
+  }
+  .avatar{
+    width: 75px;
+  }
+
+  button{
+    font-size: 16px;
+  }
+  .img-btn{
+    width: 30px;
+  }
+  .review_text{
+    font-size:12px;
+  }
+
+  .reviews_container{
+    gap: 15px;
+  }
+}
+
+@media(max-width: 768px){
+  .reviews_container{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  h4{
+    font-size: 20px;
+  }
+  .review{
+    padding: 30px;
+    margin:0 auto;
+    max-width: 500px;
+  }
+  .avatar{
+    width: 90px;
+  }
+
+  .img-btn{
+    width: 35px;
+  }
+  .review_text{
+    font-size:14px;
+  }
+}
+
+@media(max-width: 480px){
+  h4{
+    font-size: 12px;
+  }
+  .review{
+    padding: 20px;
+  }
+  .avatar{
+    width: 50px;
+  }
+
+  .img-btn{
+    width: 20px;
+  }
+
+  .review_text{
+    font-size:9px;
+  }
+
+  button{
+    padding: 14px 16px;
+  }
+}
+
 </style>

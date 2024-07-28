@@ -11,14 +11,14 @@ const videos = reactive([
     id: '1',
     name: 'Почему выбирают нас',
     text: 'Узнайте больше о компании,<br> посмотрев видео',
-    img: '',
+    img: '/house2.png',
     video: ''
   },
   {
     id: '2',
     name: 'Наши достижения',
     text: 'Посмотрите наше видео о достижениях',
-    img: '',
+    img: '/house2.png',
     video: ''
   }
 ])
@@ -28,7 +28,7 @@ const images = reactive([
     id: '1',
     name: 'Почему asd нас',
     text: 'Узнайте больше о компании,<br> посмотрев изображение',
-    img: ''
+    img: '/house2.png'
   },
   { id: '2', name: 'Наши asd', text: 'Посмотрите наши достижения', img: '' }
 ])
@@ -84,7 +84,7 @@ const { openModal } = inject('Reviews')
 </script>
 
 <template>
-  <div>
+  <section>
     <div class="link_block">
       <div id="about"></div>
     </div>
@@ -93,6 +93,14 @@ const { openModal } = inject('Reviews')
       <div class="about_info" :class="{ 'fade-in': aboutAnimate }">
         <h4 class="block_title">{{ thisContent.name }}</h4>
         <span v-html="thisContent.text"> </span>
+
+        <a
+          class="play mobile_play"
+          :class="{ active: About === 'video' }"
+          @click="openModal(thisContent.video)"
+        >
+          <img src="/big_play.svg" alt="play" width="130px" height="130px" />
+        </a>
 
         <a href="#form" class="info-btn">
           <Button text="Быстрая заявка" :arrow="true" />
@@ -168,10 +176,38 @@ const { openModal } = inject('Reviews')
         ></div>
       </div>
     </nav>
-  </div>
+
+    <div class="fon" :style="{ background: `url(${thisContent.img})` }"     :class="{ 'fade-in': aboutAnimate }">
+
+    </div>
+  </section>
 </template>
 
 <style scoped>
+.mobile_play{
+  display: none !important;
+}
+
+section{
+  position: relative;
+  border-radius: 10px;
+}
+
+.fon{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: none;
+
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-radius: 10px;
+}
+
 .about_info {
   height: 450px;
   position: relative;
@@ -191,7 +227,6 @@ const { openModal } = inject('Reviews')
 }
 
 .play {
-  display: none;
   cursor: pointer;
   width: fit-content;
   height: fit-content;
@@ -224,7 +259,6 @@ h4 {
 .about_preview {
   width: 100%;
   border-radius: 20px;
-  background: #d9d9d9 !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -375,10 +409,13 @@ span {
   .about_container{
     gap: 0px;
   }
+  .about_info, .about_preview{
+    height: 350px;
+  }
 }
 
 @media(max-width: 1024px){
-  button{
+  .info-btn button{
     padding: 20px;
     font-size: 16px;
   }
@@ -389,6 +426,79 @@ span {
   span, button{
     font-size: 16px !important;
   }
+  nav{
+    margin-top: 25px;
+    margin-bottom: 5px;
+  }
+  h4{
+    margin-top: 0;
+  }
+
+  section{
+    padding: 25px 40px;
+    height: fit-content;
+    margin-bottom: 80px;
+  }
+
+  .about_preview{
+    background: inherit !important;
+  }
+  .fon{
+    display:block;
+  }
+
+  .about_navigate {
+    border-radius: 70px; /* 70% of 100px */
+    outline: 1.4px solid white; /* 70% of 2px */
+    width: 84px; /* 70% of 120px */
+  }
+
+  .about_navigate button {
+    width: 42px; /* 70% of 60px */
+    height: 42px; /* 70% of 60px */
+    transform: translateX(-0.7px); /* 70% of -1px */
+  }
+
+  .about_navigate svg {
+    top: 14.7px; /* 70% of 21px */
+  }
+
+  .about_navigate .left {
+    left: 15.4px; /* 70% of 22px */
+  }
+
+  .about_navigate .right {
+    right: 15.4px; /* 70% of 22px */
+  }
+
+  .about_navigate button.active {
+    transform: translateX(42.7px); /* 70% of 61px */
+  }
+
+  .about_navigate svg{
+    width:8px;
+    top: 12px;
+  }
+
+  .content_navigate div{
+    width: 12px;
+    height: 12px;
+  }
+
+  .about_info{
+    max-height: 300px;
+  }
+
+  .about_preview{
+    max-height: 300px;
+  }
+}
+
+@media(max-width: 900px){
+  .play img{
+    width: 80px;
+    height:80px;
+  }
 }
 
 @media(max-width: 768px){
@@ -396,5 +506,111 @@ span {
     width:80px;
     height:80px;
   }
+
+  section{
+    margin-bottom: 100px;
+  }
+
+  .about_preview{
+    display:none;
+  }
+
+  .mobile_play{
+    display: block !important;
+  }
+
+  .play img{
+    margin-top: 20px;
+  }
+
+  .about_container{
+    width: 100%;
+    flex-direction: column !important;
+  }
+
+  .about_navigate {
+    border-radius: 40px;
+    outline: 0.8px solid white;
+    width: 55px;
+  }
+
+  .about_navigate button {
+    width: 30px;
+    height: 30px;
+    transform: translateX(-0.4px);
+    padding: 0;
+  }
+
+  .about_navigate .left {
+    left: 10px
+  }
+
+  .about_navigate .right {
+    right: 10px;
+  }
+
+  .about_navigate button.active {
+    transform: translateX(25.4px);
+  }
+
+  .about_navigate svg {
+    width: 6px;
+    top: 6px;
+  }
+
+  .content_navigate div {
+    width: 10px;
+    height: 10px;
+  }
+
+  .play img{
+    width:60px;
+    height:60px;
+  }
+
+  .about_info{
+    height: 280px;
+  }
+
+  .info-btn button{
+    font-size: 14px !important;
+    padding: 15px;
+  }
+
+  section{
+    padding: 25px 30px;
+  }
+
+
+  h4{
+    max-width: 350px;
+  }
 }
+
+@media(max-width: 480px){
+  section{
+    margin-bottom: 80px;
+  }
+
+  .play img{
+    width:44px;
+    height:44px;
+  }
+
+  .play img{
+    margin-top: 12px;
+  }
+
+  .about_info{
+    height:250px;
+  }
+
+  .info-btn button{
+    font-size: 12px !important;
+  }
+  section{
+    padding: 25px 10px;
+  }
+}
+
 </style>

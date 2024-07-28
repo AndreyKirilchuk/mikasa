@@ -63,6 +63,9 @@ import About from '@/components/About.vue'
 
 .service:hover {
   background: url('/violet_block.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 img {
@@ -113,14 +116,50 @@ img {
   .service_inner{
     font-size: 20px;
     bottom:20px;
+    padding: 0px 20px;
+  }
+}
+
+@media(max-width: 1200px){
+  .service{
+    height: 180px;
+  }
+}
+
+@media(max-width: 1100px){
+  .service_inner{
+    font-size: 16px;
+    bottom:20px;
+  }
+  .service{
+    height: 164px;
+  }
+  .service_inner img{
+    width: 12px;
   }
 }
 
 
 
-@media(max-width: 768px){
+@media(max-width: 1000px){
   .services_container{
     grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+  }
+}
+
+@media(max-width: 600px){
+  .services_container{
+    grid-template-columns: repeat(1,1fr);
+    gap: 15px;
+  }
+}
+
+@media(max-width: 480px){
+  .service{
+    border-radius: 8px;
+    height: 120px;
+    gap: 10px;
   }
 }
 </style>

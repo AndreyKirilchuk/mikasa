@@ -16,7 +16,7 @@ const { openCalculate } = inject('Calculate')
               Строим дома
               <p>для комфортной<br> жизни</p>
             </h2>
-            <div>Строительство загородной недвижимости в Уфе</div>
+            <div>Строительство загородной<br class="mobile_br"> недвижимости в Уфе</div>
             <Button text="Рассчитать стоимость" :arrow="true" @click="openCalculate" />
           </div>
           <div class="info-boxes" v-motion-slide-bottom>
@@ -35,19 +35,32 @@ const { openCalculate } = inject('Calculate')
 
       <div class="banner_fon"></div>
       <div class="banner-img" v-motion-fade-visible-once>
-        <img src="/house.png" alt="House" />
+        <img src="/house.png" alt="house" />
+
+        <img src="/house_mobile.png" alt="house">
       </div>
+
+
     </section>
+
+    <div class="container">
+      <Button text="Расчитать стоимость" class="button-mobile"/>
+    </div>
   </main>
 </template>
 
 <style scoped>
+
+.button-mobile{
+  display:none;
+}
+
 .banner {
   display: flex;
   justify-content: space-between;
   position: relative;
-  border-bottom: 1px solid #444444;
   max-height: 1001px;
+  border-bottom: 1px solid #444444;
 }
 
 .banner_content {
@@ -110,6 +123,10 @@ button {
   backdrop-filter: blur(50px);
 }
 
+.banner-img{
+  height: fit-content;
+}
+
 .banner-img img {
   max-width: 100%;
   height: auto;
@@ -117,6 +134,10 @@ button {
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+}
+
+.banner-img img:last-child{
+  display: none;
 }
 
 
@@ -187,5 +208,127 @@ button {
     top: 15%;
   }
 }
+
+@media(max-width: 1024px){
+  .banner_info div{
+    font-size: 18px;
+    line-height: 21px;
+    margin-top: 10px;
+  }
+
+  button{
+    font-size: 18px;
+    padding:20px;
+  }
+}
+
+@media(max-width: 850px){
+  .info-boxes div:nth-child(2){
+    display: none;
+  }
+
+  .info-boxes{
+    margin-top: 15px;
+  }
+
+  .banner-img img{
+    width: 655px;
+    float: right;
+    height: 500px;
+  }
+}
+
+@media(max-width: 650px){
+  .banner-img img:first-child{
+    display:none
+  }
+
+  .banner-img img:last-child{
+    display: block;
+  }
+
+  h2{
+    color: white !important;
+  }
+
+  .banner-img img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .banner{
+    height: auto;
+  }
+
+  .button-mobile{
+    display:block;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .banner_info button{
+    display:none;
+  }
+
+  .banner{
+    border:inherit;
+  }
+
+  .info-boxes{
+    margin-top: 60px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+  }
+
+  .info-box{
+    padding: 10px;
+    max-width: 100%;
+  }
+}
+
+@media(max-width: 605px){
+  .info-box{
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 540px){
+  .info-box{
+    font-size: 10px;
+    padding:5px 10px;
+  }
+  .info-boxes{
+    margin-top: 40px;
+  }
+
+}
+
+@media(max-width: 480px){
+  .info-boxes{
+    margin-top: 20px;
+  }
+  .info-box{
+    font-size: 10px;
+    padding:8px 10px;
+  }
+  .banner_info h2{
+    font-size: 30px;
+    line-height: 28px;
+  }
+
+  .banner_content{
+    top: 20%;
+  }
+
+  .banner_info div{
+    font-size: 16px;
+    color:rgba(255,255,255,0.7)
+  }
+}
+
 
 </style>

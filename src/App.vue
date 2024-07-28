@@ -89,7 +89,7 @@ provide('toggleBurger', toggleBurger)
   <div class="block_container">
     <Banner />
     <Projects />
-    <Banner_form title="Индивидуальный <br> подход" img="house2.png" />
+    <Banner_form title="Индивидуальный <br> подход" img="house2.png" img_mobile="house2_mobile.png" />
 
     <Services />
     <Banner_form title="Ответим на все <br class='mobile_br'> ваши <br class='dekstop_br'> вопросы" img="house3.png" />
@@ -99,7 +99,6 @@ provide('toggleBurger', toggleBurger)
     <Form />
     <Footer />
   </div>
-
 </template>
 
 <style>
@@ -166,6 +165,23 @@ provide('toggleBurger', toggleBurger)
   }
   .block_title{
     font-size: 32px;
+    line-height: 35px;
+  }
+}
+
+@media(max-width: 768px){
+  .block_container{
+    row-gap: 100px;
+  }
+}
+
+@media(max-width: 480px){
+  .block_container{
+    row-gap: 80px;
+  }
+  .block_title{
+    font-size: 25px;
+    line-height: 26px;
   }
 }
 </style>

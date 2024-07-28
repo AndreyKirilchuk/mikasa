@@ -220,7 +220,7 @@ const sendCalculation = async () => {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 500px;
+  width: 480px;
   float: left;
 }
 
@@ -258,6 +258,7 @@ const sendCalculation = async () => {
   text-align: left;
   font-size: 20px;
   color: white;
+  align-items: center;
 }
 
 .violet {
@@ -357,7 +358,9 @@ button {
     font-size: 16px;
   }
 
-
+  .sendForm{
+    width: 400px;
+  }
 }
 
 @media(max-width: 1440px){
@@ -366,15 +369,108 @@ button {
   }
 }
 
-@media(max-width: 1300px){
+@media(max-width: 1200px){
   .container{
-    width: 1100px;
+    width: 1024px;
+  }
+  .sendForm{
+    width: 400px;
+  }
+  .sendForm_input input{
+    padding: 15px 20px;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+  .custom_checbox > *{
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 5px !important;
+  }
+  .custom_checbox img {
+    width: 10px;
+  }
+
+  .checkbox_inner{
+    font-size: 14px;
+  }
+
+  button{
+    padding: 20px 0px;
   }
 }
 
-@media(max-width: 1100px){
+@media(max-width: 1024px){
   .container{
     width: 950px;
   }
+
+  h4{
+    font-size: 16px;
+  }
+
+  .sendForm_input input{
+    padding: 15px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+
+  .sendForm{
+    width: 300px;
+    gap: 15px;
+  }
+
+  .custom_checbox > *{
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 2px !important;
+  }
+  .custom_checbox img {
+    width: 8px;
+  }
+
+  button{
+    font-size: 14px;
+    padding: 15px 0px;
+    margin-top: 0;
+    border-radius: 5px;
+  }
 }
+
+@media(max-width: 950px){
+  .container{
+    width: 768px;
+  }
+}
+
+@media(max-width: 768px){
+  .container{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .block_title{
+    text-align: center;
+  }
+
+  h4{
+    text-align: center;
+  }
+}
+
+@media(max-width: 480px){
+  .block_title{
+    text-align: left;
+  }
+
+  h4{
+    text-align: left;
+    font-size: 14px;
+  }
+
+
+}
+
+
 </style>

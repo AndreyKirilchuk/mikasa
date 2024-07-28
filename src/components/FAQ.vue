@@ -165,5 +165,96 @@ const toggleAccordion = (index) => {
   .faq_container{
     padding: 35px 0px;
   }
+  .name{
+    font-size: 28px;
+  }
+
+  .content{
+    font-size: 18px;
+  }
+
+  .toggle{
+    width:45px;
+    height: 45px;
+  }
+
+  .toggle svg{
+    width: 16px;
+  }
+}
+
+@media(max-width: 1200px){
+  .name{
+    font-size: 26px;
+  }
+  .content{
+    font-size: 16px;
+  }
+
+  .toggle{
+    width:40px;
+    height: 40px;
+  }
+
+  .toggle svg{
+    width: 15px;
+  }
+
+  .faq{
+    padding: 0px 15px 13px 15px;
+  }
+
+  .content.active{
+    margin-top: 10px;
+  }
+}
+
+@media(max-width: 1024px){
+  .name{
+    font-size: 20px;
+  }
+  .content{
+    font-size: 14px;
+  }
+
+  .toggle{
+    width:33px;
+    height: 33px;
+  }
+
+  .toggle svg{
+    width: 13px;
+  }
+
+  .faq{
+    padding: 0px 12px 15px 12px;
+  }
+}
+
+@media(max-width: 768px){
+  .faq{
+    padding: 0px 9px 15px 9px;
+  }
+}
+
+@media(max-width: 480px){
+  .name{
+    font-size: 16px;
+  }
+  .content{
+    font-size: 10px;
+  }
+
+  .faq{
+    padding: 0px 5px 10px 5px;
+  }
+
+  .content{
+    transition: all 0.6s ease-in-out;
+  }
+
+  .content.active{
+    max-height: 200px;
+  }
 }
 </style>

@@ -1,11 +1,12 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted, onUnmounted } from 'vue'
 
 import Button from '@/components/UI components/Button.vue'
 
 const projects = reactive([
   {
     id: 1,
+    main_name: `Проект <span style="color:#9238a8">№1</span>`,
     name: 'Проект 1',
     preview: '/project1.svg',
     images: ['/project1.svg', '/project2.svg', '/project3.svg'],
@@ -14,6 +15,7 @@ const projects = reactive([
   },
   {
     id: 2,
+    main_name: `Проект <span style="color:#9238a8">№2</span>`,
     name: 'Проект 2',
     preview: '/project2.svg',
     images: ['/project2.svg', '/project1-2.svg', '/project1-3.svg'],
@@ -22,6 +24,7 @@ const projects = reactive([
   },
   {
     id: 3,
+    main_name: `Проект <span style="color:#9238a8">№3</span>`,
     name: 'Проект 3',
     preview: '/project3.svg',
     images: ['/project3.svg', '/project1-2.svg', '/project1-3.svg'],
@@ -30,6 +33,7 @@ const projects = reactive([
   },
   {
     id: 4,
+    main_name: `Проект <span style="color:#9238a8">№4</span>`,
     name: 'Проект 4',
     preview: '/project4.svg',
     images: ['/project4.svg', '/project1-2.svg', '/project1-3.svg'],
@@ -38,6 +42,7 @@ const projects = reactive([
   },
   {
     id: 5,
+    main_name: `Проект <span style="color:#9238a8">№5</span>`,
     name: 'Проект 5',
     preview: '/project5.svg',
     images: ['/project5.svg', '/project1-2.svg', '/project1-3.svg'],
@@ -49,9 +54,11 @@ const projects = reactive([
 const slideAnimate = ref(false)
 const mainProjectAnimate = ref(false)
 const currentImageIndex = ref(0)
+const screenWidth = ref(window.innerWidth);
 
 const mainProject = ref({
   id: 1,
+  main_name: `Проект <span style="color:#9238a8">№5</span>`,
   name: 'Проект 1',
   preview: '/project1.svg',
   images: ['/project1.svg', '/project2.svg', '/project3.svg'],
@@ -92,6 +99,19 @@ const prevImage = () => {
     (currentImageIndex.value - 1 + mainProject.value.images.length) %
     mainProject.value.images.length
 }
+
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', updateScreenWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScreenWidth);
+});
+
 </script>
 
 <template>
@@ -149,7 +169,7 @@ const prevImage = () => {
             </div>
           </div>
 
-          <h3>{{ mainProject.name }} <span></span></h3>
+          <h3 v-html="mainProject.main_name"></h3>
           <span class="text">
             {{ mainProject.text }}
           </span>
@@ -158,7 +178,7 @@ const prevImage = () => {
           </a>
         </div>
 
-        <div class="project_list" v-motion-slide-visible-once-bottom>
+        <div class="project_list"  v-if="screenWidth > 1024"  v-motion-slide-visible-once-bottom >
           <div
             class="project_item"
             v-for="(project, index) in projects"
@@ -174,6 +194,23 @@ const prevImage = () => {
             </span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="project_list" v-if="screenWidth <= 1024" v-motion-slide-visible-once-bottom>
+      <div
+        class="project_item"
+        v-for="(project, index) in projects"
+        :key="index"
+        v-auto-animate
+        v-show="project.view"
+      >
+            <span v-if="project.view">
+              <div class="image-container" @click="showProject(project.id)">
+                <img :src="project.preview" :alt="project.preview" height="300px" />
+              </div>
+              <h4>{{ project.name }}</h4>
+            </span>
       </div>
     </div>
   </div>
@@ -197,7 +234,7 @@ h2{
 
 .main_project {
   grid-column: span 2;
-  height: 500px;
+  height: fit-content;
   position: sticky;
   top: 150px;
   border-radius: 20px;
@@ -330,7 +367,7 @@ button {
     height: 400px;
     background-size: 20%;
   }
-  .main_preview .prev svg, .next svg{
+  .prev svg, .next svg{
     width: 50px;
     height: 50px;
   }
@@ -341,7 +378,7 @@ button {
     max-height: 1250px;
   }
   .image-container{
-    width:400px;
+    width: fit-content;
   }
   .image-container img{
     width: 400px;
@@ -368,12 +405,9 @@ button {
   h2{
     margin-bottom:35px;
   }
-  .main_preview .prev svg, .next svg{
+  .prev svg, .next svg{
     width: 45px;
     height: 45px;
-  }
-  .image-container{
-    width:310px;
   }
   .image-container img{
     width: 310px;
@@ -384,7 +418,7 @@ button {
   }
 }
 
-@media(max-width: 1024px){
+@media(max-width: 1100px){
   h2{
     margin-bottom:20px;
   }
@@ -414,9 +448,107 @@ button {
   }
 }
 
-@media(max-width: 768px){
+@media(max-width: 1024px){
   .main_preview img{
     height: 400px;
   }
+
+  .main_project{
+    top: 0;
+    position: inherit;
+    width:100%;
+  }
+
+  .project{
+    flex-direction: column;
+  }
+
+  .project_list{
+    margin-top: 20px;
+    flex-direction: row;
+    overflow-x: scroll;
+    margin-left: 60px;
+  }
+
+  .projects_container{
+    margin-bottom: 0;
+  }
+}
+
+@media(max-width: 900px){
+  .main_preview img{
+    height: 350px;
+  }
+}
+
+@media(max-width: 768px){
+  .project_list{
+    margin-left: 40px;
+  }
+
+  .image-container img{
+    width: 250px;
+    height: 150px;
+  }
+}
+
+@media(max-width: 580px){
+  .main_preview img{
+    height: 250px;
+  }
+  .prev svg, .next svg{
+    width:35px;
+    height: 35px;
+  }
+}
+
+@media(max-width: 500px){
+  .prev svg, .next svg{
+    width:25px;
+    height: 25px;
+  }
+
+  .project_list{
+    margin-left: 10px;
+  }
+
+  .main_preview img{
+    height: 200px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  h4{
+    font-size: 12px
+  }
+
+  .image-container img{
+    width: 160px;
+    height: 96px;
+  }
+
+  .text{
+    font-size: 8px;
+  }
+
+  button{
+    margin-top:10px;
+    font-size:14px;
+
+  }
+}
+
+@media(max-width: 380px){
+  .main_preview img{
+    height: 150px;
+  }
+
+  .prev svg, .next svg{
+    width:20px;
+    height: 20px;
+  }
+
 }
 </style>

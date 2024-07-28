@@ -1,7 +1,8 @@
 <script setup>
 defineProps({
   title: String,
-  img: String
+  img: String,
+  img_mobile:String
 })
 
 import { ref } from 'vue'
@@ -111,14 +112,16 @@ const sendForm = async () => {
           <Button text="Оставить заявку" />
         </form>
         <div class="agreed" v-motion-slide-visible-once-bottom>
-          *Нажимая на кнопку вы соглашаетесь с <span>политикой <br class="mobile_br"> конфиденциальных данных</span>
+          *Нажимая на кнопку вы соглашаетесь с <br class="mini_br"> <span>политикой <br class="mobile_br"> конфиденциальных данных</span>
         </div>
       </div>
     </div>
 
     <div class="banner_fon"></div>
     <div class="banner-img" v-motion-fade-visible-once>
-      <img :src="img" alt="House" />
+      <img :src="img" alt="house" />
+
+      <img :src="img_mobile" alt="house">
     </div>
   </section>
 </template>
@@ -218,6 +221,14 @@ input::placeholder {
 .error {
   border: 1px solid #cc1616 !important;
   animation: shake 0.5s;
+}
+
+.mini_br{
+  display: none;
+}
+
+.banner-img img:last-child{
+  display:none;
 }
 
 @keyframes shake {
@@ -342,10 +353,96 @@ input::placeholder {
     font-size:16px;
   }
   .banner-img img {
-    max-width: 600px;
-    max-height: 480px;
+    max-width: 660px;
+    max-height: 5300px;
+  }
+  .mobile_br{
+    display: none;
+  }
+  .mini_br{
+    display: block;
   }
 }
 
+@media(max-width: 1024px){
+  .banner_info{
+    max-width: 350px;
+  }
+
+  .form{
+    margin-top: 30px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  button{
+    max-width: 260px;
+    padding:19px 25px !important;
+    text-align: center;
+    justify-content: center;
+  }
+
+  input::placeholder {
+    text-align: center;
+  }
+
+  input{
+    padding: 20px;
+  }
+}
+
+@media(max-width: 660px){
+  .banner-img img{
+    max-width: 100%;
+
+  }
+}
+
+@media (max-width: 480px) {
+  .block_title{
+    font-size: 24px;
+  }
+
+  hr{
+    width: 280px;
+    margin:15px 0px;
+  }
+
+  input{
+    padding: 12px;
+    width: 150px;
+    font-size: 14px;
+  }
+
+  button{
+    width: 150px;
+    padding: 12px !important;
+    font-size: 14px;
+  }
+
+  .agreed{
+    font-size: 8px;
+  }
+
+  input::placeholder {
+    font-size: 14px;
+  }
+
+  .banner_info span{
+    font-size: 12px;
+  }
+
+  .banner-img img:first-child{
+    display:none;
+  }
+
+  .banner-img img:last-child{
+    display:block;
+  }
+
+  .banner-img img {
+    min-height: 326px;
+  }
+}
 
 </style>

@@ -111,6 +111,7 @@
 </template>
 
 <style scoped>
+
 .contacts_inner {
   display: flex;
   border-bottom: 1px solid #444444;
@@ -123,7 +124,8 @@
 }
 
 .contacts_info {
-  min-width: 800px;
+  width: 100%;
+  max-width: 800px;
   display: flex;
   align-items: flex-end;
 }
@@ -131,6 +133,8 @@
 .contacts_map {
   width: 100%;
   height: 650px;
+  max-width: 1200px;
+  margin:0 auto;
 }
 
 .contacts_text {
@@ -185,17 +189,83 @@ a:hover svg path {
   }
 
   .contacts_messengers{
-    padding: 30px 0px;
+    padding:30px 60px;
+    gap: 100px;
   }
 
-  .contacts_info{
-    min-width: 700px;
+}
+
+@media (max-width: 1200px) {
+  .contacts_messengers{
+    gap: 80px;
   }
 }
 
-@media(max-width: 1500px){
-  .contacts_info{
-    min-width: 600px;
+@media(max-width: 1024px){
+  .contacts_inner{
+    font-size: 16px;
+  }
+
+  .contacts_text{
+    padding:40px 0px;
+    gap: 40px;
+  }
+
+  .contacts_map{
+    height: 365px;
+  }
+
+  svg{
+    width: 30px;
+    height: 30px;
+  }
+
+  .contacts_messengers{
+    gap: 60px;
+  }
+}
+
+@media(max-width: 768px){
+  .contacts_messengers{
+    gap: 40px;
+    border:0;
+    justify-content: inherit;
+    padding: 0px 41px;
+  }
+  .contacts_inner{
+    flex-direction: column;
+  }
+  .contacts_map{
+    height: 400px;
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #444444;
+    margin-top: 20px;
+  }
+
+  .contacts_text_absolute{
+    position: inherit;
+  }
+
+  .contacts_inner{
+    font-size: 20px;
+  }
+
+  .contacts_text{
+    padding: 20px 0px;
+  }
+}
+
+@media(max-width: 480px){
+  .contacts_messengers{
+    padding: 0px 10px;
+  }
+
+  .contacts_inner{
+    font-size: 14px;
+  }
+
+  .contacts_map{
+    height: 300px;
   }
 }
 
