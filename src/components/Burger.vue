@@ -117,4 +117,10 @@
   a:hover{
     color: white;
   }
+
+  @media(max-width: 480px){
+    .burger_menu{
+      width: 100%;
+    }
+  }
 </style>

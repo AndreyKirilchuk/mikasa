@@ -144,6 +144,10 @@ const sendForm = async () => {
   z-index: 100;
 }
 
+.banner-img{
+  overflow: hidden;
+}
+
 .banner_info {
   max-width: 751px;
 }
@@ -394,7 +398,22 @@ input::placeholder {
 @media(max-width: 660px){
   .banner-img img{
     max-width: 100%;
+  }
 
+  .banner-img{
+    max-height: 450px;
+  }
+
+  .banner-img img:first-child{
+    display:none;
+  }
+
+  .banner-img img:last-child{
+    display:block;
+  }
+
+  hr{
+    border-color: rgba(255,255,255,0.7);
   }
 }
 
@@ -432,16 +451,13 @@ input::placeholder {
     font-size: 12px;
   }
 
-  .banner-img img:first-child{
-    display:none;
-  }
-
-  .banner-img img:last-child{
-    display:block;
-  }
 
   .banner-img img {
     min-height: 326px;
+  }
+
+  .banner_info{
+    max-width: 280px;
   }
 }
 

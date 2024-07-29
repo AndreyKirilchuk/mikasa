@@ -508,10 +508,6 @@ button {
     height: 25px;
   }
 
-  .project_list{
-    margin-left: 10px;
-  }
-
   .main_preview img{
     height: 200px;
   }
@@ -536,7 +532,20 @@ button {
   button{
     margin-top:10px;
     font-size:14px;
+    padding: 15px;
+  }
 
+  .prev{
+    left: 10px;
+  }
+  .next{
+    right: 10px;
+  }
+}
+
+@media(max-width: 480px){
+  .project_list{
+    margin-left: 10px;
   }
 }
 

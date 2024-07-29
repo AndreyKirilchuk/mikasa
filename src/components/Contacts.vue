@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -100,17 +101,18 @@
       </div>
       <div class="contacts_map" v-motion-slide-visible-once-right>
         <iframe
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A4ce10c0a95856d11ba9470a50001547eb52c0f315f30886c36c617005fbb9b17&amp;source=constructor"
+          src="https://yandex.ru/map-widget/v1/?um=constructor%3A4ce10c0a95856d11ba9470a50001547eb52c0f315f30886c36c617005fbb9b17&amp;source=constructor&theme=dark"
           width="100%"
           height="100%"
           frameborder="0"
-        ></iframe>
+        />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+
 
 .contacts_inner {
   display: flex;

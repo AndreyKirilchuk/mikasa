@@ -9,7 +9,7 @@ const { closeReviews } = inject('Reviews')
   <div class="more_reviews_container" v-motion-fade>
     <div>
       <h3 v-motion-fade>Убедитесь в нашем профессионализме</h3>
-      <span v-motion-fade>Отзывы наших клиентов на разных площадках</span>
+      <span v-motion-fade>Отзывы наших клиентов <br class="mobile_br"> на разных площадках</span>
       <div class="info-boxes">
         <a class="info-box" href="">
           <p>
@@ -103,6 +103,10 @@ button {
   font-size: 20px !important;
 }
 
+.mobile_br{
+  display: none !important;
+}
+
 @media(max-width: 1400px){
   h3{
     font-size: 40px;
@@ -112,5 +116,88 @@ button {
     font-size: 20px;
   }
 }
+
+@media(max-width: 1200px){
+  h3{
+    font-size: 32px;
+  }
+
+  span{
+    font-size: 16px;
+  }
+
+  button{
+    font-size: 16px !important;
+    padding: 18px 35px;
+    border-radius: 5px;
+  }
+
+  .info-boxes {
+    gap: 20px;
+    margin:40px 0px;
+  }
+
+  .info-box{
+    font-size: 16px;
+    padding: 0px 20px;
+    border-radius: 5px;
+  }
+
+  .info-box img{
+    width: 30px;
+  }
+}
+
+@media(max-width: 768px){
+  h3{
+    font-size: 28px;
+  }
+
+  button{
+    font-size: 14px !important;
+    padding: 15px 30px;
+  }
+
+  .info-boxes {
+    gap: 20px;
+    margin:40px 0px;
+  }
+
+  .info-box{
+    font-size: 14px;
+
+  }
+
+  .info-box img{
+    width: 30px;
+  }
+}
+
+@media(max-width: 480px){
+  h3{
+    font-size: 24px;
+  }
+
+  .info-boxes {
+    flex-direction: column;
+  }
+
+  .info-box{
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+    margin:0 auto;
+  }
+
+  .mobile_br{
+    display: block !important;
+  }
+
+  button{
+    padding: 12px 24px;
+  }
+}
+
+
 
 </style>

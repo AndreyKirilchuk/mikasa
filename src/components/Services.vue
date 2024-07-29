@@ -158,6 +158,7 @@ img {
 @media(max-width: 480px){
   .service{
     border-radius: 8px;
+    width: 100%;
     height: 120px;
     gap: 10px;
   }

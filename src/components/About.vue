@@ -585,6 +585,13 @@ span {
   h4{
     max-width: 350px;
   }
+
+
+  .about_info{
+    height:290px;
+    min-width: 0px;
+  }
+
 }
 
 @media(max-width: 480px){
@@ -601,15 +608,15 @@ span {
     margin-top: 12px;
   }
 
-  .about_info{
-    height:250px;
-  }
-
   .info-btn button{
     font-size: 12px !important;
   }
   section{
     padding: 25px 10px;
+  }
+
+  .about_info{
+    height:250px;
   }
 }
 

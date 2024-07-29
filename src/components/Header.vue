@@ -163,6 +163,12 @@ nav a:hover {
   .burger{
     width: 34px;
   }
+
 }
 
+@media(max-width: 510px){
+  .header-btn a{
+    display: none;
+  }
+}
 </style>

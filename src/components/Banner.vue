@@ -30,6 +30,8 @@ const { openCalculate } = inject('Calculate')
               <p>Расширенная гарантия – 5 лет, прописана в договоре</p>
             </div>
           </div>
+
+          <Button text="Расчитать стоимость" class="button-mobile"/>
         </div>
       </div>
 
@@ -43,9 +45,6 @@ const { openCalculate } = inject('Calculate')
 
     </section>
 
-    <div class="container">
-      <Button text="Расчитать стоимость" class="button-mobile"/>
-    </div>
   </main>
 </template>
 
@@ -232,9 +231,12 @@ button {
   }
 
   .banner-img img{
-    width: 655px;
     float: right;
     height: 500px;
+  }
+
+  .banner-img{
+    width:100%;
   }
 }
 
@@ -287,6 +289,10 @@ button {
     padding: 10px;
     max-width: 100%;
   }
+
+  button{
+    margin-top: 20px;
+  }
 }
 
 @media(max-width: 605px){
@@ -327,6 +333,42 @@ button {
   .banner_info div{
     font-size: 16px;
     color:rgba(255,255,255,0.7)
+  }
+
+
+}
+
+@media(max-width: 420px){
+  .info-boxes{
+    margin-top: 10px;
+  }
+
+  .info-box{
+    padding: 0px 5px;
+  }
+
+  .banner_content{
+    top: 60px;
+  }
+
+  .banner{
+    margin-bottom: 50px;
+  }
+
+}
+
+@media(max-width: 370px){
+
+  .info-boxes{
+    margin-top: 5px;
+  }
+
+  .info-box{
+    padding: 0px 2px;
+  }
+
+  .banner{
+    margin-bottom: 70px;
   }
 }
 

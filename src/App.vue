@@ -92,7 +92,7 @@ provide('toggleBurger', toggleBurger)
     <Banner_form title="Индивидуальный <br> подход" img="house2.png" img_mobile="house2_mobile.png" />
 
     <Services />
-    <Banner_form title="Ответим на все <br class='mobile_br'> ваши <br class='dekstop_br'> вопросы" img="house3.png" />
+    <Banner_form title="Ответим на все <br class='mobile_br'> ваши <br class='dekstop_br'> вопросы" img="house3.png" img_mobile="house3_mobile.png" />
     <Reviews />
     <f-a-q />
     <Contacts />

@@ -27,6 +27,7 @@ button {
 }
 
 button img {
+  align-self: center;
   transition: 0.3s;
 }
 
@@ -49,4 +50,23 @@ button:hover img {
     width: 10px;
   }
 }
+
+@media(max-width: 1024px){
+  button img{
+    width: 9px;
+  }
+}
+
+@media(max-width: 768px){
+  button img{
+    width: 8px;
+  }
+}
+
+@media(max-width: 480px){
+  button img{
+    width: 7px;
+  }
+}
+
 </style>
