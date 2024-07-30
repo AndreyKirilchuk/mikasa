@@ -1,16 +1,27 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive} from 'vue'
 
 const services = reactive([
-  { name: `Строительство <br>дома`, img: '/home_build.png' },
-  { name: `Механизированная<br> штукатурка`, img: '/mechanized_plastering.png' },
-  { name: `Полусухая<br> стяжка`, img: '/semi_dry_screed.png' },
-  { name: 'Электромонтаж', img: '/electrical_installation.png' },
-  { name: 'Системы отопления', img: '/heating_systems.png' },
-  { name: 'Водоснабжение', img: '/water_supply.png' }
+  { name: `Строительство <br>дома`, img: '/home_build.png', active: false},
+  { name: `Механизированная<br> штукатурка`, img: '/mechanized_plastering.png', active: false},
+  { name: `Полусухая<br> стяжка`, img: '/semi_dry_screed.png', active: false},
+  { name: 'Электромонтаж', img: '/electrical_installation.png', active: false},
+  { name: 'Системы отопления', img: '/heating_systems.png', active: false},
+  { name: 'Водоснабжение', img: '/water_supply.png', active: false},
 ])
 
 import About from '@/components/About.vue'
+
+const addHover = (service) => {
+  service.active = true;
+  console.log(service)
+}
+
+const removeHover = (service) => {
+  service.active = false;
+  console.log(service)
+}
+
 </script>
 
 <template>
@@ -29,11 +40,14 @@ import About from '@/components/About.vue'
         v-for="service in services"
         href="#form"
         v-motion-slide-visible-once-bottom
+        @touchstart="addHover(service)"
+        @touchend="removeHover(service)"
+        :class="{active: service.active}"
       >
         <div class="service_inner">
           <div v-html="service.name"></div>
 
-          <img src="/arrow.svg" alt="" />
+          <img src="/arrow.svg" alt="arrow" />
         </div>
       </a>
     </div>
@@ -54,7 +68,7 @@ import About from '@/components/About.vue'
   border-radius: 19px;
   width: 450px;
   height: 260px;
-  transition: 0.3s;
+  transition: 0.4s;
   position: relative;
   background-size: cover !important;
   background-position: center !important;
@@ -70,11 +84,14 @@ import About from '@/components/About.vue'
 
 img {
   display: none;
-  transition: 0.3s;
 }
 
 .service:hover img {
   display: block;
+}
+
+.service.active{
+  background: green;
 }
 
 .service_inner {

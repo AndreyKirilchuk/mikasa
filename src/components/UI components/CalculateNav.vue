@@ -78,4 +78,40 @@ defineProps({
   }
 }
 
+@media(max-width: 1200px){
+  .buttons{
+    bottom: 2%;
+  }
+}
+
+@media(max-width: 768px){
+  .buttons{
+    width: 100%;
+    position: static;
+    left: 0;
+    margin:50px auto;
+    transform: translate(0,0);
+    bottom: 0;
+  }
+
+  button{
+    font-size: 16px;
+  }
+
+  .next{
+    padding: 12px 15px;
+  }
+
+  .back{
+    width: fit-content;
+    height: fit-content;
+    padding: 15px 15px;
+    border-radius: 5px;
+  }
+
+  svg{
+    width: 20px;
+    height: 15px;
+  }
+}
 </style>

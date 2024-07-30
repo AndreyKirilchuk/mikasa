@@ -468,8 +468,6 @@ button {
     text-align: left;
     font-size: 14px;
   }
-
-
 }
 
 

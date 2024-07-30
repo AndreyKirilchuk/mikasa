@@ -10,13 +10,13 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 12px;
+  width: 11px;
   background-color: rgba(36, 36, 36, 0.1);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #9238a8;
-  border-radius: 5px;
+  background-color: #7b308d;
+  border-radius: 4px;
 }
 
 body.active {

@@ -151,7 +151,7 @@ const validateForm = () => {
       error_name.value = true
     }
 
-    if (number.value.length < 1) {
+    if (number.value.length !== 18) {
       error_number.value = true
     }
 
@@ -212,7 +212,6 @@ provide('backProgress', backProgress)
   <div class="calculate" v-motion-fade-visible>
     <!--    header -->
     <div class="calculate_header">
-      <div></div>
       <div class="progress_bar" v-if="progress < 6">
         <div
           v-for="step in 5"
@@ -293,8 +292,8 @@ provide('backProgress', backProgress)
     </form>
 
     <!--    progress 5-->
-    <form @submit.prevent="validateForm" class="calculate_form" v-if="progress === 5">
-      <h2 v-motion-fade-visible>Введите номер телефона, на который <br />Вам отправить расчет</h2>
+    <form @submit.prevent="validateForm" class="calculate_form sendForm_container" v-if="progress === 5">
+      <h2 v-motion-fade-visible>Введите номер телефона, <br /> на который Вам отправить расчет</h2>
       <div class="sendForm" v-motion-fade-visible>
         <div class="sendForm_input">
           <label for="name">Ваше имя</label>
@@ -324,23 +323,25 @@ provide('backProgress', backProgress)
           </div>
         </div>
 
-        <div class="checkbox_inner" v-for="(checkbox, index) in checkboxes" :key="index">
-          <div class="custom_checbox">
-            <input
-              type="checkbox"
-              :id="checkbox.id"
-              :name="checkbox.name"
-              v-model="checkbox.checked"
-              @change="applyCheckbox(checkbox.id)"
-            />
-            <label
-              :for="checkbox.id"
-              :class="{ error: error_agreed && checkbox.id === 'checkbox3' }"
-            >
-              <img src="/check_mark.svg" alt="check_mark" width="13px" />
-            </label>
+        <div class="checkbox_container">
+          <div class="checkbox_inner" v-for="(checkbox, index) in checkboxes" :key="index">
+            <div class="custom_checbox">
+              <input
+                type="checkbox"
+                :id="checkbox.id"
+                :name="checkbox.name"
+                v-model="checkbox.checked"
+                @change="applyCheckbox(checkbox.id)"
+              />
+              <label
+                :for="checkbox.id"
+                :class="{ error: error_agreed && checkbox.id === 'checkbox3' }"
+              >
+                <img src="/check_mark.svg" alt="check_mark" width="13px" />
+              </label>
+            </div>
+            <div v-html="checkbox.text"></div>
           </div>
-          <div v-html="checkbox.text"></div>
         </div>
       </div>
       <CalculateNav text="Готово" />
@@ -548,10 +549,16 @@ input[type='radio']:checked + label img {
   text-align: left;
   font-size: 20px;
   color: white;
+  align-items: center;
 }
 
 .violet {
   color: #9238a8;
+}
+
+
+.custom_checbox{
+  height: fit-content;
 }
 
 .custom_checbox input {
@@ -622,11 +629,25 @@ input[type='radio']:checked + label img {
   transform: translate(-50%, -50%);
 }
 
+.sendForm_container h2{
+  max-width: 890px;
+  margin:50px auto;
+}
+
+.sendForm_container h2 br{
+  display: none;
+}
+
 @media (max-width: 1600px) {
   img{
     max-width: 250px;
     max-height: 150px;
   }
+
+  .sendForm_container h2{
+    max-width: 600px;
+  }
+
   h2{
     font-size: 32px;
   }
@@ -659,4 +680,228 @@ input[type='radio']:checked + label img {
     font-size: 18px;
   }
 }
+
+@media(max-width: 1200px){
+  .options_img{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: 25px;
+    column-gap: 30px;
+  }
+
+  .options_img p{
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+
+  h2{
+    font-size: 28px;
+  }
+
+  .option_text{
+    font-size: 20px;
+    height: fit-content;
+  }
+
+  .option_container label{
+    width: 20px;
+    height: 20px;
+  }
+
+  .calculate_header{
+    top: 45px;
+  }
+
+  .cross{
+    top: 30px;
+  }
+
+  .cross svg{
+    width: 25px;
+    height: 25px;
+  }
+
+  .step{
+    width: 50px;
+  }
+
+  .sendForm{
+    width: 400px;
+    gap:15px;
+  }
+
+  .sendForm_input input{
+    padding: 15px 20px;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+
+  .custom_checbox > *{
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 5px !important;
+  }
+  .custom_checbox img {
+    width: 10px;
+  }
+
+  .checkbox_inner{
+    font-size: 14px;
+  }
+
+  .checkbox_container{
+    gap: 20px;
+  }
+
+  .error_text{
+    font-size: 12px;
+  }
+
+  .checkbox_container{
+    margin-top: 10px;
+  }
+}
+
+@media(max-width: 768px){
+  .options_img{
+    grid-template-columns: repeat(1,1fr);
+  }
+
+  .calculate{
+    overflow-y: scroll;
+  }
+
+  .calculate_form{
+    position: static;
+    margin:60px auto;
+    height: auto;
+    width: 100%;
+  }
+
+  .cross{
+    right: 40px;
+  }
+
+  h2{
+    font-size: 18px;
+  }
+
+  .sendForm_container h2{
+    max-width: 400px;
+  }
+
+  .cross{
+    top: 25px;
+    right: 30px;
+  }
+
+  .cross svg{
+    width: 20px;
+    height: 20px;
+  }
+
+  .options_text, .options_img{
+    margin-top: 50px;
+  }
+
+
+}
+
+@media(max-width: 480px){
+
+
+
+  .sendForm_container h2{
+    width: 100%;
+    margin:50px auto;
+    text-align: left;
+    padding:0px 10px;
+    max-width: 100%;
+  }
+
+  .sendForm{
+    width: 100%;
+    padding: 0px 10px;
+    gap: 0px;
+    box-sizing: border-box;
+  }
+
+  .sendForm_input{
+    font-size: 14px;
+  }
+
+  .sendForm_input input{
+    margin-top: 8px;
+  }
+
+  .sendForm_container h2 br{
+    display:block;
+  }
+
+  .cross{
+    top: 15px;
+    right: 25px;
+  }
+
+  .cross svg{
+    width: 15px;
+    height: 15px;
+  }
+
+  .step{
+    height: 2px;
+    width: 34px;
+  }
+
+  .calculate_header{
+    top: 30px;
+  }
+
+  .progress_bar{
+    gap: 2px;
+  }
+
+  h2{
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .checkbox_inner{
+    font-size: 12px;
+  }
+
+  .custom_checbox > *{
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 2.5px !important;
+  }
+
+  .custom_checbox img{
+    width: 7px;
+    margin:0 auto;
+  }
+
+  .option_text{
+    font-size: 16px;
+  }
+
+  .option_container label{
+    width: 15px;
+    height: 15px;
+  }
+
+  .option_img{
+    font-size: 16px;
+  }
+
+  .error_text{
+    font-size: 11px;
+  }
+
+  .checkbox_container{
+    margin-top:15px;
+  }
+}
+
+
 </style>

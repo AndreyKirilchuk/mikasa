@@ -31,7 +31,7 @@ const { openCalculate } = inject('Calculate')
             </div>
           </div>
 
-          <Button text="Расчитать стоимость" class="button-mobile"/>
+          <Button text="Расчитать стоимость" class="button-mobile" @click="openCalculate" />
         </div>
       </div>
 

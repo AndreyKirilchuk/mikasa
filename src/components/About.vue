@@ -281,7 +281,7 @@ span {
 
 .about_navigate {
   border-radius: 100px;
-  outline: 2px solid white;
+  border: 2px solid white;
   display: flex;
   height: fit-content;
   width: 120px;
@@ -448,31 +448,31 @@ span {
   }
 
   .about_navigate {
-    border-radius: 70px; /* 70% of 100px */
-    outline: 1.4px solid white; /* 70% of 2px */
-    width: 84px; /* 70% of 120px */
+    border-radius: 70px;
+    border: 1.4px solid white;
+    width: 84px;
   }
 
   .about_navigate button {
-    width: 42px; /* 70% of 60px */
-    height: 42px; /* 70% of 60px */
-    transform: translateX(-0.7px); /* 70% of -1px */
+    width: 42px;
+    height: 42px;
+    transform: translateX(-0.7px);
   }
 
   .about_navigate svg {
-    top: 14.7px; /* 70% of 21px */
+    top: 14.7px;
   }
 
   .about_navigate .left {
-    left: 15.4px; /* 70% of 22px */
+    left: 15.4px;
   }
 
   .about_navigate .right {
-    right: 15.4px; /* 70% of 22px */
+    right: 15.4px;
   }
 
   .about_navigate button.active {
-    transform: translateX(42.7px); /* 70% of 61px */
+    transform: translateX(42.7px);
   }
 
   .about_navigate svg{
@@ -530,7 +530,7 @@ span {
 
   .about_navigate {
     border-radius: 40px;
-    outline: 0.8px solid white;
+    border: 0.8px solid white;
     width: 55px;
   }
 

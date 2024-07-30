@@ -26,7 +26,9 @@
               ivanov-inan@gmail.com
             </div>
 
-            <div>Бари Галеева г. Уфа</div>
+            <div>Верхнеторговая 2 Офис 1410<br/>
+              г. Уфа
+            </div>
           </div>
         </div>
       </div>
@@ -142,8 +144,9 @@
 .contacts_text {
   display: flex;
   flex-direction: column;
-  gap: 50px;
   padding: 70px 0px;
+  justify-content:space-between;
+  height: 520px;
 }
 
 .contacts_text_absolute{
@@ -195,6 +198,9 @@ a:hover svg path {
     gap: 100px;
   }
 
+  .contacts_text{
+    height: 420px;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -225,6 +231,10 @@ a:hover svg path {
   .contacts_messengers{
     gap: 60px;
   }
+
+  .contacts_text{
+    height: 275px;
+  }
 }
 
 @media(max-width: 768px){
@@ -253,6 +263,9 @@ a:hover svg path {
   }
 
   .contacts_text{
+    height: auto;
+    justify-content: inherit;
+    gap: 25px;
     padding: 20px 0px;
   }
 }
@@ -268,6 +281,10 @@ a:hover svg path {
 
   .contacts_map{
     height: 300px;
+  }
+
+  .contacts_text{
+    gap: 20px;
   }
 }
 

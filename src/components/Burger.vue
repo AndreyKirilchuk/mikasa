@@ -101,7 +101,7 @@
 
   .burger-btn{
     position: absolute;
-    bottom: 35px;
+    bottom: 85px;
   }
 
   .burger-btn span{

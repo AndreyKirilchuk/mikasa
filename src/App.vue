@@ -102,6 +102,7 @@ provide('toggleBurger', toggleBurger)
 </template>
 
 <style>
+
 .block_title {
   color: white;
   font-size: 52px;
@@ -122,7 +123,7 @@ provide('toggleBurger', toggleBurger)
 
 .link_block div {
   position: absolute;
-  top: -140px;
+  top: -120px;
 }
 
 .mobile_br{
@@ -150,6 +151,10 @@ provide('toggleBurger', toggleBurger)
   }
   .dekstop_br{
     display: none;
+  }
+  .link_block div {
+    position: absolute;
+    top: -100px;
   }
 }
 
