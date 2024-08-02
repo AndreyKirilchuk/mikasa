@@ -101,7 +101,7 @@
           </a>
         </div>
       </div>
-      <div class="contacts_map" v-motion-slide-visible-once-right>
+      <div class="contacts_map">
         <iframe
           src="https://yandex.ru/map-widget/v1/?um=constructor%3A4ce10c0a95856d11ba9470a50001547eb52c0f315f30886c36c617005fbb9b17&amp;source=constructor&theme=dark"
           width="100%"
@@ -148,6 +148,7 @@
   justify-content:space-between;
   height: 520px;
 }
+
 
 .contacts_text_absolute{
   position: absolute;
@@ -240,10 +241,11 @@ a:hover svg path {
 @media(max-width: 768px){
   .contacts_messengers{
     gap: 40px;
-    border:0;
+    border-top: 1px solid #444444;
     justify-content: inherit;
-    padding: 0px 41px;
+    padding: 20px 41px;
   }
+
   .contacts_inner{
     flex-direction: column;
   }
@@ -251,7 +253,7 @@ a:hover svg path {
     height: 400px;
     border-top: 1px solid #444444;
     border-bottom: 1px solid #444444;
-    margin-top: 20px;
+    margin-top: 0px;
   }
 
   .contacts_text_absolute{
@@ -272,7 +274,7 @@ a:hover svg path {
 
 @media(max-width: 480px){
   .contacts_messengers{
-    padding: 0px 10px;
+    padding: 15px 10px;
   }
 
   .contacts_inner{
@@ -281,6 +283,7 @@ a:hover svg path {
 
   .contacts_map{
     height: 300px;
+    margin-top: 0px;
   }
 
   .contacts_text{

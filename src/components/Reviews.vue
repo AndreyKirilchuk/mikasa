@@ -232,12 +232,26 @@ button {
   }
 
   .review_text{
-    font-size:9px;
+    font-size:11px;
+    line-height: 15px;
   }
 
   button{
     padding: 14px 16px;
   }
+
+  h4{
+    line-height: 0;
+  }
+
+  .img-btn{
+    margin-top:5px;
+  }
+
+  .review_name{
+    gap: 10px;
+  }
+
 }
 
 </style>

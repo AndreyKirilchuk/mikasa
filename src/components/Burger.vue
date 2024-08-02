@@ -16,10 +16,10 @@
   <div class="burger_menu" :class="{active: burgerActive}">
     <div class="header_burger">
       <a href="#" @click="toggleBurger">
-        <img src="/logo_mini.svg" alt="logo_mini">
+        <img src="/logo_mini.svg"  width="45px" alt="logo_mini">
       </a>
 
-      <img src="/cross.svg" alt="cross" width="12px" @click="toggleBurger" />
+      <img src="/cross.svg" alt="cross" width="16px" @click="toggleBurger" />
     </div>
     <div class="burger-content">
       <nav>
@@ -35,7 +35,7 @@
         <a href="#form" @click="toggleBurger">
           <Button text="Оставить заявку"/>
         </a>
-        <br>
+
         <span>MiCasa Home | Строительная компания</span>
       </div>
     </div>
@@ -102,6 +102,9 @@
   .burger-btn{
     position: absolute;
     bottom: 85px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 
   .burger-btn span{
@@ -122,5 +125,10 @@
     .burger_menu{
       width: 100%;
     }
+
+    nav{
+      font-size: 18px;
+    }
+
   }
 </style>

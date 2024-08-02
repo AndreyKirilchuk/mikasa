@@ -242,7 +242,8 @@ const toggleAccordion = (index) => {
     font-size: 16px;
   }
   .content{
-    font-size: 10px;
+    font-size: 11px;
+    line-height: 15px;
   }
 
   .faq{

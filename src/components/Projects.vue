@@ -8,8 +8,8 @@ const projects = reactive([
     id: 1,
     main_name: `Проект <span style="color:#9238a8">№1</span>`,
     name: 'Проект 1',
-    preview: '/project1.svg',
-    images: ['/project1.svg', '/project2.svg', '/project3.svg'],
+    preview: '/project1.png',
+    images: ['/project1.png', '/project2.png', '/project3.png'],
     text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
     view: false
   },
@@ -17,8 +17,8 @@ const projects = reactive([
     id: 2,
     main_name: `Проект <span style="color:#9238a8">№2</span>`,
     name: 'Проект 2',
-    preview: '/project2.svg',
-    images: ['/project2.svg', '/project1-2.svg', '/project1-3.svg'],
+    preview: '/project2.png',
+    images: ['/project2.png', '/project3.png', '/project4.png'],
     text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
     view: true
   },
@@ -26,8 +26,8 @@ const projects = reactive([
     id: 3,
     main_name: `Проект <span style="color:#9238a8">№3</span>`,
     name: 'Проект 3',
-    preview: '/project3.svg',
-    images: ['/project3.svg', '/project1-2.svg', '/project1-3.svg'],
+    preview: '/project3.png',
+    images: ['/project3.png', '/project4.png', '/project5.png'],
     text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
     view: true
   },
@@ -35,8 +35,8 @@ const projects = reactive([
     id: 4,
     main_name: `Проект <span style="color:#9238a8">№4</span>`,
     name: 'Проект 4',
-    preview: '/project4.svg',
-    images: ['/project4.svg', '/project1-2.svg', '/project1-3.svg'],
+    preview: '/project4.png',
+    images: ['/project4.png', '/project5.png', '/project1.png'],
     text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
     view: true
   },
@@ -44,8 +44,8 @@ const projects = reactive([
     id: 5,
     main_name: `Проект <span style="color:#9238a8">№5</span>`,
     name: 'Проект 5',
-    preview: '/project5.svg',
-    images: ['/project5.svg', '/project1-2.svg', '/project1-3.svg'],
+    preview: '/project5.png',
+    images: ['/project5.png', '/project1.png', '/project2.png'],
     text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
     view: true
   }
@@ -60,8 +60,8 @@ const mainProject = ref({
   id: 1,
   main_name: `Проект <span style="color:#9238a8">№5</span>`,
   name: 'Проект 1',
-  preview: '/project1.svg',
-  images: ['/project1.svg', '/project2.svg', '/project3.svg'],
+  preview: '/project1.png',
+  images: ['/project1.png', '/project2.png', '/project3.png'],
   text: 'Дом 500 кв м, внутри 17 спален, 6 санузлов и две кухни, он был спроектирован в стиле барокко, были учтены все требования заказчика, не смотря на то, что дом был выполнен в архаичном стиле, он соответсвует всем современным тенденциям',
   view: false
 })
@@ -526,14 +526,16 @@ button {
   }
 
   .text{
-    font-size: 10px;
-    line-height:1px;
+    font-size:11px;
+    line-height: 15px;
+    display: flex;
   }
 
   button{
     margin-top:10px;
-    font-size:14px;
-    padding: 15px;
+    font-size:12px;
+    padding: 14px;
+    border-radius: 5px;
   }
 
   .prev{

@@ -61,11 +61,17 @@ button:hover img {
   button img{
     width: 8px;
   }
+
+
 }
 
 @media(max-width: 480px){
   button img{
     width: 7px;
+  }
+
+  button{
+    border-radius: 5px !important;
   }
 }
 

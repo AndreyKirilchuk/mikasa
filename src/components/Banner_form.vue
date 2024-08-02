@@ -51,7 +51,7 @@ const applyMask = () => {
 const sendForm = async () => {
   error_number.value = false
 
-  if (number.value.length === 0) {
+  if (number.value.length !== 18) {
     setTimeout(() => {
       error_number.value = true
     }, 10)
@@ -415,6 +415,12 @@ input::placeholder {
   hr{
     border-color: rgba(255,255,255,0.7);
   }
+
+
+  .banner_content{
+    top: 10%;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -448,7 +454,10 @@ input::placeholder {
   }
 
   .banner_info span{
-    font-size: 12px;
+    font-size: 14px;
+  }
+  .banner_info span br{
+    display: none;
   }
 
 
@@ -456,8 +465,24 @@ input::placeholder {
     min-height: 326px;
   }
 
+  .banner_content{
+    top: 14%;
+  }
+
   .banner_info{
     max-width: 280px;
+  }
+}
+
+@media(max-width: 400px){
+  .banner_content{
+    top: 11%;
+  }
+}
+
+@media (max-width: 350px) {
+  .banner_content{
+    top: 8%;
   }
 }
 

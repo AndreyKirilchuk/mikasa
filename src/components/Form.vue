@@ -94,7 +94,7 @@ const validateForm = () => {
       error_name.value = true
     }
 
-    if (number.value.length < 1) {
+    if (number.value.length !== 18) {
       error_number.value = true
     }
 
@@ -460,12 +460,7 @@ button {
 }
 
 @media(max-width: 480px){
-  .block_title{
-    text-align: left;
-  }
-
   h4{
-    text-align: left;
     font-size: 14px;
   }
 }

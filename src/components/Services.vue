@@ -77,9 +77,6 @@ const removeHover = (service) => {
 
 .service:hover {
   background: url('/violet_block.png') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
 }
 
 img {
@@ -91,7 +88,14 @@ img {
 }
 
 .service.active{
-  background: green;
+  background: url('/violet_block.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.service.active img{
+  display: block;
 }
 
 .service_inner {

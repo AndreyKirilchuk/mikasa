@@ -275,6 +275,7 @@ button {
 
   .banner{
     border:inherit;
+    margin-bottom: 80px;
   }
 
   .info-boxes{
@@ -293,6 +294,12 @@ button {
   button{
     margin-top: 20px;
   }
+
+  .banner_content{
+    top: 100px;
+  }
+
+
 }
 
 @media(max-width: 605px){
@@ -327,7 +334,7 @@ button {
   }
 
   .banner_content{
-    top: 20%;
+    top: 100px;
   }
 
   .banner_info div{
@@ -335,40 +342,43 @@ button {
     color:rgba(255,255,255,0.7)
   }
 
-
+  .banner{
+    margin-bottom: 90px;
+  }
 }
 
 @media(max-width: 420px){
   .info-boxes{
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   .info-box{
-    padding: 0px 5px;
+    padding: 0;
   }
 
-  .banner_content{
-    top: 60px;
+  .info-box p{
+    padding: 0px 25px;
   }
 
   .banner{
-    margin-bottom: 50px;
+    margin-bottom: 90px;
   }
 
 }
 
-@media(max-width: 370px){
+@media(max-width: 380px){
+
 
   .info-boxes{
     margin-top: 5px;
   }
 
-  .info-box{
-    padding: 0px 2px;
+  .info-box p{
+    padding: 0px 12px;
   }
 
   .banner{
-    margin-bottom: 70px;
+    margin-bottom: 150px;
   }
 }
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, provide } from 'vue'
+import { ref, provide, onMounted } from 'vue'
 
 import Header from '@/components/Header.vue'
 import Banner from '@/components/Banner.vue'
@@ -15,6 +15,7 @@ import MoreReviews from '@/components/MoreReviews.vue'
 import Footer from '@/components/Footer.vue'
 import Form from '@/components/Form.vue'
 import Burger from '@/components/Burger.vue'
+import Loading from '@/components/Loading.vue'
 
 const body = ref(document.body)
 const CalculateActive = ref(false)
@@ -22,6 +23,7 @@ const ModalActive = ref(false)
 const ModalVideo = ref('')
 const moreReviewsActive = ref(false)
 const burgerActive = ref(false)
+const isLoading = ref(true)
 
 const openCalculate = () => {
   body.value.classList.add('active')
@@ -77,16 +79,28 @@ provide('Reviews', {
 })
 
 provide('toggleBurger', toggleBurger)
+
+const loader = () => {
+  window.scrollTo(0, 0)
+  body.value.classList.add('active')
+  setTimeout(()=>{
+    isLoading.value = false;
+    body.value.classList.remove('active')
+  },3000)
+}
+
+loader()
+
 </script>
 
 <template>
   <Header />
   <Calculate :class="{'thisCalculate':1 === 1  ,'calculate_active': CalculateActive}"/>
   <Burger :burgerActive="burgerActive" />
-
+  <Loading :isLoading="isLoading" />
   <MoreReviews v-if="moreReviewsActive" />
   <Modal v-if="ModalActive" :ModalVideo="ModalVideo" />
-  <div class="block_container">
+  <div class="block_container" :class="{active: isLoading}">
     <Banner />
     <Projects />
     <Banner_form title="Индивидуальный <br> подход" img="house2.png" img_mobile="house2_mobile.png" />
@@ -115,6 +129,13 @@ provide('toggleBurger', toggleBurger)
   display: flex;
   flex-direction: column;
   row-gap: 150px;
+  max-height: 100%;
+  margin-top: 0px;
+  transition: all 0.7s ease-in-out;
+}
+
+.block_container.active{
+  margin-top: 100vh;
 }
 
 .link_block {
