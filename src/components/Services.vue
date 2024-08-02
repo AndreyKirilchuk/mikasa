@@ -14,12 +14,10 @@ import About from '@/components/About.vue'
 
 const addHover = (service) => {
   service.active = true;
-  console.log(service)
 }
 
 const removeHover = (service) => {
   service.active = false;
-  console.log(service)
 }
 
 </script>

@@ -555,7 +555,7 @@ span {
 
   .about_navigate svg {
     width: 6px;
-    top: 6px;
+    top: 5px;
   }
 
   .content_navigate div {
@@ -617,6 +617,10 @@ span {
 
   .about_info{
     height:250px;
+  }
+
+  .content_navigate{
+    gap: 10px;
   }
 }
 

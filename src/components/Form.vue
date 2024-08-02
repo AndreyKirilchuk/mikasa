@@ -154,7 +154,9 @@ const sendCalculation = async () => {
       <div id="form"></div>
     </div>
 
-    <form @submit.prevent="validateForm" class="calculate_form">
+    <div class="form_container">
+
+      <form @submit.prevent="validateForm" class="calculate_form">
       <h2 class="block_title" v-motion-slide-visible-once-left>Постройте дом <br />своей мечты!</h2>
       <h4 v-motion-slide-visible-once-left>
         Оставьте контакты и мы с вами<br />
@@ -208,12 +210,23 @@ const sendCalculation = async () => {
         <Button text="Отправить" />
       </div>
     </form>
+
+      <img src="/form.png" alt="">
+    </div>
   </div>
 </template>
 
 <style scoped>
+
+.form_container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
 .container {
-  width: 1300px;
+  padding: 0px 120px;
 }
 
 .sendForm {
@@ -361,18 +374,18 @@ button {
   .sendForm{
     width: 400px;
   }
-}
 
-@media(max-width: 1440px){
+  .form_container img{
+    width: 530px;
+  }
   .container{
-    width: 1200px;
+    padding: 0px 80px;
   }
 }
+
 
 @media(max-width: 1200px){
-  .container{
-    width: 1024px;
-  }
+
   .sendForm{
     width: 400px;
   }
@@ -397,12 +410,13 @@ button {
   button{
     padding: 20px 0px;
   }
+
+  .form_container img{
+    width: 450px;
+  }
 }
 
 @media(max-width: 1024px){
-  .container{
-    width: 950px;
-  }
 
   h4{
     font-size: 16px;
@@ -434,19 +448,30 @@ button {
     margin-top: 0;
     border-radius: 5px;
   }
-}
 
-@media(max-width: 950px){
-  .container{
-    width: 768px;
+  .form_container img{
+    width: 350px;
   }
+
+  .form_container{
+    gap: 20px;
+  }
+
 }
 
 @media(max-width: 768px){
+  .form_container img{
+    display: none;
+  }
+
   .container{
     width: 100%;
     margin: 0 auto;
     display: flex;
+    justify-content: center;
+  }
+
+  .form_container{
     justify-content: center;
   }
 

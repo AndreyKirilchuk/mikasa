@@ -348,8 +348,8 @@ provide('backProgress', backProgress)
     </form>
 
     <!--    after send -->
-    <div class="calculate_form" v-if="progress === 6">
-      <div class="accept_container">
+    <div class="accept_container" v-if="progress === 6">
+
         <img src="/successful.svg" alt="successful" width="100px" v-motion-fade-visible />
 
         <h2 v-motion-fade-visible>
@@ -357,7 +357,7 @@ provide('backProgress', backProgress)
         </h2>
 
         <Button text="На главную" @click="closeCalculate" />
-      </div>
+
     </div>
   </div>
 </template>
@@ -411,7 +411,9 @@ provide('backProgress', backProgress)
   cursor: pointer;
   position: absolute;
   right: 75px;
-  top: 65px;
+  top: 55px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .cross svg path {
@@ -493,6 +495,7 @@ input[type='radio']:checked + label img {
   width: 25px;
   height: 25px;
   border-radius: 100%;
+  -webkit-border-radius: 100%;
   border: 3px solid #242424;
   outline: 2px solid #ffffff;
   cursor: pointer;
@@ -620,6 +623,17 @@ input[type='radio']:checked + label img {
   margin: 0 auto;
   font-size: 40px;
   font-weight: 600;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 90vh;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 25px;
+}
+
+.accept_container img{
+  margin: 0 auto;
 }
 
 .accept_container button {
@@ -667,6 +681,7 @@ input[type='radio']:checked + label img {
     top: 40px;
     width: 24px;
   }
+
   .sendForm{
     gap: 20px;
   }
@@ -681,7 +696,7 @@ input[type='radio']:checked + label img {
   }
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1300px){
   .options_img{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -713,7 +728,7 @@ input[type='radio']:checked + label img {
   }
 
   .cross{
-    top: 30px;
+    top: 28px;
   }
 
   .cross svg{
@@ -791,7 +806,6 @@ input[type='radio']:checked + label img {
   }
 
   .cross{
-    top: 25px;
     right: 30px;
   }
 
@@ -804,7 +818,9 @@ input[type='radio']:checked + label img {
     margin-top: 50px;
   }
 
-
+  .accept_container{
+    max-width: 400px;
+  }
 }
 
 @media(max-width: 480px){
@@ -839,14 +855,16 @@ input[type='radio']:checked + label img {
   }
 
   .cross{
-    top: 15px;
+    top: 17px;
     right: 25px;
   }
 
+
   .cross svg{
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
+
 
   .step{
     height: 2px;
@@ -901,7 +919,10 @@ input[type='radio']:checked + label img {
   .checkbox_container{
     margin-top:15px;
   }
-}
 
+  .accept_container{
+    max-width: 300px;
+  }
+}
 
 </style>
