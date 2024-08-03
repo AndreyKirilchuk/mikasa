@@ -84,7 +84,7 @@ nav {
   gap: 25px;
   color: white;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 50
 }
 
 nav a {

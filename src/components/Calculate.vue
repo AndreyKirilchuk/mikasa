@@ -340,7 +340,7 @@ provide('backProgress', backProgress)
                 <img src="/check_mark.svg" alt="check_mark" width="13px" />
               </label>
             </div>
-            <div v-html="checkbox.text"></div>
+            <label v-html="checkbox.text" :for="checkbox.id"></label>
           </div>
         </div>
       </div>
@@ -494,8 +494,8 @@ input[type='radio']:checked + label img {
   display: block;
   width: 25px;
   height: 25px;
-  border-radius: 100%;
-  -webkit-border-radius: 100%;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
   border: 3px solid #242424;
   outline: 2px solid #ffffff;
   cursor: pointer;
@@ -696,7 +696,7 @@ input[type='radio']:checked + label img {
   }
 }
 
-@media(max-width: 1300px){
+@media(max-width: 1440px){
   .options_img{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -857,6 +857,7 @@ input[type='radio']:checked + label img {
   .cross{
     top: 17px;
     right: 25px;
+    z-index: 999;
   }
 
 

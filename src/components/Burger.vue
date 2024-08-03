@@ -101,7 +101,7 @@
 
   .burger-btn{
     position: absolute;
-    bottom: 85px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
     gap: 15px;

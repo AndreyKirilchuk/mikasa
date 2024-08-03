@@ -204,14 +204,14 @@ const sendCalculation = async () => {
               <img src="/check_mark.svg" alt="check_mark" width="13px" />
             </label>
           </div>
-          <div v-html="checkbox.text"></div>
+          <label v-html="checkbox.text" :for="checkbox.id"></label>
         </div>
 
         <Button text="Отправить" />
       </div>
     </form>
 
-      <img src="/form.png" alt="">
+      <img src="/form.png" alt="form" class="form_img">
     </div>
   </div>
 </template>
@@ -375,7 +375,7 @@ button {
     width: 400px;
   }
 
-  .form_container img{
+  .form_container .form_img{
     width: 530px;
   }
   .container{
@@ -411,7 +411,7 @@ button {
     padding: 20px 0px;
   }
 
-  .form_container img{
+  .form_container .form_img{
     width: 450px;
   }
 }
@@ -449,7 +449,7 @@ button {
     border-radius: 5px;
   }
 
-  .form_container img{
+  .form_container .form_img{
     width: 350px;
   }
 
@@ -460,7 +460,7 @@ button {
 }
 
 @media(max-width: 768px){
-  .form_container img{
+  .form_container .form_img{
     display: none;
   }
 

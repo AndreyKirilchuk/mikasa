@@ -116,7 +116,10 @@ onUnmounted(() => {
 
 <template>
   <div class="projects_container">
-    <div class="container" id="projects">
+    <div class="link_block">
+      <div id="projects"></div>
+    </div>
+    <div class="container">
       <h2 class="block_title">Готовые проекты</h2>
       <div class="project">
         <div

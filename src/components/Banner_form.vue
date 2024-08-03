@@ -420,7 +420,6 @@ input::placeholder {
   .banner_content{
     top: 10%;
   }
-
 }
 
 @media (max-width: 480px) {
@@ -471,6 +470,11 @@ input::placeholder {
 
   .banner_info{
     max-width: 280px;
+  }
+
+  .form{
+    margin-top: 40px;
+    gap: 10px;
   }
 }
 

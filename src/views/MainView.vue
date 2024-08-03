@@ -86,9 +86,8 @@ const loader = () => {
   setTimeout(()=>{
     isLoading.value = false;
     body.value.classList.remove('active')
-  },3000)
+  },3200)
 }
-
 
 loader()
 

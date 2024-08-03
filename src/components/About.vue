@@ -492,6 +492,15 @@ span {
   .about_preview{
     max-height: 300px;
   }
+
+  .content_navigate{
+    gap: 10px;
+  }
+
+  .content_navigate div{
+    width:10px;
+    height: 10px;
+  }
 }
 
 @media(max-width: 900px){

@@ -68,6 +68,10 @@
     line-height: 20px;
   }
 
+  .container{
+    padding: 0px 150px !important;
+  }
+
   .violet{
     color:#9238a8;
   }
@@ -83,13 +87,16 @@
     padding-bottom: 25px;
   }
 
-  @media(max-width: 768px){
+  @media(max-width: 900px){
     h1{
       font-size: 24px;
     }
     .content{
       color: white;
       font-size: 14px;
+    }
+    .container{
+      padding: 0px 84px !important;
     }
   }
 
@@ -100,6 +107,9 @@
     .content{
       color: white;
       font-size: 11px;
+    }
+    .container{
+      padding: 0px 15px !important;
     }
   }
 </style>
