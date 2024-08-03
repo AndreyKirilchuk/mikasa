@@ -1,86 +1,69 @@
 <script setup>
-import { inject, reactive, ref, watch } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import Button from '@/components/UI components/Button.vue'
 
 const thisContent = ref({})
 const About = ref('video')
 const aboutAnimate = ref(false)
 
-const videos = reactive([
+const content = reactive([
   {
     id: '1',
     name: 'Почему выбирают нас',
     text: 'Узнайте больше о компании,<br> посмотрев видео',
     img: '/house2.png',
-    video: ''
+    video: '/house2.png',
+    type: 'video',
   },
   {
     id: '2',
-    name: 'Наши достижения',
-    text: 'Посмотрите наше видео о достижениях',
-    img: '/house2.png',
-    video: ''
-  }
-])
-
-const images = reactive([
-  {
-    id: '1',
     name: 'Почему asd нас',
     text: 'Узнайте больше о компании,<br> посмотрев изображение',
-    img: '/house2.png'
+    img: '/house2.png',
+    type: 'img',
   },
-  { id: '2', name: 'Наши asd', text: 'Посмотрите наши достижения', img: '' }
+  {
+    id: '3',
+    name: 'Наши asd',
+    text: 'Посмотрите наши достижения',
+    img: '/house2.png',
+    type: 'img',
+  }
 ])
 
-let videoIndex = 0
-let imgIndex = 0
+thisContent.value = content[0];
 
-const setVideo = () => {
+let contentIndex = 0
+
+const setContent = () => {
   aboutAnimate.value = true
-  thisContent.value = videos[videoIndex]
+  thisContent.value = content[contentIndex]
   setTimeout(() => (aboutAnimate.value = false), 1000)
 }
 
-const setImg = () => {
-  aboutAnimate.value = true
-  thisContent.value = images[imgIndex]
-  setTimeout(() => (aboutAnimate.value = false), 1000)
+setContent()
+
+const nextContent = () => {
+  contentIndex = (contentIndex + 1) % content.length
+  setContent()
 }
 
-setVideo()
-
-const toggleAbout = () => {
-  if (About.value === 'video') {
-    About.value = 'img'
-    setImg()
+const backContent = () => {
+  if (contentIndex === 0) {
+    contentIndex = content.length - 1
   } else {
-    About.value = 'video'
-    setVideo()
+    contentIndex = (contentIndex - 1) % content.length
   }
+  setContent()
 }
 
-const nextVideo = () => {
-  videoIndex = (videoIndex + 1) % videos.length
-  setVideo()
-}
-
-const nextImg = () => {
-  imgIndex = (imgIndex + 1) % images.length
-  setImg()
-}
-
-const toggleVideo = (id) => {
-  videoIndex = videos.findIndex((item) => item.id === id)
-  setVideo()
-}
-
-const toggleImg = (id) => {
-  imgIndex = images.findIndex((item) => item.id === id)
-  setImg()
+const toggleContent = (id) => {
+  contentIndex = content.findIndex((item) => item.id === id)
+  setContent()
 }
 
 const { openModal } = inject('Reviews')
+
 </script>
 
 <template>
@@ -96,7 +79,7 @@ const { openModal } = inject('Reviews')
 
         <a
           class="play mobile_play"
-          :class="{ active: About === 'video' }"
+          :class="{ active: thisContent.type === 'video' }"
           @click="openModal(thisContent.video)"
         >
           <img src="/big_play.svg" alt="play" width="130px" height="130px" />
@@ -114,7 +97,7 @@ const { openModal } = inject('Reviews')
       >
         <a
           class="play"
-          :class="{ active: About === 'video' }"
+          :class="{ active: thisContent.type === 'video' }"
           @click="openModal(thisContent.video)"
         >
           <img src="/big_play.svg" alt="play" width="130px" height="130px" />
@@ -123,9 +106,10 @@ const { openModal } = inject('Reviews')
     </div>
 
     <nav>
-      <div class="about_navigate" @click="toggleAbout">
-        <button :class="{ active: About === 'img' }"></button>
+      <div class="about_navigate">
+        <button @click="backContent"></button>
 
+        <button @click="nextContent"></button>
         <svg
           width="11"
           height="20"
@@ -133,7 +117,7 @@ const { openModal } = inject('Reviews')
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           class="left"
-          :class="{ active: About === 'video' }"
+          @click="backContent"
         >
           <path
             d="M9.57143 1.42871L1.68367 9.49504C1.30364 9.88367 1.30364 10.5047 1.68367 10.8933L9.57143 18.9597"
@@ -150,7 +134,7 @@ const { openModal } = inject('Reviews')
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           class="right"
-          :class="{ active: About === 'img' }"
+          @click="nextContent"
         >
           <path
             d="M1.71428 1.42871L9.60203 9.49504C9.98207 9.88367 9.98207 10.5047 9.60203 10.8933L1.71428 18.9597"
@@ -163,16 +147,10 @@ const { openModal } = inject('Reviews')
 
       <div class="content_navigate">
         <div
-          v-for="circle in videos"
+          v-for="circle in content"
           :class="{ active: thisContent.id === circle.id }"
           v-if="About === 'video'"
-          @click="toggleVideo(circle.id)"
-        ></div>
-        <div
-          v-for="circle in images"
-          :class="{ active: thisContent.id === circle.id }"
-          v-if="About === 'img'"
-          @click="toggleImg(circle.id)"
+          @click="toggleContent(circle.id)"
         ></div>
       </div>
     </nav>
@@ -230,6 +208,7 @@ section{
   cursor: pointer;
   width: fit-content;
   height: fit-content;
+  display: none;
 }
 
 .play.active {
@@ -299,8 +278,13 @@ span {
   transform: translateX(-1px);
 }
 
-.about_navigate button .left path {
-  stroke: red;
+
+.about_navigate button:nth-child(1){
+  background: inherit;
+}
+
+.about_navigate button:nth-child(2){
+  transform: translateX(1px);
 }
 
 .about_navigate svg {
@@ -314,7 +298,7 @@ span {
 }
 
 .about_navigate .right path {
-  stroke: white;
+  stroke: #14161a;
   transition: 0.4s;
 }
 
@@ -323,20 +307,8 @@ span {
   transition: 0.4s;
 }
 
-.about_navigate .left.active path {
-  stroke: #14161a;
-}
-
-.about_navigate .right.active path {
-  stroke: #14161a;
-}
-
 .about_navigate .right {
   right: 22px;
-}
-
-.about_navigate button.active {
-  transform: translateX(61px);
 }
 
 .content_navigate {
@@ -525,7 +497,7 @@ span {
   }
 
   .mobile_play{
-    display: block !important;
+    display: block;
   }
 
   .play img{
@@ -601,6 +573,9 @@ span {
     min-width: 0px;
   }
 
+  .mobile_play.active{
+    display: block !important;
+  }
 }
 
 @media(max-width: 480px){

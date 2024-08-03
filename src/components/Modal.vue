@@ -77,4 +77,24 @@ const { closeModal } = inject('Reviews')
 .cross:hover path {
   fill: #9238a8;
 }
+
+@media(max-width: 1024px){
+  .video{
+    height: 65%;
+  }
+}
+
+@media(max-width: 768px){
+  .video{
+    width: 88%;
+    height: 45%;
+  }
+}
+
+@media(max-width: 480px){
+  .video{
+    width: 95%;
+    height: 35%;
+  }
+}
 </style>
