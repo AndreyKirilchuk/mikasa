@@ -145,7 +145,7 @@
   height: 650px;
   max-width: 1200px;
   margin:0 auto;
-  z-index: 700;
+  z-index: 100;
 }
 
 .contacts_text {
