@@ -7,25 +7,25 @@ const reviews = reactive([
     name: 'Тимур Ибрагимов',
     text: 'MeCasa построила для меня дом мечты! Профессионализм, внимание к деталям и качество работы — вот что отличает эту компанию. Рекомендую MeCasa всем, кто хочет создать свой идеальный дом!',
     img: '/avatar.png',
-    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
+    video: 'https://rutube.ru/play/embed/ad7394fe8278d99a8ed3c710c8ddd047/'
   },
   {
     name: 'Эльвира Галяутдинова',
     text: 'Сотрудничество с MeCasa было легким и приятным. Они проявили высокий профессионализм и ответственность на каждом этапе строительства. Мой дом был построен в срок и в пределах бюджета, а качество работы просто потрясающее.',
     img: '/avatar.png',
-    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
+    video: 'https://rutube.ru/play/embed/ad7394fe8278d99a8ed3c710c8ddd047/'
   },
   {
     name: 'Андрей Гаврилов',
     text: 'MeCasa построила для меня дом мечты! Профессионализм, внимание к деталям и качество работы — вот что отличает эту компанию. Рекомендую MeCasa всем, кто хочет создать свой идеальный дом!',
     img: '/avatar.png',
-    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
+    video: 'https://rutube.ru/play/embed/ad7394fe8278d99a8ed3c710c8ddd047/'
   },
   {
     name: 'Руслан Набулин',
     text: 'Сотрудничество с MeCasa было легким и приятным. Они проявили высокий профессионализм и ответственность на каждом этапе строительства. Мой дом был построен в срок и в пределах бюджета, а качество работы просто потрясающее.',
     img: '/avatar.png',
-    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
+    video: 'https://rutube.ru/play/embed/ad7394fe8278d99a8ed3c710c8ddd047/'
   }
 ])
 

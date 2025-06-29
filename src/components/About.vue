@@ -12,7 +12,7 @@ const content = reactive([
     name: 'Почему выбирают нас',
     text: 'Узнайте больше о компании,<br> посмотрев видео',
     img: '/house2.png',
-    video: '/house2.png',
+    video: 'https://rutube.ru/play/embed/ad7394fe8278d99a8ed3c710c8ddd047/',
     type: 'video',
   },
   {

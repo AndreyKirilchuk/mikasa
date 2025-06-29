@@ -32,11 +32,11 @@ const { closeModal } = inject('Reviews')
   <iframe
     class="video"
     :src="ModalVideo"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen
+    frameBorder="0"
+    allow="clipboard-write; autoplay"
+    webkitAllowFullScreen
+    mozallowfullscreen
+    allowFullScreen
   ></iframe>
 </template>
 
@@ -78,21 +78,21 @@ const { closeModal } = inject('Reviews')
   fill: #9238a8;
 }
 
-@media(max-width: 1024px){
-  .video{
+@media (max-width: 1024px) {
+  .video {
     height: 65%;
   }
 }
 
-@media(max-width: 768px){
-  .video{
+@media (max-width: 768px) {
+  .video {
     width: 88%;
     height: 45%;
   }
 }
 
-@media(max-width: 480px){
-  .video{
+@media (max-width: 480px) {
+  .video {
     width: 95%;
     height: 35%;
   }
