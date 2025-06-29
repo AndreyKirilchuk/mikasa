@@ -186,17 +186,17 @@
           </div>
 
           <div>
-            <router-link to="/privacy" target="_blank" >Политика обработки персональных данных</router-link><br />
-            <a href="https://t.me/nilahimp" target="_blank"
-              >Разработка сайта <span class="violet">W agency</span></a
+            <span>Политика обработки персональных данных</span><br />
+            <a href="https://t.me/kandev_web" target="_blank"
+              >Разработка сайта <span class="violet">KanDev</span></a
             >
           </div>
 
           <div>
-            <a href="https://t.me/nilahimp" target="_blank"
-            >Разработка сайта <span class="violet">W agency</span></a
+            <a href="https://t.me/kandev_web" target="_blank"
+            >Разработка сайта <span class="violet">KanDev</span></a
             ><br>
-            <router-link to="/privacy" target="_blank" >Политика обработки персональных данных</router-link>
+            <span>Политика обработки персональных данных</span>
           </div>
         </div>
       </footer>

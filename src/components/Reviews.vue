@@ -13,19 +13,19 @@ const reviews = reactive([
     name: 'Эльвира Галяутдинова',
     text: 'Сотрудничество с MeCasa было легким и приятным. Они проявили высокий профессионализм и ответственность на каждом этапе строительства. Мой дом был построен в срок и в пределах бюджета, а качество работы просто потрясающее.',
     img: '/avatar.png',
-    video: 'path/to/elvira_video.mp4'
+    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
   },
   {
     name: 'Андрей Гаврилов',
     text: 'MeCasa построила для меня дом мечты! Профессионализм, внимание к деталям и качество работы — вот что отличает эту компанию. Рекомендую MeCasa всем, кто хочет создать свой идеальный дом!',
     img: '/avatar.png',
-    video: 'path/to/andrei_video.mp4'
+    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
   },
   {
     name: 'Руслан Набулин',
     text: 'Сотрудничество с MeCasa было легким и приятным. Они проявили высокий профессионализм и ответственность на каждом этапе строительства. Мой дом был построен в срок и в пределах бюджета, а качество работы просто потрясающее.',
     img: '/avatar.png',
-    video: 'path/to/ruslan_video.mp4'
+    video: 'https://www.youtube.com/embed/Ue0_YwonJyE?si=fup82kb8aQs6vegd'
   }
 ])
 
