@@ -129,9 +129,15 @@
 
 .contacts_info {
   width: 100%;
-  max-width: 800px;
+  max-width: 1920px;
   display: flex;
   align-items: flex-end;
+}
+
+@media (max-width: 1920px) {
+  .contacts_info{
+    max-width: 800px;
+  }
 }
 
 .contacts_map {
